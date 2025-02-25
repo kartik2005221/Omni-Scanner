@@ -57,7 +57,7 @@ python3 main.py --nmap -t 80,443 -i 10.0.0.5
 ```
 
 **Interactive Menu**  
-![Menu Demo](image link)
+![Menu Demo](https://raw.githubusercontent.com/kartik2005221/Omni-Scanner/refs/heads/master/screenshot.png)
 
 ---
 
