@@ -1,0 +1,5 @@
+python-nmap>=0.7.1
+scapy>=2.5.0
+
+# nmap should be installed in your system as a package and also in python pip
+# arp-scan (option 1 of option 1) is only suported on linux and mac only

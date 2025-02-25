@@ -1,0 +1,17 @@
+TODO-6: Sanitise input before using in subprocess.run
+  Potential Security Risk with subprocess.run:
+  Using subprocess.run with user inputs directly can be a security risk (command injection). It is better to sanitize
+  and validate inputs before using them in subprocess calls.
+  For example, if the user input is used directly in the command, an attacker can inject additional commands
+TODO-8: add csv and moving them to backup functionality on next run
+todo-9: adding extra functionalities like,
+    scapy>=2.5.0          # For ARP scanning and packet manipulation
+    python-nmap>=0.7.1    # Nmap integration (requires nmap installed)
+    prettytable>=3.6.0    # Clean terminal output formatting
+    colorama>=0.4.6       # Cross-platform colored terminal text
+    tqdm>=4.64.1          # Progress bars for long scans
+    manuf>=1.1.5          # MAC address vendor lookup
+todo-10: separate script for windows and linux, because of different commands and not dudo requirement in windows, and
+    main.py automatically determines the OS and runs the appropriate script
+todo-11: handling keyboard interrupt in all parts of script properly
+todo-12: fixing infinite ping request and allow user to chose from infinite ping request or limited ping request
