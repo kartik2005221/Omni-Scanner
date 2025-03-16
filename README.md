@@ -30,7 +30,7 @@ A Python-powered network scanning suite for ethical hackers, sysadmins, and secu
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Omni-Scanner.git
+   git clone https://github.com/kartik2005221/Omni-Scanner.git
    cd Omni-Scanner
    ```
 
@@ -57,7 +57,7 @@ python3 main.py --nmap -t 80,443 -i 10.0.0.5
 ```
 
 **Interactive Menu**  
-![Menu Demo](image link)
+![Menu Demo](https://raw.githubusercontent.com/kartik2005221/Omni-Scanner/refs/heads/master/screenshot.png)
 
 ---
 
