@@ -11,7 +11,7 @@ todo-9: adding extra functionalities like,
     colorama>=0.4.6       # Cross-platform colored terminal text
     tqdm>=4.64.1          # Progress bars for long scans
     manuf>=1.1.5          # MAC address vendor lookup
-todo-10: separate script for windows and linux, because of different commands and not dudo requirement in windows, and
+todo-10: separate script for windows and linux, because of different commands and not sudo requirement in windows, and
     main.py automatically determines the OS and runs the appropriate script
 todo-11: handling keyboard interrupt in all parts of script properly
 todo-12: fixing infinite ping request and allow user to chose from infinite ping request or limited ping request
