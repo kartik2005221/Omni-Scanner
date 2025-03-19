@@ -1,6 +1,6 @@
 import os
-import subprocess
 import platform
+
 oper_system = platform.system()
 
 def splash_screen():
@@ -24,13 +24,13 @@ k::::::k   k:::::k  a::::::::::aa:::a r:::::r                    tt:::::::::::tt
 kkkkkkkk    kkkkkkk  aaaaaaaaaa  aaaa rrrrrrr                      ttttttttttt  iiiiiiiikkkkkkkk    kkkkkkk
 
 
-***********************************************************************
-***********************************************************************
-****                                                               ****
-****                © Copyright of Kartik - 2025                   ****
-****                                                               ****
-***********************************************************************
-*****************************************************[Ethical Use Only]
+                  ***********************************************************************
+                  ***********************************************************************
+                  ****                                                               ****
+                  ****                © Copyright of Kartik - 2025                   ****
+                  ****                                                               ****
+                  ***********************************************************************
+                  *****************************************************[Ethical Use Only]
 
 ## Welcome to Kartik's OmniScanner''')
 
@@ -38,24 +38,3 @@ kkkkkkkk    kkkkkkk  aaaaaaaaaa  aaaa rrrrrrr                      ttttttttttt  
 def clear_screen():
     """Clearing the screen before running"""
     os.system('cls' if os.name == 'nt' else 'clear')
-
-
-def check_sudo():
-    """To check for current program is running with sudo or not,
-    0 -> no sudo,
-    1 -> sudo"""
-    if not 'SUDO_UID' in os.environ.keys():
-        return 0
-    else:
-        return 1
-
-
-def run_with_sudo():
-    """To Run again program with sudo.
-    first take input from user, if he wants to run again with sudo or not"""
-    if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
-        if oper_system.lower() == 'linux':
-            subprocess.run(["sudo", "-S", "python", os.path.basename(__file__)])
-        elif oper_system.lower() == 'windows':
-            subprocess.run(["sudo", "python", os.path.basename(__file__)])
-        exit()

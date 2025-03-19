@@ -44,7 +44,7 @@ Omni-Scanner is a comprehensive network analysis tool designed for reconnaissanc
 
 Additional Commands
     H (Help): Displays this documentation.
-    X (Exit): Safely terminates the program.
+    0 (Exit): Safely terminates the program.
 
 Important Notes
     - Ensure Ethical Use:
