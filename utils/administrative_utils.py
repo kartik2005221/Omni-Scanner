@@ -44,20 +44,28 @@ def is_sudo_linux():
     else:
         return 1
 
+# def run_with_sudo_linux():
+#     """To Run current program with sudo.
+#     first take input from user, if he wants to run again with sudo or not"""
+#     if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
+#         # subprocess.run(["sudo", "-S", "python3", os.path.basename(__file__)])
+#         subprocess.run(["sudo", "python3", os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main.py'))])
+#
+#     sys.exit()
+
 def run_with_sudo_linux():
-    """To Run current program with sudo.
-    first take input from user, if he wants to run again with sudo or not"""
+    """Ask from user to run with sudo or not, then Restart the script with sudo privileges."""
     if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
-        # subprocess.run(["sudo", "-S", "python3", os.path.basename(__file__)])
-        subprocess.run(["sudo", "python3", os.path.abspath(__file__)])
-        sys.exit()
+        subprocess.run(["sudo", "python3"] + sys.argv)
+    sys.exit()
 
 def check_and_run_sudo_linux():
     if not is_sudo_linux():
-
         print("Program not running with sudo, Limited functionality available")
         print("Run with sudo for full functionality")
         run_with_sudo_linux()
+
+
 
 # Common
 def check_administrative_privilieage():
@@ -68,9 +76,9 @@ def check_administrative_privilieage():
         is_admin_windows()
     elif oper_system == 'Linux':
         is_sudo_linux()
-
-def check_and_run_administrative_privilieage():
-    if oper_system == 'Windows':
-        check_and_run_admin_windows()
-    elif oper_system == 'Linux':
-        check_and_run_sudo_linux()
+#
+# def check_and_run_administrative_privilieage():
+#     if oper_system == 'Windows':
+#         check_and_run_admin_windows()
+#     elif oper_system == 'Linux':
+#         check_and_run_sudo_linux()

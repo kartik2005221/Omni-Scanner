@@ -8,7 +8,7 @@ Omni-Scanner is a comprehensive network analysis tool designed for reconnaissanc
 1. Scanning Full Network, Finding Specific Target
     This option allows you to discover active devices and analyze targets within your network.
     - How It Works:
-        Scan All IPs (High Speed): Uses ARP (Address Resolution Protocol) to rapidly identify all devices connected to the local network. ARP scanning is lightweight and efficient, making it ideal for quick network inventories.
+        Scan All IPs (High Speed): Uses ARP (Address Resolution Protocol) to rapidly identify all devices connected to the local network. ARP scanning is lightweight and efficient, making it ideal for quick network inventories. (sudo required) (linux & macos only)
         Scan Specific IPs (Detailed): Leverages Nmap, a industry-standard tool, to perform deep scans on user-specified IP ranges. This method provides detailed insights into open ports, services, and device configurations.
     - When to Use:
         ARP scanning is best for immediate device discovery (e.g., identifying unknown devices on a home network).
@@ -78,6 +78,7 @@ This menu provides two methods to identify and analyze devices on your network.
     When to Use:
         - Quickly audit connected devices (e.g., home/office networks).
         - Identify unauthorized devices (e.g., intruders on a Wi-Fi network).
+    Availability: Linux & macOS only with sudo privileges.
     Limitations:
         - No port or service details.
         - Limited to the local subnet.
@@ -144,7 +145,7 @@ This menu allows advanced customization of ICMP (Internet Control Message Protoc
         - Measure average latency (round-trip time).
 
 2. Large Ping
-    Purpose: Test network performance with oversized packets.
+    Purpose: Test network performance with oversize packets.
     Technical Details:
     Method: Sends ICMP packets with user-defined sizes.
     Customization: 
