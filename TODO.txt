@@ -11,23 +11,14 @@ todo-9: adding extra functionalities like,
     colorama>=0.4.6       # Cross-platform colored terminal text
     tqdm>=4.64.1          # Progress bars for long scans
     manuf>=1.1.5          # MAC address vendor lookup
-todo-10: separate script for windows and linux, because of different commands and not sudo requirement in windows, and
-    main.py automatically determines the OS and runs the appropriate script
 todo-11: handling keyboard interrupt in all parts of script properly
 todo-12: fixing infinite ping request and allow user to chose from infinite ping request or limited ping request
 todo-13: make a custom made script for different operating systems, and check for required packages and install them
 
 extra functionalities:
-- integrate python-nmap instead of using subprocess.run('nmap')
-- valid ip detector using ipaddress module
 - make a script for all os and check for required packages at first run and install them
 - limited and infinite ping request, handle these requests properly, ask from users
 - arguments vs interactive mode, which to use, or both
     - should i make gui for this?
-- make functions for different scans, for example arp scan, ping scan, etc
-- move menu() to their respective files of os
-- rename menu_utils to scan_utils
-- npcap compaibility for windows, and arp-scan for windows through it
-- warn user if npcap is not installed, AND SAY THEM TO INSTALL IT
-- update documentation for npcap requirement
-- add section in readme for preparing our os to run this script
+- add section in readme for preparing your os to run this script
+- progress bar for option 1's 2nd scan of nmap detailed scan

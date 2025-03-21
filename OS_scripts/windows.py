@@ -1,28 +1,33 @@
 import subprocess
-
-from utils.administrative_utils import check_and_run_admin_windows
 from utils.common_utils import documentation
-from utils.menu_utils import traceroute_all_os
+from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range
 
 
 def level_1():
     """Menu Based : All IP Scanner"""
     while True:
-        print("\nSelect a Option:\n\t1. Scan All IPs (High Speed, Less Detailed) (Sudo Required)"
-              "\n\t2. Scan specific IPs (Slow speed, More Detailed)\n\tH. Help\n\t0. Previous Menu")
+        print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed) (Sudo Required) "
+              "(linux/macos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
+              "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\tH. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower()
         if input2 == 'h':
             print(documentation(1))
         elif input2 == '0':
             return 0
         elif input2 == '1':
-            subprocess.run(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",
-                            input("Enter range of IPs (eg. 192.168.1.1-100)\n::: ")])
-        elif input2 == '2':
-            try:
-                subprocess.run(["nmap", input("Enter range of IPs (eg. 192.168.1.1-100)\n::: ")])
-            except KeyboardInterrupt:
-                print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+            print("Sorry, This option is not available in your operating system")
+        elif input2 in ['2', '3']:
+            ip_addr = input("Enter range of IPs (eg. 192.168.1.1-255)\n::: ")
+            if validate_ip_range(ip_addr):
+                if input2 == '2':
+                            subprocess.run(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",ip_addr])
+                elif input2 == '3':
+                    try:
+                        subprocess.run(["nmap", ip_addr])
+                    except KeyboardInterrupt:
+                        print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+            else:
+                print("Invalid IP range entered, Please Try again")
         else:
             print("Unsupported Option selected, Please Try again")
 
@@ -38,14 +43,17 @@ def level_2():
                 print(documentation(2))
             elif input2 == '0':
                 return 0
-            elif input2 == '1':
-                subprocess.run(["ping", "-n", "7", input("Enter IP to ping : ")])
-            elif input2 == '2':
-                subprocess.run(["ping", "-l", input("Enter size of packet to send (0-65500)"),
-                                input("Enter IP to ping : ")])
-            elif input2 == '3':
-                subprocess.run(["ping", "-w", int(input("How much time (sec.) to wait? ")) * 1000,
-                                input("Enter IP to ping : ")])
+            elif input2 in ['1', '2', '3']:
+                ip_addr = input("Enter IP to ping (eg 192.168.1.1)\n::: ")
+                if validate_ip(ip_addr):
+                    if input2 == '1':
+                        subprocess.run(["ping", "-n", "7", ip_addr])
+                    elif input2 == '2':
+                        subprocess.run(["ping", "-l", input("Enter size of packet to send (0-65500)"), ip_addr])
+                    elif input2 == '3':
+                        subprocess.run(["ping", "-w", int(input("How much time (sec.) to wait? ")) * 1000, ip_addr])
+                else:
+                    print("Invalid IP entered, Please Try again")
             elif input2 == '4':
                     print("Sorry, Flood ping not possible in your operating system")
             else:
@@ -65,7 +73,7 @@ def level_4():
               "7. All Port scan(6 or 7, not both)\n\t8. Aggressive Scan (Slower)"
               "\n\tP. Top 50  network ports used.\n\tH. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower()
-        if input2 == 'h':
+        if 'h' in input2:
             print(documentation(4))
         elif input2 == '0':
             return 0
@@ -73,48 +81,52 @@ def level_4():
             print(documentation('p'))
             input("Enter to go back to previous menu...")
         elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
-            ip = input("Enter IP to scan : ")
-            if input2 == '1':
-                subprocess.run(["nmap", ip])
+            ip_addr = input("Enter IP to scan(eg - 192.168.1.1)\n::: ")
+            if validate_ip(ip_addr):
+                if '1' in input2:
+                    subprocess.run(["nmap", ip_addr])
+                else:
+                    new_input2 = input2.split()
+                    # print(new_input2)
+                    list_of_commands = ['nmap']
+
+                    if '2' in new_input2:
+                        list_of_commands.append("-O")
+
+                    if '3' in new_input2:
+                        list_of_commands.append("-sV")
+
+                    if '4' in new_input2:
+                        list_of_commands.append("-sS")
+
+                    if '5' in new_input2:
+                        list_of_commands.append("-sU")
+
+                    if '7' in new_input2:
+                        list_of_commands.append("-p-")
+                    elif '6' in new_input2:
+                        list_of_ports = input("Enter port range (Eg. 1-65535) : ") or '1-65535'
+                        list_of_commands.append("-p")
+                        list_of_commands.append(list_of_ports)
+
+                    if '8' in new_input2:
+                        list_of_commands.append("-A")
+
+                    list_of_commands.append(ip_addr)
+                    print(list_of_commands)
+                    subprocess.run(list_of_commands)
             else:
-                new_input2 = input2.split()
-                # print(new_input2)
-                list_of_commands = ['nmap']
-
-                if '2' in new_input2:
-                    list_of_commands.append("-O")
-
-                if '3' in new_input2:
-                    list_of_commands.append("-sV")
-
-                if '4' in new_input2:
-                    list_of_commands.append("-sS")
-
-                if '5' in new_input2:
-                    list_of_commands.append("-sU")
-
-                if '7' in new_input2:
-                    list_of_commands.append("-p-")
-                elif '6' in new_input2:
-                    list_of_ports = input("Enter port range (Eg. 1-65535) : ") or '1-65535'
-                    list_of_commands.append("-p")
-                    list_of_commands.append(list_of_ports)
-
-                if '8' in new_input2:
-                    list_of_commands.append("-A")
-
-                list_of_commands.append(ip)
-                print(list_of_commands)
-                subprocess.run(list_of_commands)
+                print("Invalid IP entered, Please Try again")
         else:
             print("Unsupported Option selected, Please Try again")
 
 
 def menu_windows():
     """Function for Initial Menu to show in front of user"""
-    check_and_run_admin_windows()
+    # check_and_run_admin_windows()
     while True:
         print(r"""
+(Windows Version)
 Select a Option :
     1. Scanning full network, Finding Specific Target
     2. Pinging(Custom) a Specific IP

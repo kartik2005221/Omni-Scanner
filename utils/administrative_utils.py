@@ -3,11 +3,11 @@ import ctypes
 import os
 import subprocess
 
-from utils.common_utils import oper_system
 
 # Windows
 def is_admin_windows():
-    """Check if the script is running with administrative privileges."""
+    """Check if the script is running with administrative privileges.
+    :returns : True if running with admin privilege, else False"""
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
     except AttributeError:
@@ -36,9 +36,8 @@ def check_and_run_admin_windows():
 
 # Linux
 def is_sudo_linux():
-    """To check for current program is running with sudo or not,
-    0 -> no sudo,
-    1 -> sudo"""
+    """To check for current program is running with sudo or not.
+    :returns : 0 if not running with sudo, else 1"""
     if not 'SUDO_UID' in os.environ.keys():
         return 0
     else:
@@ -55,27 +54,25 @@ def is_sudo_linux():
 
 def run_with_sudo_linux():
     """Ask from user to run with sudo or not, then Restart the script with sudo privileges."""
-    if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
-        subprocess.run(["sudo", "python3"] + sys.argv)
+    subprocess.run(["sudo", "python3"] + sys.argv)
     sys.exit()
 
 def check_and_run_sudo_linux():
     if not is_sudo_linux():
         print("Program not running with sudo, Limited functionality available")
         print("Run with sudo for full functionality")
-        run_with_sudo_linux()
-
-
+        if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
+            run_with_sudo_linux()
 
 # Common
-def check_administrative_privilieage():
-    """To check for current program is running with administrative access or not,
-    0 -> no administrative access,
-    1 -> administrative access"""
-    if oper_system == 'Windows':
-        is_admin_windows()
-    elif oper_system == 'Linux':
-        is_sudo_linux()
+# def check_administrative_privilieage():
+#     """To check for current program is running with administrative access or not,
+#     0 -> no administrative access,
+#     1 -> administrative access"""
+#     if oper_system == 'Windows':
+#         is_admin_windows()
+#     elif oper_system == 'Linux':
+#         is_sudo_linux()
 #
 # def check_and_run_administrative_privilieage():
 #     if oper_system == 'Windows':

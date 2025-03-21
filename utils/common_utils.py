@@ -33,8 +33,10 @@ kkkkkkkk    kkkkkkk  aaaaaaaaaa  aaaa rrrrrrr                      ttttttttttt  
                   ****                                                               ****
                   ***********************************************************************
                   *****************************************************[Ethical Use Only]
+                  
+## Welcome to Kartik's OmniScanner
 ''')
-    print(f"## Welcome to Kartik's OmniScanner ({Oper_system} Version)")
+    # print(f"## Welcome to Kartik's OmniScanner ({Oper_system} Version)")
 
 
 def clear_screen():
@@ -45,7 +47,7 @@ def clear_screen():
 def documentation(i):
     """To print documentation from documentation_utils.
     :param : 0 for main menu, 1 for level 1, 2 for level 2, 4 for level 4, p for ports
-    :return : Documentation as string"""
+    :returns : Documentation as string"""
 
     if i == 0:
         return doc_utils.help0
