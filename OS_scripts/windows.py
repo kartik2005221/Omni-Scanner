@@ -12,18 +12,22 @@ def level_1():
         input2 = input("::: ").lower()
         if input2 == 'h':
             print(documentation(1))
+            input("Enter to go back to menu...")
         elif input2 == '0':
             return 0
         elif input2 == '1':
             print("Sorry, This option is not available in your operating system")
         elif input2 in ['2', '3']:
-            ip_addr = input("Enter range of IPs (eg. 192.168.1.1-255)\n::: ")
+            ip_addr = input("Enter range of IPs (eg. 192.168.1.1-255)\n::: ") or "127.0.0.1"
             if validate_ip_range(ip_addr):
                 if input2 == '2':
-                            subprocess.run(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",ip_addr])
+                            subprocess.run(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout",
+                                            "2000ms",ip_addr])
+                            input("Press Enter to continue...")
                 elif input2 == '3':
                     try:
                         subprocess.run(["nmap", ip_addr])
+                        input("Press Enter to continue...")
                     except KeyboardInterrupt:
                         print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
             else:
@@ -41,17 +45,29 @@ def level_2():
             input2 = input("::: ").lower()
             if input2 == 'h':
                 print(documentation(2))
+                input("Enter to go back to menu...")
             elif input2 == '0':
                 return 0
             elif input2 in ['1', '2', '3']:
-                ip_addr = input("Enter IP to ping (eg 192.168.1.1)\n::: ")
+                ip_addr = input("Enter IP to ping (eg 192.168.1.1)\n::: ") or "127.0.0.1"
                 if validate_ip(ip_addr):
+                    ping_type = input("Ping finitely or infinitely? (1/2)\n::: ") or '1'
+                    if ping_type == '1':
+                        no_of_packets = input("Enter number of packets to send\n::: ") or '5'
+                        ping_count = f"-c {no_of_packets}"
+                    else:
+                        ping_count = "-t"
+
                     if input2 == '1':
-                        subprocess.run(["ping", "-n", "7", ip_addr])
+                        subprocess.run(["ping", ping_count, ip_addr])
+                        input("Press Enter to continue...")
                     elif input2 == '2':
-                        subprocess.run(["ping", "-l", input("Enter size of packet to send (0-65500)"), ip_addr])
+                        subprocess.run(["ping", ping_count, "-l", input("Enter size of packet to send (0-65500)"), ip_addr])
+                        input("Press Enter to continue...")
                     elif input2 == '3':
-                        subprocess.run(["ping", "-w", int(input("How much time (sec.) to wait? ")) * 1000, ip_addr])
+                        subprocess.run(["ping", ping_count, "-w", str(int(input("How much time (sec.) to wait?\n::: ")) * 1000),
+                                        ip_addr])
+                        input("Press Enter to continue...")
                 else:
                     print("Invalid IP entered, Please Try again")
             elif input2 == '4':
@@ -75,16 +91,18 @@ def level_4():
         input2 = input("::: ").lower()
         if 'h' in input2:
             print(documentation(4))
+            input("Enter to go back to menu...")
         elif input2 == '0':
             return 0
         elif input2 == 'p':
             print(documentation('p'))
-            input("Enter to go back to previous menu...")
+            input("Enter to go back to menu...")
         elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
-            ip_addr = input("Enter IP to scan(eg - 192.168.1.1)\n::: ")
+            ip_addr = input("Enter IP to scan(eg - 192.168.1.1)\n::: ") or "127.0.0.1"
             if validate_ip(ip_addr):
                 if '1' in input2:
                     subprocess.run(["nmap", ip_addr])
+                    input("Press Enter to continue...")
                 else:
                     new_input2 = input2.split()
                     # print(new_input2)
@@ -115,6 +133,7 @@ def level_4():
                     list_of_commands.append(ip_addr)
                     print(list_of_commands)
                     subprocess.run(list_of_commands)
+                    input("Press Enter to continue...")
             else:
                 print("Invalid IP entered, Please Try again")
         else:
@@ -122,7 +141,7 @@ def level_4():
 
 
 def menu_windows():
-    """Function for Initial Menu to show in front of user"""
+    """Function for Initial Menu to show in front of the user"""
     # check_and_run_admin_windows()
     while True:
         print(r"""
@@ -138,6 +157,7 @@ Select a Option :
 
         if input1 == 'h':
             print(documentation(0))
+            input("Enter to go back to menu...")
         elif input1 == '0':
             return 0
         elif input1 == '1':

@@ -6,7 +6,7 @@ Oper_system = platform.system()
 oper_system = Oper_system.lower()
 
 def splash_screen():
-    """To print splash screen"""
+    """To print the splash screen"""
     print(r'''
 kkkkkkkk                                                          tttt            iiii  kkkkkkkk
 k::::::k                                                       ttt:::t           i::::i k::::::k
@@ -46,7 +46,7 @@ def clear_screen():
 
 def documentation(i):
     """To print documentation from documentation_utils.
-    :param : 0 for main menu, 1 for level 1, 2 for level 2, 4 for level 4, p for ports
+    :param : 0 for the main menu, 1 for level 1, 2 for level 2, 4 for level 4, p for ports
     :returns : Documentation as string"""
 
     if i == 0:

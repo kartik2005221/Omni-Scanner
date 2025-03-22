@@ -14,8 +14,8 @@ def is_admin_windows():
         return False
 
 def run_as_admin_windows():
-    """To Run current program with admin privilege.
-    first take input from user, if he wants to run again with admin privilege or not"""
+    """to run the current program with admin privilege.
+    first take input from the user if he wants to run again with admin privilege or not"""
     if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
         ctypes.windll.shell32.ShellExecuteW(
             None,
@@ -45,7 +45,7 @@ def is_sudo_linux():
 
 # def run_with_sudo_linux():
 #     """To Run current program with sudo.
-#     first take input from user, if he wants to run again with sudo or not"""
+#     first take input from the user if he wants to run again with sudo or not"""
 #     if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
 #         # subprocess.run(["sudo", "-S", "python3", os.path.basename(__file__)])
 #         subprocess.run(["sudo", "python3", os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main.py'))])
@@ -53,7 +53,7 @@ def is_sudo_linux():
 #     sys.exit()
 
 def run_with_sudo_linux():
-    """Ask from user to run with sudo or not, then Restart the script with sudo privileges."""
+    """Ask from the user to run with sudo or not, then Restart the script with sudo privileges."""
     subprocess.run(["sudo", "python3"] + sys.argv)
     sys.exit()
 

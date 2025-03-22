@@ -10,9 +10,10 @@ def level_1():
         print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed) (Sudo Required) "
               "(linux/mcos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
               "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\tH. Help\n\t0. Previous Menu")
-        input2 = input("::: ").lower()
+        input2 = input("::: ").lower() or '0'
         if input2 == 'h':
             print(documentation(1))
+            input("Enter to go back to menu...")
         elif input2 == '0':
             return 0
         elif input2 == '1':
@@ -20,12 +21,14 @@ def level_1():
                 print("Sudo not detected, \nTry another option or Switch to SUDO (Option 5 in previous menu)")
             else:
                 subprocess.run(["sudo", "arp-scan", "-l"])
+                input("Press Enter to continue...")
         elif input2 in ['2', '3']:
-            ip_addr = input("Enter range of IPs (eg. 192.168.1.1-255)\n::: ")
+            ip_addr = input("Enter range of IPs (eg. 192.168.1.1-255)\n::: ") or "127.0.0.1"
             if validate_ip_range(ip_addr):
                 if input2 == '2':
                     subprocess.run(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",
                                     ip_addr])
+                    input("Press Enter to continue...")
                 elif input2 == '3':
                     try:
                         subprocess.run(["nmap", ip_addr])
@@ -42,32 +45,61 @@ def level_2():
     while True:
         try:
             print("\nSelect a Option:\n\t1. Simple finite ping\n\t2. Large Ping\n\t3. Ping for slow network"
-                  "\n\t4. Flood Ping (requires sudo)(available only in linux/mac)\n\tH. Help\n\t0. Previous Menu")
-            input2 = input("::: ").lower()
+                  "\n\t4. Flood Ping (requires sudo)\n\tH. Help\n\t0. Previous Menu")
+            input2 = input("::: ").lower() or '0'
             if input2 == 'h':
                 print(documentation(2))
+                input("Enter to go back to menu...")
             elif input2 == '0':
                 return 0
             elif input2 in ['1', '2', '3', '4']:
-                ip_addr = input("Enter IP to ping : ")
+                ip_addr = input("Enter IP to ping\n::: ") or "127.0.0.1"
                 if validate_ip(ip_addr):
-                    if input2 == '1':
-                        subprocess.run(["ping", "-c", "7", ip_addr])
-                    elif input2 == '2':
-                        subprocess.run(["ping", "-s", input("Enter size of packet to send (0-65500)"), ip_addr])
-                    elif input2 == '3':
-                        subprocess.run(["ping", "-W", int(input("How much time to wait? ")), ip_addr])
-                    elif input2 == '4':
+                    if input2 == '4':
                         if is_sudo_linux() == 1:
                             subprocess.run(["sudo", "ping", "-f", ip_addr])
+                            input("Press Enter to continue...")
                         else:
                             print("Sudo not detected, Try another option or Switch to SUDO")
+                        continue
+                    ping_type = input("Ping finitely or infinitely? (1/2)\n::: ") or '1'
+                    if ping_type == '1':
+                        no_of_packets = input("Enter number of packets to send\n::: ") or '5'
+                        ping_count = f"-c {no_of_packets}"
+                    else:
+                        ping_count = ""
+
+                    if input2 == '1':
+                        command = ["ping", ip_addr]
+                        if ping_count:
+                            command.insert(1, ping_count)
+                        subprocess.run(command)
+                        input("Press Enter to continue...")
+                    elif input2 == '2':
+                        command = ["ping", ip_addr, "-s", input("Enter size of packet to send (0-65500)\n::: ") or '56']
+                        if ping_count:
+                            command.insert(1, ping_count)
+                        subprocess.run(command)
+                        input("Press Enter to continue...")
+                    elif input2 == '3':
+                        command = ["ping", ip_addr, "-W", input("How much time(sec.) to wait? \n::: ") or '1']
+                        if ping_count:
+                            command.insert(1, ping_count)
+                        subprocess.run(command)
+                        input("Press Enter to continue...")
+                    # elif input2 == '4':
+                    #     if is_sudo_linux() == 1:
+                    #         subprocess.run(["sudo", "ping", "-f", ip_addr])
+                    #         input("Press Enter to continue...")
+                    #     else:
+                    #         print ("Sudo not detected, Try another option, or Switch to SUDO")
                 else:
                     print("Invalid IP entered, Please Try again")
             else:
                 print("Unsupported Option selected, Please Try again")
         except KeyboardInterrupt:
             print("Stopping...")
+            input("Press Enter to continue...")
             continue
 
 
@@ -80,19 +112,21 @@ def level_4():
               "from open ports\n\t4. SYN Scan\n\t5. UDP Scan\n\t6. Specific Port scan \n\t"
               "7. All Port scan(6 or 7, not both)\n\t8. Aggressive Scan (Slower)"
               "\n\tP. Top 50  network ports used.\n\tH. Help\n\t0. Previous Menu")
-        input2 = input("::: ").lower()
+        input2 = input("::: ").lower() or '0'
         if input2 == 'h':
             print(documentation(4))
+            input("Enter to go back to menu...")
         elif input2 == '0':
             return 0
         elif input2 == 'p':
             print(documentation('p'))
-            input("Enter to go back to previous menu...")
+            input("Enter to go back to menu...")
         elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
-            ip = input("Enter IP to scan : ")
+            ip = input("Enter IP to scan\n::: ") or "127.0.0.1"
             if validate_ip(ip):
                 if input2 == '1':
                     subprocess.run(["nmap", ip])
+                    input("Press Enter to continue...")
                 else:
                     new_input2 = input2.split()
                     # print(new_input2)
@@ -123,6 +157,7 @@ def level_4():
                     list_of_commands.append(ip)
                     print(list_of_commands)
                     subprocess.run(list_of_commands)
+                    input("Press Enter to continue...")
             else:
                 print("Invalid IP entered, Please Try again")
         else:
@@ -130,7 +165,7 @@ def level_4():
 
 
 def menu_linux():
-    """Function for Initial Menu to show in front of user"""
+    """Function for Initial Menu to show in front of the user"""
     check_and_run_sudo_linux()
     while True:
         print(f"\n(Linux {'SUDO' if is_sudo_linux() else 'Limited Functionality'} Version)")
@@ -142,10 +177,11 @@ def menu_linux():
     5. Switch to SUDO
     H. Help
     0. Exit""")
-        input1 = input("::: ").lower()
+        input1 = input("::: ").lower() or '0'
 
         if input1 == 'h':
             print(documentation(0))
+            input("Enter to go back to menu...")
         elif input1 == '0':
             return 0
         elif input1 == '1':

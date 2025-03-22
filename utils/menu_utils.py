@@ -7,12 +7,15 @@ def traceroute_all_os():
     :returns : 0"""
     if oper_system() == "Windows":
         subprocess.run(["tracert", input("Enter IP for traceroute : ")])
+        input("Press Enter to continue...")
     else:
         subprocess.run(["traceroute", input("Enter IP for traceroute : ")])
+        input("Press Enter to continue...")
     return 0
 
 def validate_ip(ip):
-    """To validate IP address. Return True if valid, else False
+    """To validate the IP address.
+    Return True if valid, else False
     :param ip: IP address to validate
     :returns: True if valid, else False"""
     try:

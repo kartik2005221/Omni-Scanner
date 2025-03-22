@@ -1,9 +1,9 @@
-TODO-6: Sanitise input before using in subprocess.run
-  Potential Security Risk with subprocess.run:
-  Using subprocess.run with user inputs directly can be a security risk (command injection). It is better to sanitize
-  and validate inputs before using them in subprocess calls.
-  For example, if the user input is used directly in the command, an attacker can inject additional commands
-TODO-8: add csv and moving them to backup functionality on next run
+TODO-6: Sanitize input before using in subprocess.run
+    Potential Security Risk with subprocess.run:
+    Using subprocess.run with user inputs directly can be a security risk (command injection). It is better to sanitize
+    and validate inputs before using them in subprocess calls.
+    For example, if the user input is used directly in the command, an attacker can inject additional commands
+TODO-8: add csv and moving them to back up functionality on next run
 todo-9: adding extra functionalities like,
     scapy>=2.5.0          # For ARP scanning and packet manipulation
     python-nmap>=0.7.1    # Nmap integration (requires nmap installed)
@@ -12,13 +12,12 @@ todo-9: adding extra functionalities like,
     tqdm>=4.64.1          # Progress bars for long scans
     manuf>=1.1.5          # MAC address vendor lookup
 todo-11: handling keyboard interrupt in all parts of script properly
-todo-12: fixing infinite ping request and allow user to chose from infinite ping request or limited ping request
 todo-13: make a custom made script for different operating systems, and check for required packages and install them
 
 extra functionalities:
-- make a script for all os and check for required packages at first run and install them
-- limited and infinite ping request, handle these requests properly, ask from users
-- arguments vs interactive mode, which to use, or both
-    - should i make gui for this?
-- add section in readme for preparing your os to run this script
-- progress bar for option 1's 2nd scan of nmap detailed scan
+- make a script for all operating systems and check for required packages at first run and install them
+- arguments vs. interactive mode, which mode to use, or both
+    - should I make gui for this?
+- add a section in readme for preparing user's os to run this script
+- progress bar for option 1's second scan of nmap detailed scan
+- update documentation
