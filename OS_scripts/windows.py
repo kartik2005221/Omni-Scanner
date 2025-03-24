@@ -1,6 +1,10 @@
 import subprocess
 from utils.common_utils import documentation
-from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range
+from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, run_nmap_scan_big
+import threading
+import itertools
+import time
+import sys
 
 
 def level_1():
@@ -25,11 +29,12 @@ def level_1():
                                             "2000ms",ip_addr])
                             input("Press Enter to continue...")
                 elif input2 == '3':
-                    try:
-                        subprocess.run(["nmap", ip_addr])
-                        input("Press Enter to continue...")
-                    except KeyboardInterrupt:
-                        print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+                    # try:
+                    #     subprocess.run(["nmap", ip_addr])
+                    #     input("Press Enter to continue...")
+                    # except KeyboardInterrupt:
+                    #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+                    run_nmap_scan_big(ip_addr)
             else:
                 print("Invalid IP range entered, Please Try again")
         else:

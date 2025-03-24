@@ -18,6 +18,7 @@ extra functionalities:
 - make a script for all operating systems and check for required packages at first run and install them
 - arguments vs. interactive mode, which mode to use, or both
     - should I make gui for this?
-- add a section in readme for preparing user's os to run this script
-- progress bar for option 1's second scan of nmap detailed scan
-- update documentation
+- add a section in readme for preparing user's os to run this script**
+- update documentation**
+- default vale to every input in windows.py**
+after doing **, pull to main branch

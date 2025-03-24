@@ -1,7 +1,7 @@
 import subprocess
 from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
 from utils.common_utils import documentation
-from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range
+from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, run_nmap_scan_big
 
 
 def level_1():
@@ -30,10 +30,12 @@ def level_1():
                                     ip_addr])
                     input("Press Enter to continue...")
                 elif input2 == '3':
-                    try:
-                        subprocess.run(["nmap", ip_addr])
-                    except KeyboardInterrupt:
-                        print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+                    # try:
+                    #     subprocess.run(["nmap", ip_addr])
+                    #     input("Press Enter to continue...")
+                    # except KeyboardInterrupt:
+                    #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+                    run_nmap_scan_big(ip_addr)
             else:
                 print("\nInvalid IP Address, please try again")
         else:

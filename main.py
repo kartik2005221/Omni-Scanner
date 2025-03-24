@@ -10,7 +10,8 @@ while True:
     elif oper_system == 'linux':
         menu_linux()
 
-    if input("Press 0 to exit (finally) :::  ").lower() == '0':
+    exit_finally = input("Press 0 to exit (finally) :::  ") or '1'
+    if exit_finally.lower() == '0':
         print("Exiting...")
         clear_screen()
         break
