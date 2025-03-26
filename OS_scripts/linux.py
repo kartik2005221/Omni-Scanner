@@ -32,9 +32,10 @@ def level_1():
                 elif input2 == '3':
                     # try:
                     #     subprocess.run(["nmap", ip_addr])
-                    #     input("Press Enter to continue...")
+                    #     input ("Press Enter to continue...")
                     # except KeyboardInterrupt:
-                    #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+                    #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
+                    #     if user does not have enough time]")
                     run_nmap_scan_big(ip_addr)
             else:
                 print("\nInvalid IP Address, please try again")
@@ -176,7 +177,8 @@ def menu_linux():
     2. Pinging(Custom) a Specific IP
     3. TraceRouting
     4. Advance Scanning a Specific IP
-    5. Switch to SUDO
+    5. Get network information
+    6. Switch to SUDO
     H. Help
     0. Exit""")
         input1 = input("::: ").lower() or '0'
@@ -195,7 +197,10 @@ def menu_linux():
         elif input1 == '4':
             level_4()
         elif input1 == '5':
-            if  not is_sudo_linux():
+            subprocess.run(["ip", "a"])
+            input("Press Enter to continue...")
+        elif input1 == '6':
+            if not is_sudo_linux():
                 print("Switching to SUDO...")
                 run_with_sudo_linux()
             else:

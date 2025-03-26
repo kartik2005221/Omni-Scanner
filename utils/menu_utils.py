@@ -2,9 +2,9 @@ import subprocess
 import ipaddress
 from utils.common_utils import oper_system
 import threading
-import itertools
 import time
 import sys
+
 
 def traceroute_all_os():
     """Just a Simple Traceroute Function
@@ -17,6 +17,7 @@ def traceroute_all_os():
         input("Press Enter to continue...")
     return 0
 
+
 def validate_ip(ip):
     """To validate the IP address.
     Return True if valid, else False
@@ -27,6 +28,7 @@ def validate_ip(ip):
         return True
     except ValueError:
         return False
+
 
 def validate_ip_range(ip_range):
     """To validate IP address range. Return True if valid, else False
@@ -49,22 +51,26 @@ def spinning_cursor():
         for cursor in '|/-\\':
             yield cursor
 
-def spinner_task(process):
+
+def spinner_task(spinner_user):
     """Displays a spinner while the process is running"""
     spinner = spinning_cursor()
-    while process.poll() is None:  # Keep running while process is active
+    while spinner_user.poll() is None:  # Keep running while a process is active
         sys.stdout.write(f"\rScanning network... {next(spinner)} ")
         sys.stdout.flush()
-        time.sleep(0.2)  # Adjust speed of the spinner
+        time.sleep(0.2)  # Adjust the speed of the spinner
     # sys.stdout.write("\rScanning complete!     \n")
 
+
 process = 0
+
+
 def run_nmap_scan_big(ip_range):
     """Runs Nmap scan with progress indicator and graceful exit"""
     global process
     try:
         process = subprocess.Popen(["nmap", ip_range], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        # Start spinner in a separate thread
+        # Start the spinner in a separate thread
         spinner_thread = threading.Thread(target=spinner_task, args=(process,), daemon=True)
         spinner_thread.start()
         # Wait for the Nmap process to complete
@@ -77,8 +83,16 @@ def run_nmap_scan_big(ip_range):
         input("Press Enter to continue...")
 
     except KeyboardInterrupt:
-        process.terminate()  # Kill Nmap process if user presses Ctrl+C
+        process.terminate()  # Kill Nmap process if the user presses Ctrl+C
         print("\nStopping...")
+
+# def get_ip():
+#     """Get the IP address of the current system"""
+#     if oper_system() == "Windows":
+#         subprocess.run(["ipconfig"])
+#     else:
+#         subprocess.run(["ip", "addr"])
+
 
 # sample codes for reference
 # result = subprocess.run(["arp-scan", "-l"], capture_output=True, text=True)

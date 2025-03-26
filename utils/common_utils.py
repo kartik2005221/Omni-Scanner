@@ -5,6 +5,7 @@ import utils.documentation_utils as doc_utils
 Oper_system = platform.system()
 oper_system = Oper_system.lower()
 
+
 def splash_screen():
     """To print the splash screen"""
     print(r'''

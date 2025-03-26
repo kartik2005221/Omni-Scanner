@@ -20,5 +20,4 @@ extra functionalities:
     - should I make gui for this?
 - add a section in readme for preparing user's os to run this script**
 - update documentation**
-- default vale to every input in windows.py**
-after doing **, pull to main branch
+after doing **, pull to the main branch

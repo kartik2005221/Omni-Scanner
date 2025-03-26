@@ -13,6 +13,7 @@ def is_admin_windows():
     except AttributeError:
         return False
 
+
 def run_as_admin_windows():
     """to run the current program with admin privilege.
     first take input from the user if he wants to run again with admin privilege or not"""
@@ -21,11 +22,12 @@ def run_as_admin_windows():
             None,
             "runas",  # "runas" triggers UAC elevation
             sys.executable,
-            f'"{sys.argv[0]}"', # quoted to handle spaces
+            f'"{sys.argv[0]}"',  # quoted to handle spaces
             None,
             1
         )
         sys.exit()
+
 
 def check_and_run_admin_windows():
     """Check if not sudo, then Run the script with admin privileges"""
@@ -33,6 +35,7 @@ def check_and_run_admin_windows():
         print("Program not running with administrative privilege, Limited functionality available")
         print("Run with administrative privilege for full functionality")
         run_as_admin_windows()
+
 
 # Linux
 def is_sudo_linux():
@@ -42,6 +45,7 @@ def is_sudo_linux():
         return 0
     else:
         return 1
+
 
 # def run_with_sudo_linux():
 #     """To Run current program with sudo.
@@ -56,6 +60,7 @@ def run_with_sudo_linux():
     """Ask from the user to run with sudo or not, then Restart the script with sudo privileges."""
     subprocess.run(["sudo", "python3"] + sys.argv)
     sys.exit()
+
 
 def check_and_run_sudo_linux():
     if not is_sudo_linux():

@@ -1,10 +1,6 @@
 import subprocess
 from utils.common_utils import documentation
 from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, run_nmap_scan_big
-import threading
-import itertools
-import time
-import sys
 
 
 def level_1():
@@ -13,7 +9,7 @@ def level_1():
         print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed) (Sudo Required) "
               "(linux/macos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
               "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\tH. Help\n\t0. Previous Menu")
-        input2 = input("::: ").lower()
+        input2 = input("::: ").lower() or '0'
         if input2 == 'h':
             print(documentation(1))
             input("Enter to go back to menu...")
@@ -25,15 +21,16 @@ def level_1():
             ip_addr = input("Enter range of IPs (eg. 192.168.1.1-255)\n::: ") or "127.0.0.1"
             if validate_ip_range(ip_addr):
                 if input2 == '2':
-                            subprocess.run(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout",
-                                            "2000ms",ip_addr])
-                            input("Press Enter to continue...")
+                    subprocess.run(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout",
+                                    "2000ms", ip_addr])
+                    input("Press Enter to continue...")
                 elif input2 == '3':
                     # try:
                     #     subprocess.run(["nmap", ip_addr])
-                    #     input("Press Enter to continue...")
+                    #     input ("Press Enter to continue...")
                     # except KeyboardInterrupt:
-                    #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1, if you dont have enough time]")
+                    #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
+                    #     if user does not have enough time]")
                     run_nmap_scan_big(ip_addr)
             else:
                 print("Invalid IP range entered, Please Try again")
@@ -44,16 +41,16 @@ def level_1():
 def level_2():
     """Menu Based : Ping option's function"""
     while True:
-        try:
-            print("\nSelect a Option:\n\t1. Simple finite ping\n\t2. Large Ping\n\t3. Ping for slow network"
-                  "\n\t4. Flood Ping (requires sudo)(available only in linux/mac)\n\tH. Help\n\t0. Previous Menu")
-            input2 = input("::: ").lower()
-            if input2 == 'h':
-                print(documentation(2))
-                input("Enter to go back to menu...")
-            elif input2 == '0':
-                return 0
-            elif input2 in ['1', '2', '3']:
+        print("\nSelect a Option:\n\t1. Simple finite ping\n\t2. Large Ping\n\t3. Ping for slow network"
+              "\n\t4. Flood Ping (requires sudo)(available only in linux/mac)\n\tH. Help\n\t0. Previous Menu")
+        input2 = input("::: ").lower() or '0'
+        if input2 == 'h':
+            print(documentation(2))
+            input("Enter to go back to menu...")
+        elif input2 == '0':
+            return 0
+        elif input2 in ['1', '2', '3']:
+            try:
                 ip_addr = input("Enter IP to ping (eg 192.168.1.1)\n::: ") or "127.0.0.1"
                 if validate_ip(ip_addr):
                     ping_type = input("Ping finitely or infinitely? (1/2)\n::: ") or '1'
@@ -67,21 +64,27 @@ def level_2():
                         subprocess.run(["ping", ping_count, ip_addr])
                         input("Press Enter to continue...")
                     elif input2 == '2':
-                        subprocess.run(["ping", ping_count, "-l", input("Enter size of packet to send (0-65500)"), ip_addr])
+                        subprocess.run(
+                            ["ping", ping_count, "-l", input("Enter size of packet to send (0-65500)"), ip_addr])
                         input("Press Enter to continue...")
                     elif input2 == '3':
-                        subprocess.run(["ping", ping_count, "-w", str(int(input("How much time (sec.) to wait?\n::: ")) * 1000),
-                                        ip_addr])
+                        subprocess.run(
+                            ["ping", ping_count, "-w", str(int(input("How much time (sec.) to wait?\n::: ")) * 1000),
+                             ip_addr])
                         input("Press Enter to continue...")
                 else:
                     print("Invalid IP entered, Please Try again")
-            elif input2 == '4':
-                    print("Sorry, Flood ping not possible in your operating system")
-            else:
-                print("Unsupported Option selected, Please Try again")
-        except KeyboardInterrupt:
-            print("Stopping...")
-            continue
+            except KeyboardInterrupt:
+                print("[Ctrl-C] Stopping...")
+                try:
+                    if input("Press Enter to continue..."):
+                        return 0
+                except KeyboardInterrupt:
+                    return 0
+        elif input2 == '4':
+            print("Sorry, Flood ping not possible in your operating system")
+        else:
+            print("Unsupported Option selected, Please Try again")
 
 
 def level_4():
@@ -93,7 +96,7 @@ def level_4():
               "from open ports\n\t4. SYN Scan\n\t5. UDP Scan\n\t6. Specific Port scan \n\t"
               "7. All Port scan(6 or 7, not both)\n\t8. Aggressive Scan (Slower)"
               "\n\tP. Top 50  network ports used.\n\tH. Help\n\t0. Previous Menu")
-        input2 = input("::: ").lower()
+        input2 = input("::: ").lower() or '0'
         if 'h' in input2:
             print(documentation(4))
             input("Enter to go back to menu...")
@@ -156,9 +159,10 @@ Select a Option :
     2. Pinging(Custom) a Specific IP
     3. TraceRouting
     4. Advance Scanning a Specific IP
+    5. Get network information
     H. Help
     0. Exit""")
-        input1 = input("::: ").lower()
+        input1 = input("::: ").lower() or '0'
 
         if input1 == 'h':
             print(documentation(0))
@@ -173,6 +177,8 @@ Select a Option :
             traceroute_all_os()
         elif input1 == '4':
             level_4()
+        elif input1 == '5':
+            subprocess.run(["ipconfig"])
+            input("Press Enter to continue...")
         else:
             print("Unsupported Option selected, Please Try again")
-
