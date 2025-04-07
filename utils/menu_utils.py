@@ -6,15 +6,25 @@ import time
 import sys
 
 
+def run_command(command):
+    """Running commands, with subprocess
+    :param command: Command to run"""
+    print("\nExecuting: ", end="")
+    for i in command:
+        print(i, end=" ")
+    print()
+    subprocess.run(command)
+    input("Press Enter to continue...")
+
+
 def traceroute_all_os():
     """Just a Simple Traceroute Function
     :returns : 0"""
     if oper_system() == "Windows":
-        subprocess.run(["tracert", input("Enter IP for traceroute : ")])
+        run_command(["tracert", input("Enter IP for traceroute : ")])
         input("Press Enter to continue...")
     else:
-        subprocess.run(["traceroute", input("Enter IP for traceroute : ")])
-        input("Press Enter to continue...")
+        run_command(["traceroute", input("Enter IP for traceroute : ")])
     return 0
 
 
@@ -86,16 +96,18 @@ def run_nmap_scan_big(ip_range):
         process.terminate()  # Kill Nmap process if the user presses Ctrl+C
         print("\nStopping...")
 
+
 # def get_ip():
 #     """Get the IP address of the current system"""
 #     if oper_system() == "Windows":
-#         subprocess.run(["ipconfig"])
+#         run_command(["ipconfig"])
 #     else:
-#         subprocess.run(["ip", "addr"])
+#         run_command(["ip", "addr"])
 
 
 # sample codes for reference
-# result = subprocess.run(["arp-scan", "-l"], capture_output=True, text=True)
+# result = run_command(["arp-scan", "-l"], capture_output=True, text=True)
 # print("Output:", result.stdout)
 # print("Error:", result.stderr)
 # print("Return Code:", result.returncode)
+print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

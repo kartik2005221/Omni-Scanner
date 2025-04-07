@@ -1,7 +1,8 @@
 import sys
 import ctypes
 import os
-import subprocess
+
+from utils.menu_utils import run_command
 
 
 # Windows
@@ -51,14 +52,14 @@ def is_sudo_linux():
 #     """To Run current program with sudo.
 #     first take input from the user if he wants to run again with sudo or not"""
 #     if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
-#         # subprocess.run(["sudo", "-S", "python3", os.path.basename(__file__)])
-#         subprocess.run(["sudo", "python3", os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main.py'))])
+#         # run_command(["sudo", "-S", "python3", os.path.basename(__file__)])
+#         run_command(["sudo", "python3", os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'main.py'))])
 #
 #     sys.exit()
 
 def run_with_sudo_linux():
     """Ask from the user to run with sudo or not, then Restart the script with sudo privileges."""
-    subprocess.run(["sudo", "python3"] + sys.argv)
+    run_command(["sudo", "python3"] + sys.argv)
     sys.exit()
 
 
@@ -84,3 +85,5 @@ def check_and_run_sudo_linux():
 #         check_and_run_admin_windows()
 #     elif oper_system == 'Linux':
 #         check_and_run_sudo_linux()
+
+print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

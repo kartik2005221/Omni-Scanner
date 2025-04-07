@@ -335,3 +335,5 @@ Key Notes
     - Security: Ports like 443 (HTTPS), 993 (IMAPS), and 995 (POP3S) encrypt traffic by default.  
     - Dynamic/Ephemeral Ports: Client-side ports (e.g., 49152–65535) are temporary and not listed here.  
 """
+
+print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

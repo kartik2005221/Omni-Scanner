@@ -19,7 +19,10 @@ try:
         else:
             print("Aborting Exit...")
 except KeyboardInterrupt:
-    print("\n[Ctrl-C] Exiting...")
-    input("Press any key to exit ...")
-    clear_screen()
-    exit(0)
+    try:
+        input("\n[Ctrl-C] Exiting...")
+    except KeyboardInterrupt:
+        pass
+    finally:
+        clear_screen()
+        exit(0)

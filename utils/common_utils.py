@@ -62,3 +62,5 @@ def documentation(i):
         return doc_utils.ports
     else:
         return "Documentation not available"
+
+print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
