@@ -25,3 +25,4 @@ after doing **, pull to the main branch
 -o-all, -oX, -oG
 
 - nmap wale section me, 4th wale me, range and simple ip ka option user ko do,,,
+wrong file runned, fix it

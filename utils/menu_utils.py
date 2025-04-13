@@ -7,18 +7,17 @@ import time
 
 import requests
 
-from utils.common_utils import oper_system, run_command
+from utils.common_utils import run_command
 
 
-def traceroute_all_os():
-    """Just a Simple Traceroute Function
-    :returns : 0"""
-    if oper_system() == "Windows":
-        run_command(["tracert", input("Enter IP for traceroute : ")])
-        input("Press Enter to continue...")
-    else:
-        run_command(["traceroute", input("Enter IP for traceroute : ")])
-    return 0
+# def traceroute_all_os():
+#     """Just a Simple Traceroute Function
+#     :returns : 0"""
+#     if oper_system == "windows":
+#         run_command(["tracert", input("Enter IP for traceroute : ")])
+#     else:
+#         run_command(["traceroute", input("Enter IP for traceroute : ")])
+#     return 0
 
 
 def validate_ip(ip):
@@ -98,6 +97,9 @@ def get_mac_vendor(mac_address: str) -> str:
             return response.text.strip()
         elif response.status_code == 404:
             return "Vendor Not Found"
+        elif response.status_code == 429:
+            return ("Rate Limit Exceeded. Try again later.\n\tOR\nTry Paid API for more requests "
+                    "https://macvendors.com/plans")
         else:
             return f"Error: {response.status_code}"
     except requests.exceptions.RequestException as e:
@@ -126,6 +128,14 @@ def validate_mac(mac: str) -> bool:
         if re.match(pattern, mac):
             return True
     return False
+
+
+def bypass_firewall(ip_addr):
+    """Bypass Firewall
+    :returns: 0"""
+    print("Wait a Minute, Bypassing Firewall...")
+    run_command(["nmap", "-Pn", ip_addr])
+    return 0
 
 
 # import importlib.util

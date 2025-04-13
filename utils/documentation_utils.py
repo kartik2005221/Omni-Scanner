@@ -195,7 +195,60 @@ For Sub-Option Help, type H within any feature.
 
 © Kartik | Licensed for Ethical Use Only
 """
+help3 = r"""
+Selected Option 3: Traceroute any IP or Domain name.
+This menu allows to track any ip address and domain name, to find the path of packets from your system to the target host. It provides two options for different scenarios.
 
+1: Standard Traceroute (ICMP/UDP)
+    Description: Performs a traditional traceroute using ICMP (Windows) or UDP (Linux/macOS) packets to map the route from your machine to the target host. This option is compatible with most networks unless outbound ICMP or UDP traffic is blocked.
+    How It Works: 
+        Linux/macOS: Uses traceroute command which sends UDP packets with increasing TTL values.
+        Windows: Uses tracert command that sends ICMP Echo Requests.
+    Use Case:
+        General-purpose path tracing.
+        Diagnosing routing issues or high-latency links on open networks.
+    Commands Used:
+        Linux/macOS:
+            traceroute <target>
+        Windows:
+            tracert <target>
+    Requirements:
+        traceroute must be installed (Linux).
+        No elevated privileges needed unless restricted by system policy.
+
+2: Firewall-Evasion Traceroute (TCP Port 80)
+    Description: Performs a traceroute using TCP SYN packets to a well-known open port (default: 80). This is useful in environments where ICMP or UDP packets are filtered by a firewall or router, but HTTP traffic is allowed.
+    How It Works:
+        Sends TCP SYN packets to port 80 (HTTP).
+        Mimics standard web traffic to bypass firewalls that block ping or UDP probes.
+    Use Case:
+        Tracing routes through firewalled networks.
+        Penetration testing or red team scenarios.
+        More accurate routing paths through load-balanced or ICMP-blocked infrastructure.
+    Commands Used:
+        Linux/macOS:
+            sudo traceroute -T -p 80 <target>
+        Windows (via Nmap):
+            nmap --traceroute -p 80 <target>
+            Windows tracert does not support TCP mode natively. We use nmap as a fallback.
+    Requirements: 
+        Requires sudo (admin) privileges on Linux/macOS.
+        nmap must be installed for Windows.
+
+Notes & Recommendations
+    For most networks, Option 1 is sufficient and faster.
+    If Option 1 returns timeouts or incomplete hops, try Option 2.
+    Always run the tool with necessary privileges or you'll get misleading results.
+    Consider automating fallback in future versions using a “Smart Traceroute” logic.
+
+Warnings
+    Ethical Use: Always obtain permission before scanning. Unauthorized scans may be illegal.
+
+To Return to the Main Menu, press 0.
+For this Help Screen, press H.
+
+© Kartik | Licensed for Ethical Use Only
+"""
 help4 = r"""
 Advanced Scan Overview
 The Advanced Scan menu offers powerful network reconnaissance tools to analyze targets in depth. Each option focuses on different aspects of network exploration, from detecting open ports to identifying software vulnerabilities. Below is a breakdown of what each scan does, how it works, and when to use it.
@@ -278,62 +331,70 @@ For this Help Screen, press H.
 
 ports = r"""
 Top 50 Common Network Ports
-    1. 80/TCP - HTTP (Web traffic)  
-    2. 443/TCP - HTTPS (Secure web traffic)  
-    3. 22/TCP - SSH (Secure Shell)  
-    4. 53/TCP/UDP - DNS (Domain Name System)  
-    5. 25/TCP - SMTP (Email delivery)  
-    6. 110/TCP - POP3 (Email retrieval)  
-    7. 143/TCP - IMAP (Email management)  
-    8. 21/TCP - FTP Control (File Transfer Protocol)  
-    9. 23/TCP - Telnet (Unencrypted remote access)  
-    10. 3389/TCP - RDP (Remote Desktop Protocol)  
-    11. 445/TCP - SMB (Windows file/printer sharing)  
-    12. 139/TCP - NetBIOS Session Service  
-    13. 137/UDP - NetBIOS Name Service  
-    14. 138/UDP - NetBIOS Datagram Service  
-    15. 3306/TCP - MySQL Database  
-    16. 5432/TCP - PostgreSQL Database  
-    17. 587/TCP - SMTP Submission (Secure email sending)  
-    18. 993/TCP - IMAPS (IMAP over SSL)  
-    19. 995/TCP - POP3S (POP3 over SSL)  
-    20. 161/UDP - SNMP (Network monitoring)  
-    21. 162/UDP - SNMP Trap (SNMP alerts)  
-    22. 123/UDP - NTP (Network Time Protocol)  
-    23. 514/UDP - Syslog (Logging service)  
-    24. 67/UDP - DHCP Server (IP assignment)  
-    25. 68/UDP - DHCP Client  
-    26. 389/TCP/UDP - LDAP (Directory services)  
-    27. 636/TCP - LDAPS (LDAP over SSL)  
-    28. 8443/TCP - HTTPS Alternate (Common for web apps)  
-    29. 8080/TCP - HTTP Alternate (Proxy/web caching)  
-    30. 27017/TCP - MongoDB Database  
-    31. 6379/TCP - Redis (In-memory database)  
-    32. 11211/TCP/UDP - Memcached (Caching system)  
-    33. 1194/UDP - OpenVPN  
-    34. 500/UDP - IKE (IPsec key exchange)  
-    35. 4500/UDP - IPsec NAT-Traversal  
-    36. 1433/TCP - Microsoft SQL Server  
-    37. 1521/TCP - Oracle Database  
+    1. 80/TCP        - HTTP (Web traffic)  
+    2. 443/TCP       - HTTPS (Secure web traffic)  
+    3. 22/TCP        - SSH (Secure Shell)  
+    4. 53/TCP/UDP    - DNS (Domain Name System)  
+    5. 25/TCP        - SMTP (Email delivery)  
+    6. 110/TCP       - POP3 (Email retrieval)  
+    7. 143/TCP       - IMAP (Email management)  
+    8. 21/TCP        - FTP Control (File Transfer Protocol)  
+    9. 23/TCP        - Telnet (Unencrypted remote access)  
+    10. 3389/TCP     - RDP (Remote Desktop Protocol)  
+    11. 445/TCP      - SMB (Windows file/printer sharing)  
+    12. 139/TCP      - NetBIOS Session Service  
+    13. 137/UDP      - NetBIOS Name Service  
+    14. 138/UDP      - NetBIOS Datagram Service  
+    15. 3306/TCP     - MySQL Database  
+    16. 5432/TCP     - PostgreSQL Database  
+    17. 587/TCP      - SMTP Submission (Secure email sending)  
+    18. 993/TCP      - IMAPS (IMAP over SSL)  
+    19. 995/TCP      - POP3S (POP3 over SSL)  
+    20. 161/UDP      - SNMP (Network monitoring)  
+    21. 162/UDP      - SNMP Trap (SNMP alerts)  
+    22. 123/UDP      - NTP (Network Time Protocol)  
+    23. 514/UDP      - Syslog (Logging service)  
+    24. 67/UDP       - DHCP Server (IP assignment)  
+    25. 68/UDP       - DHCP Client  
+    26. 389/TCP/UDP  - LDAP (Directory services)  
+    27. 636/TCP      - LDAPS (LDAP over SSL)  
+    28. 8443/TCP     - HTTPS Alternate (Common for web apps)  
+    29. 8080/TCP     - HTTP Alternate (Proxy/web caching)  
+    30. 27017/TCP    - MongoDB Database  
+    31. 6379/TCP     - Redis (In-memory database)  
+    32. 11211/TCP/UDP- Memcached (Caching system)  
+    33. 1194/UDP     - OpenVPN  
+    34. 500/UDP      - IKE (IPsec key exchange)  
+    35. 4500/UDP     - IPsec NAT-Traversal  
+    36. 1433/TCP     - Microsoft SQL Server  
+    37. 1521/TCP     - Oracle Database  
     38. 2049/TCP/UDP - NFS (Network File System)  
-    39. 873/TCP - Rsync (File synchronization)  
+    39. 873/TCP      - Rsync (File synchronization)  
     40. 5060/TCP/UDP - SIP (VoIP signaling)  
-    41. 5061/TCP - SIP-TLS (Secure SIP)  
-    42. 5900/TCP - VNC (Remote desktop)  
-    43. 25565/TCP - Minecraft Server  
-    44. 3128/TCP - Squid Proxy  
-    45. 69/UDP - TFTP (Trivial File Transfer Protocol)  
-    46. 2222/TCP - SSH Alternate (Custom deployments)  
-    47. 9200/TCP - Elasticsearch (Search engine)  
-    48. 9300/TCP - Elasticsearch Cluster Communication  
-    49. 5601/TCP - Kibana (Data visualization for Elasticsearch)  
-    50. 2483/TCP - Oracle Database SSL 
+    41. 5061/TCP     - SIP-TLS (Secure SIP)  
+    42. 5900/TCP     - VNC (Remote desktop)  
+    43. 25565/TCP    - Minecraft Server  
+    44. 3128/TCP     - Squid Proxy  
+    45. 69/UDP       - TFTP (Trivial File Transfer Protocol)  
+    46. 2222/TCP     - SSH Alternate (Custom deployments)  
+    47. 9200/TCP     - Elasticsearch (Search engine)  
+    48. 9300/TCP     - Elasticsearch Cluster Communication  
+    49. 5601/TCP     - Kibana (Data visualization for Elasticsearch)  
+    50. 2483/TCP     - Oracle Database SSL 
 
 Key Notes
     - TCP vs. UDP: Some services use both (e.g., DNS, LDAP), while others are UDP-only (e.g., DHCP, SNMP, NTP).  
     - Legacy Protocols: Ports like Telnet (23) and FTP (21) are insecure and often replaced by SSH (22) and SFTP/SCP.  
     - Security: Ports like 443 (HTTPS), 993 (IMAPS), and 995 (POP3S) encrypt traffic by default.  
     - Dynamic/Ephemeral Ports: Client-side ports (e.g., 49152–65535) are temporary and not listed here.  
+
+Warnings
+    Ethical Use: Always obtain permission before scanning. Unauthorized scans may be illegal.
+
+To Return to the Main Menu, press 0.
+For this Help Screen, press H.
+
+© Kartik | Licensed for Ethical Use Only
 """
 
 if __name__ == "__main__":

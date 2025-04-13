@@ -6,7 +6,7 @@ from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, 
 def level_1():
     """Menu Based : All IP Scanner"""
     while True:
-        print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed) (Sudo Required) "
+        print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed)"
               "(linux/macos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
               "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\t4. Mac Vendor Lookup\n\t"
               "H. Help\n\t0. Previous Menu")
@@ -49,7 +49,7 @@ def level_2():
     """Menu Based : Ping option's function"""
     while True:
         print("\nSelect a Option:\n\t1. Simple finite ping\n\t2. Large Ping\n\t3. Ping for slow network"
-              "\n\t4. Flood Ping (requires sudo)(available only in linux/mac)\n\tH. Help\n\t0. Previous Menu")
+              "\n\t4. Flood Ping (linux/mac only)\n\tH. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower() or '0'
         if input2 == 'h':
             print(documentation(2))
@@ -94,8 +94,38 @@ def level_2():
             print("Unsupported Option selected, Please Try again")
 
 
-def level_4():
+def level_3():
+    """Menu Based : Traceroute option's function"""
+    while True:
+        print("\nSelect a Option:\n\t1. Standard Traceroute (ICMP/UDP)\n\t2. Firewall-Evasion Traceroute (TCP port 80)"
+              "(sudo required in linux/mac-os)\n\tH. Help\n\t0. Previous Menu")
+        input2 = input("::: ").lower() or '0'
+        if input2 == 'h':
+            print(documentation(3))
+            input("Enter to go back to menu...")
+        elif input2 == '0':
+            return 0
+        elif input2 in ['1', '2']:
+            ip_addr = input("Enter IP for traceroute : ") or "127.0.0.1"
+            if validate_ip(ip_addr):
+                if input2 == '1':
+                    run_command(["tracert", ip_addr])
+                elif input2 == '2':
+                    run_command(["nmap", "--traceroute", "-p", "80", ip_addr])
+            else:
+                print("Invalid IP entered, Please Try again")
+        else:
+            print("Unsupported Option selected, Please Try again")
+
+
+
+def level_4(number_of_ip = 0):
     """Menu based : All Nmap option's function"""
+    if number_of_ip == 0:
+        validate = validate_ip
+    else:
+        validate = validate_ip_range
+
     while True:
         print("\nSelect Required option: (separated by spaces)"
               "\n\t1. Simple Nmap (Fast)(Dont use it with any other argument)\n\t2. Detect OS\n\t"
@@ -109,15 +139,15 @@ def level_4():
         if 'h' in input2:
             print(documentation(4))
             input("Enter to go back to menu...")
-        elif input2 == '0':
+        elif '0' in input2:
             return 0
-        elif input2 == 'p':
+        elif 'p' in input2:
             print(documentation('p'))
             input("Enter to go back to menu...")
         # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
         elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8'] for x in input2):
             ip_addr = input("Enter IP to scan(eg - 192.168.1.1)\n::: ") or "127.0.0.1"
-            if validate_ip(ip_addr):
+            if validate(ip_addr):
                 if '1' in input2:
                     run_command(["nmap", ip_addr])
 
@@ -169,7 +199,8 @@ Select a Option :
     2. Pinging(Custom) a Specific IP
     3. TraceRouting
     4. Advance Scanning a Specific IP
-    5. Get network information
+    5. Advance Scanning Range of IPs
+    6. Get network information
     H. Help
     0. Exit""")
         input1 = input("::: ").lower() or '0'
@@ -184,10 +215,12 @@ Select a Option :
         elif input1 == '2':
             level_2()
         elif input1 == '3':
-            traceroute_all_os()
+            level_3()
         elif input1 == '4':
-            level_4()
+            level_4(number_of_ip=0)
         elif input1 == '5':
+            level_4(number_of_ip=1)
+        elif input1 == '6':
             run_command(["ipconfig"])
 
         else:

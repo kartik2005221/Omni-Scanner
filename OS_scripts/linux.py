@@ -1,6 +1,6 @@
 from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
 from utils.common_utils import documentation, run_command
-from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
+from utils.menu_utils import validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
     validate_mac
 
 
@@ -114,7 +114,40 @@ def level_2():
             continue
 
 
-def level_4():
+def level_3():
+    """Menu Based : Traceroute option's function"""
+    while True:
+        print("\nSelect a Option:\n\t1. Standard Traceroute (ICMP/UDP)\n\t2. Firewall-Evasion Traceroute (TCP port 80)"
+              "(sudo required in linux/mac-os)\n\tH. Help\n\t0. Previous Menu")
+        input2 = input("::: ").lower() or '0'
+        if input2 == 'h':
+            print(documentation(3))
+            input("Enter to go back to menu...")
+        elif input2 == '0':
+            return 0
+        elif input2 in ['1', '2']:
+            ip_addr = input("Enter IP for traceroute : ") or "127.0.0.1"
+            if validate_ip(ip_addr):
+                if input2 == '1':
+                    run_command(["traceroute", ip_addr])
+                elif input2 == '2':
+                    if is_sudo_linux() == 1:
+                        run_command(["sudo", "traceroute", "-T", "-O", "info", "-p", "80", ip_addr])
+                    else:
+                        print("Sudo not detected, Try another option or Switch to SUDO")
+            else:
+                print("Invalid IP entered, Please Try again")
+        else:
+            print("Unsupported Option selected, Please Try again")
+
+
+def level_4(number_of_ip=0):
+    """Menu based : All Nmap option's function"""
+    if number_of_ip == 0:
+        validate = validate_ip
+    else:
+        validate = validate_ip_range
+
     """Menu based : All Nmap option's function"""
     while True:
         print("\nSelect Required option: (separated by spaces)"
@@ -128,15 +161,15 @@ def level_4():
         if input2 == 'h':
             print(documentation(4))
             input("Enter to go back to menu...")
-        elif input2 == '0':
+        elif '0' in input2:
             return 0
-        elif input2 == 'p':
+        elif 'p' in input2:
             print(documentation('p'))
             input("Enter to go back to menu...")
         # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
         elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8'] for x in input2):
             ip = input("Enter IP to scan\n::: ") or "127.0.0.1"
-            if validate_ip(ip):
+            if validate(ip):
                 if input2 == '1':
                     run_command(["nmap", ip])
 
@@ -186,8 +219,9 @@ def menu_linux():
     2. Pinging(Custom) a Specific IP
     3. TraceRouting
     4. Advance Scanning a Specific IP
-    5. Get network information
-    6. Switch to SUDO
+    5. Advance Scanning Range of IPs
+    6. Get network information
+    7. Switch to SUDO
     H. Help
     0. Exit""")
         input1 = input("::: ").lower() or '0'
@@ -202,13 +236,14 @@ def menu_linux():
         elif input1 == '2':
             level_2()
         elif input1 == '3':
-            traceroute_all_os()
+            level_3()
         elif input1 == '4':
-            level_4()
+            level_4(number_of_ip=0)
         elif input1 == '5':
-            run_command(["ip", "a"])
-
+            level_4(number_of_ip=1)
         elif input1 == '6':
+            run_command(["ip", "a"])
+        elif input1 == '7':
             if not is_sudo_linux():
                 print("Switching to SUDO...")
                 run_with_sudo_linux()
