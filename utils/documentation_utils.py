@@ -336,4 +336,8 @@ Key Notes
     - Dynamic/Ephemeral Ports: Client-side ports (e.g., 49152–65535) are temporary and not listed here.  
 """
 
-print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
+if __name__ == "__main__":
+    # This file is not meant to be run directly
+    # It should be imported and used in main.py
+    # If this file is run directly, it will print an error message
+    print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

@@ -1,6 +1,7 @@
 from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
-from utils.common_utils import documentation
-from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, run_nmap_scan_big, run_command
+from utils.common_utils import documentation, run_command
+from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
+    validate_mac
 
 
 def level_1():
@@ -8,7 +9,8 @@ def level_1():
     while True:
         print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed) (Sudo Required) "
               "(linux/mcos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
-              "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\tH. Help\n\t0. Previous Menu")
+              "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\t4. Mac Vendor Lookup\n\t"
+              "H. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower() or '0'
         if input2 == 'h':
             print(documentation(1))
@@ -26,7 +28,7 @@ def level_1():
             if validate_ip_range(ip_addr):
                 if input2 == '2':
                     run_command(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",
-                                    ip_addr])
+                                 ip_addr])
 
                 elif input2 == '3':
                     # try:
@@ -35,9 +37,16 @@ def level_1():
                     # except KeyboardInterrupt:
                     #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
                     #     if the user does not have enough time]")
-                    run_nmap_scan_big(ip_addr)
+                    insert_spinner(["nmap", ip_addr])
             else:
                 print("\nInvalid IP Address, please try again")
+        elif input2 == '4':
+            mac_addr = input("Enter MAC Address to look up (eg. 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
+            if validate_mac(mac_addr):
+                print(f"Mac Vendor for {mac_addr} is {get_mac_vendor(mac_addr)}")
+            else:
+                print("Invalid MAC Address entered, Please Try again")
+            # print(get_mac_vendor(mac_addr))
         else:
             print("Unsupported Option selected, Please Try again")
 
@@ -208,4 +217,9 @@ def menu_linux():
         else:
             print("Unsupported Option selected, Please Try again")
 
-print("Wrong file selected for running\nPlease run 'main.py' file by using 'python3 main.py' command")
+
+if __name__ == "__main__":
+    # This file is not meant to be run directly
+    # It should be imported and used in main.py
+    # If this file is run directly, it will print an error message
+    print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

@@ -1,20 +1,13 @@
-import subprocess
 import ipaddress
-from utils.common_utils import oper_system
+import re
+import subprocess
+import sys
 import threading
 import time
-import sys
 
+import requests
 
-def run_command(command):
-    """Running commands, with subprocess
-    :param command: Command to run"""
-    print("\nExecuting: ", end="")
-    for i in command:
-        print(i, end=" ")
-    print()
-    subprocess.run(command)
-    input("Press Enter to continue...")
+from utils.common_utils import oper_system, run_command
 
 
 def traceroute_all_os():
@@ -75,11 +68,11 @@ def spinner_task(spinner_user):
 process = 0
 
 
-def run_nmap_scan_big(ip_range):
+def insert_spinner(command):
     """Runs Nmap scan with progress indicator and graceful exit"""
     global process
     try:
-        process = subprocess.Popen(["nmap", ip_range], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # Start the spinner in a separate thread
         spinner_thread = threading.Thread(target=spinner_task, args=(process,), daemon=True)
         spinner_thread.start()
@@ -97,6 +90,53 @@ def run_nmap_scan_big(ip_range):
         print("\nStopping...")
 
 
+def get_mac_vendor(mac_address: str) -> str:
+    url = f"https://api.macvendors.com/{mac_address}"
+    try:
+        response = requests.get(url, timeout=5)
+        if response.status_code == 200:
+            return response.text.strip()
+        elif response.status_code == 404:
+            return "Vendor Not Found"
+        else:
+            return f"Error: {response.status_code}"
+    except requests.exceptions.RequestException as e:
+        return f"Request Error: {str(e)}"
+
+
+def validate_mac(mac: str) -> bool:
+    """
+    Validates a MAC address in various formats.
+    Supports:
+    - XX:XX:XX:XX:XX:XX
+    - XX-XX-XX-XX-XX-XX
+    - XXXXXXXXXXXX
+    - XXXX.XXXX.XXXX
+    :param mac: MAC address to validate
+    :returns: True if valid, else False
+    """
+    mac = mac.strip()
+    patterns = [
+        r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$',  # 00:11:22:33:44:55 or 00-11-22-33-44-55
+        r'^([0-9A-Fa-f]{12})$',  # 001122334455
+        r'^([0-9A-Fa-f]{4}\.){2}[0-9A-Fa-f]{4}$'  # 0011.2233.4455
+    ]
+
+    for pattern in patterns:
+        if re.match(pattern, mac):
+            return True
+    return False
+
+
+# import importlib.util
+# def is_module_installed(module_name):
+#     """Check if a module is installed
+#     :param module_name: Name of the module to check
+#     :returns: True if installed, else False"""
+#     spec = importlib.util.find_spec(module_name)
+#     return spec is not None
+#
+
 # def get_ip():
 #     """Get the IP address of the current system"""
 #     if oper_system() == "Windows":
@@ -110,4 +150,8 @@ def run_nmap_scan_big(ip_range):
 # print("Output:", result.stdout)
 # print("Error:", result.stderr)
 # print("Return Code:", result.returncode)
-print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
+if __name__ == "__main__":
+    # This file is not meant to be run directly
+    # It should be imported and used in main.py
+    # If this file is run directly, it will print an error message
+    print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

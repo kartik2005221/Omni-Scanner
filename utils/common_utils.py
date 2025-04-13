@@ -1,5 +1,7 @@
 import os
 import platform
+import subprocess
+
 import utils.documentation_utils as doc_utils
 
 Oper_system = platform.system()
@@ -63,4 +65,23 @@ def documentation(i):
     else:
         return "Documentation not available"
 
+
 print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
+
+
+def run_command(command):
+    """Running commands, with subprocess
+    :param command: Command to run"""
+    print("\nExecuting: ", end="")
+    for i in command:
+        print(i, end=" ")
+    print()
+    subprocess.run(command)
+    input("Press Enter to continue...")
+
+
+if __name__ == "__main__":
+    # This file is not meant to be run directly
+    # It should be imported and used in main.py
+    # If this file is run directly, it will print an error message
+    print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

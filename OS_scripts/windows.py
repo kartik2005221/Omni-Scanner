@@ -1,5 +1,6 @@
-from utils.common_utils import documentation
-from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, run_nmap_scan_big, run_command
+from utils.common_utils import documentation, run_command
+from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
+    validate_mac
 
 
 def level_1():
@@ -7,7 +8,8 @@ def level_1():
     while True:
         print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed) (Sudo Required) "
               "(linux/macos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
-              "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\tH. Help\n\t0. Previous Menu")
+              "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\t4. Mac Vendor Lookup\n\t"
+              "H. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower() or '0'
         if input2 == 'h':
             print(documentation(1))
@@ -30,9 +32,15 @@ def level_1():
                     # except KeyboardInterrupt:
                     #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
                     #     if user does not have enough time]")
-                    run_nmap_scan_big(ip_addr)
+                    insert_spinner(["nmap", ip_addr])
             else:
                 print("Invalid IP range entered, Please Try again")
+        elif input2 == '4':
+            mac_addr = input("Enter MAC Address to look up (eg. 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
+            if validate_mac(mac_addr):
+                print(f"Mac Vendor for {mac_addr} is {get_mac_vendor(mac_addr)}")
+            else:
+                print("Invalid MAC Address entered, Please Try again")
         else:
             print("Unsupported Option selected, Please Try again")
 
@@ -63,11 +71,11 @@ def level_2():
                         run_command(["ping", ping_count, ip_addr])
 
                     elif input2 == '2':
-                          run_command(
+                        run_command(
                             ["ping", ping_count, "-l", input("Enter size of packet to send (0-65500)"), ip_addr])
 
                     elif input2 == '3':
-                          run_command(
+                        run_command(
                             ["ping", ping_count, "-w", str(int(input("How much time (sec.) to wait?\n::: ")) * 1000),
                              ip_addr])
 
@@ -111,7 +119,7 @@ def level_4():
             ip_addr = input("Enter IP to scan(eg - 192.168.1.1)\n::: ") or "127.0.0.1"
             if validate_ip(ip_addr):
                 if '1' in input2:
-                      run_command(["nmap", ip_addr])
+                    run_command(["nmap", ip_addr])
 
                 else:
                     new_input2 = input2.split("")
@@ -180,9 +188,14 @@ Select a Option :
         elif input1 == '4':
             level_4()
         elif input1 == '5':
-              run_command(["ipconfig"])
+            run_command(["ipconfig"])
 
         else:
             print("Unsupported Option selected, Please Try again")
 
-print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
+
+if __name__ == "__main__":
+    # This file is not meant to be run directly
+    # It should be imported and used in main.py
+    # If this file is run directly, it will print an error message
+    print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")

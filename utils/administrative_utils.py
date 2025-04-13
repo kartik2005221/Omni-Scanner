@@ -1,8 +1,8 @@
-import sys
 import ctypes
 import os
+import sys
 
-from utils.menu_utils import run_command
+from utils.common_utils import run_command
 
 
 # Windows
@@ -70,6 +70,7 @@ def check_and_run_sudo_linux():
         if input("Press 0 if you want to exit and run again with sudo\nElse, Press any key...\n: ") == '0':
             run_with_sudo_linux()
 
+
 # Common
 # def check_administrative_privilieage():
 #     """To check for current program is running with administrative access or not,
@@ -86,4 +87,8 @@ def check_and_run_sudo_linux():
 #     elif oper_system == 'Linux':
 #         check_and_run_sudo_linux()
 
-print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
+if __name__ == "__main__":
+    # This file is not meant to be run directly
+    # It should be imported and used in main.py
+    # If this file is run directly, it will print an error message
+    print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
