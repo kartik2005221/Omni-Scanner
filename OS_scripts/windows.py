@@ -107,14 +107,14 @@ def level_3():
             return 0
         elif input2 in ['1', '2']:
             ip_addr = input("Enter IP/Domain for traceroute : ") or "127.0.0.1"
-            if validate_ip(ip_addr):
-                if input2 == '1':
-                    run_command(["tracert", ip_addr])
-                elif input2 == '2':
-                    # run_command(["nmap", "--traceroute", "-p", "80", ip_addr])
-                    run_tcp_traceroute_windows(ip_addr)
-            else:
-                print("Invalid IP entered, Please Try again")
+            # if validate_ip(ip_addr):
+            if input2 == '1':
+                run_command(["tracert", ip_addr])
+            elif input2 == '2':
+                # run_command(["nmap", "--traceroute", "-p", "80", ip_addr])
+                run_tcp_traceroute_windows(ip_addr)
+            # else:
+            #     print("Invalid IP entered, Please Try again")
         else:
             print("Unsupported Option selected, Please Try again")
 

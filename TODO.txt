@@ -26,5 +26,3 @@ after doing **, pull to the main branch
 
 - nmap wale section me, 4th wale me, range and simple ip ka option user ko do,,,
 wrong file runned, fix it
-
-give option to user to choose between domain and single ip un traceroute

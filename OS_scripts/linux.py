@@ -127,16 +127,16 @@ def level_3():
             return 0
         elif input2 in ['1', '2']:
             ip_addr = input("Enter IP for traceroute : ") or "127.0.0.1"
-            if validate_ip(ip_addr):
-                if input2 == '1':
-                    run_command(["traceroute", ip_addr])
-                elif input2 == '2':
-                    if is_sudo_linux() == 1:
-                        run_command(["sudo", "traceroute", "-T", "-O", "info", "-p", "80", ip_addr])
-                    else:
-                        print("Sudo not detected, Try another option or Switch to SUDO")
-            else:
-                print("Invalid IP entered, Please Try again")
+            # if validate_ip(ip_addr):
+            if input2 == '1':
+                run_command(["traceroute", ip_addr])
+            elif input2 == '2':
+                if is_sudo_linux() == 1:
+                    run_command(["sudo", "traceroute", "-T", "-O", "info", "-p", "80", ip_addr])
+                else:
+                    print("Sudo not detected, Try another option or Switch to SUDO")
+            # else:
+            #     print ("Invalid IP entered, Please Try again")
         else:
             print("Unsupported Option selected, Please Try again")
 
