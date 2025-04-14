@@ -138,6 +138,41 @@ def bypass_firewall(ip_addr):
     return 0
 
 
+def run_tcp_traceroute_windows(target):
+    print(f"\nRunning TCP-based traceroute to {target}...\n")
+    try:
+        result = subprocess.run(
+            ['nmap', '--traceroute', '-p', '80', target],
+            capture_output=True,
+            text=True
+        )
+
+        output = result.stdout
+        if "TRACEROUTE" not in output:
+            print("Traceroute data not found in Nmap output. Make sure target is up and port 80 is open.")
+            return
+
+        print("Traceroute Path:\n")
+        in_traceroute = False
+
+        for line in output.splitlines():
+            if "TRACEROUTE" in line:
+                in_traceroute = True
+                continue
+            elif in_traceroute:
+                if line.strip() == "":
+                    break  # End of traceroute section
+
+                match = re.match(r'^\s*(\d+)\s+([\d.]+)\s+(.+)$', line)
+                if match:
+                    hop = match.group(1)
+                    rtt = match.group(2)
+                    address = match.group(3)
+                    print(f"Hop {hop}: {rtt} - {address}")
+    except Exception as e:
+        print(f"Error running traceroute: {e}")
+
+
 # import importlib.util
 # def is_module_installed(module_name):
 #     """Check if a module is installed

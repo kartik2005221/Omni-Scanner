@@ -1,6 +1,6 @@
 from utils.common_utils import documentation, run_command
-from utils.menu_utils import traceroute_all_os, validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
-    validate_mac
+from utils.menu_utils import validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, validate_mac, \
+    run_tcp_traceroute_windows
 
 
 def level_1():
@@ -106,12 +106,13 @@ def level_3():
         elif input2 == '0':
             return 0
         elif input2 in ['1', '2']:
-            ip_addr = input("Enter IP for traceroute : ") or "127.0.0.1"
+            ip_addr = input("Enter IP/Domain for traceroute : ") or "127.0.0.1"
             if validate_ip(ip_addr):
                 if input2 == '1':
                     run_command(["tracert", ip_addr])
                 elif input2 == '2':
-                    run_command(["nmap", "--traceroute", "-p", "80", ip_addr])
+                    # run_command(["nmap", "--traceroute", "-p", "80", ip_addr])
+                    run_tcp_traceroute_windows(ip_addr)
             else:
                 print("Invalid IP entered, Please Try again")
         else:
