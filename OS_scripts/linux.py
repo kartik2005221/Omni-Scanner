@@ -1,7 +1,7 @@
 from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
 from utils.common_utils import documentation, run_command
 from utils.menu_utils import validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
-    validate_mac
+    validate_mac, run_nmap_scan_firewall
 
 
 def level_1():
@@ -9,7 +9,7 @@ def level_1():
     while True:
         print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed) (Sudo Required) "
               "(linux/mcos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
-              "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\t4. Mac Vendor Lookup\n\t"
+              "\n\t3. Scan specific IPs (Slow speed, More Detailed)\n\t"
               "H. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower() or '0'
         if input2 == 'h':
@@ -40,13 +40,13 @@ def level_1():
                     insert_spinner(["nmap", ip_addr])
             else:
                 print("\nInvalid IP Address, please try again")
-        elif input2 == '4':
-            mac_addr = input("Enter MAC Address to look up (eg. 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
-            if validate_mac(mac_addr):
-                print(f"Mac Vendor for {mac_addr} is {get_mac_vendor(mac_addr)}")
-            else:
-                print("Invalid MAC Address entered, Please Try again")
-            # print(get_mac_vendor(mac_addr))
+        # elif input2 == '4':
+        #     mac_addr = input("Enter MAC Address to look up (eg. 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
+        #     if validate_mac(mac_addr):
+        #         print(f"Mac Vendor for {mac_addr} is {get_mac_vendor(mac_addr)}")
+        #     else:
+        #         print("Invalid MAC Address entered, Please Try again")
+        #     # print(get_mac_vendor(mac_addr))
         else:
             print("Unsupported Option selected, Please Try again")
 
@@ -154,7 +154,7 @@ def level_4(number_of_ip=0):
               "\n\t1. Simple Nmap (Fast)(Dont use it with any other argument)\n\t2. Detect OS\n\t"
               "3. Detect running service & its version"
               " from open ports\n\t4. SYN Scan\n\t5. UDP Scan\n\t6. Specific Port scan \n\t"
-              "7. All Port scan(6 or 7, not both)\n\t8. Aggressive Scan (Slower)"
+              "7. All Port scan(6 or 7, not both)\n\t8. Aggressive Scan (Slower)\n\t9. Firewall Bypass scan"
               "\n\tP. Top 50  network ports used.\n\tH. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower() or '0'
         input2 = input2.split()
@@ -199,9 +199,13 @@ def level_4(number_of_ip=0):
                     if '8' in input2:
                         list_of_commands.append("-A")
 
+                    if '9' in input2:
+                        list_of_commands.append("-Pn")
+
                     list_of_commands.append(ip)
-                    print(list_of_commands)
-                    run_command(list_of_commands)
+                    # print(list_of_commands)
+                    # run_command(list_of_commands)
+                    run_nmap_scan_firewall(list_of_commands)
 
             else:
                 print("Invalid IP entered, Please Try again")
@@ -220,8 +224,9 @@ def menu_linux():
     3. TraceRouting
     4. Advance Scanning a Specific IP
     5. Advance Scanning Range of IPs
-    6. Get network information
-    7. Switch to SUDO
+    6. Mac Vendor Lookup
+    7. Get network information
+    8. Switch to SUDO
     H. Help
     0. Exit""")
         input1 = input("::: ").lower() or '0'
@@ -242,8 +247,14 @@ def menu_linux():
         elif input1 == '5':
             level_4(number_of_ip=1)
         elif input1 == '6':
-            run_command(["ip", "a"])
+            mac_addr = input("Enter MAC Address to look up (eg. 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
+            if validate_mac(mac_addr):
+                print(f"Mac Vendor for {mac_addr} is {get_mac_vendor(mac_addr)}")
+            else:
+                print("Invalid MAC Address entered, Please Try again")
         elif input1 == '7':
+            run_command(["ip", "a"])
+        elif input1 == '8':
             if not is_sudo_linux():
                 print("Switching to SUDO...")
                 run_with_sudo_linux()

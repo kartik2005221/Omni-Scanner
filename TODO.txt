@@ -11,18 +11,12 @@ todo-9: adding extra functionalities like,
     colorama>=0.4.6       # Cross-platform colored terminal text
     tqdm>=4.64.1          # Progress bars for long scans
     manuf>=1.1.5          # MAC address vendor lookup
-todo-13: make a custom made script for different operating systems, and check for required packages and install them
 
 Extra functionalities:
-- make a script for all operating systems and check for required packages at first run and install them
 - arguments mode development
 - add a section in readme for preparing user's os to run this script**
 - update documentation**
 after doing **, pull to the main branch
-- Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn, give an option to the user.
 
 --disable-arp-ping, -Pn, (-a) not with the script
 -o-all, -oX, -oG
-
-- nmap wale section me, 4th wale me, range and simple ip ka option user ko do,,,
-wrong file runned, fix it

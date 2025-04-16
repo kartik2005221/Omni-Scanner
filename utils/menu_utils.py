@@ -173,6 +173,40 @@ def run_tcp_traceroute_windows(target):
         print(f"Error running traceroute: {e}")
 
 
+def run_nmap_scan_firewall(command):
+    """Runs Nmap scan with a firewall bypass option whenever required
+    :param command: Nmap command to run
+    :returns: None"""
+    print(f"Executing: {' '.join(command)}")
+    proces = subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,  # Line-buffered
+        universal_newlines=True
+    )
+
+    host_down_detected = False
+    while True:
+        line = proces.stdout.readline()
+        if not line and proces.poll() is not None:
+            break  # Exit loop when process finishes
+        print(line, end='')  # Print live output
+        if "Note: Host seems down" in line:
+            host_down_detected = True
+    if host_down_detected:
+        choice = input("\nHost may be blocking ping probes. Press 0 to retry with firewall Bypass option? "
+                       "\n::: ").strip().lower()
+        if choice == '0':
+            new_command = command + ['-Pn']
+            # print(f"Running command: {' '.join(new_command)}")
+            # subprocess.run(new_command)
+            run_command(new_command)
+        else:
+            print("Okay, Exiting...")
+
+
 # import importlib.util
 # def is_module_installed(module_name):
 #     """Check if a module is installed

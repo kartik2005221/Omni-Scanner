@@ -68,9 +68,6 @@ def documentation(i):
         return "Documentation not available"
 
 
-print("Wrong file selected for running\nPlease run 'main.py' file by using 'python main.py' command")
-
-
 def run_command(command):
     """Running commands, with subprocess
     :param command: Command to run"""
