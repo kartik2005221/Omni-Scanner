@@ -224,7 +224,7 @@ def menu_linux():
     3. TraceRouting
     4. Advance Scanning a Specific IP
     5. Advance Scanning Range of IPs
-    6. Mac Vendor Lookup
+    6. Mac Vendor Lookup(online)
     7. Get network information
     8. Switch to SUDO
     H. Help
@@ -249,7 +249,7 @@ def menu_linux():
         elif input1 == '6':
             mac_addr = input("Enter MAC Address to look up (eg. 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
             if validate_mac(mac_addr):
-                print(f"Mac Vendor for {mac_addr} is {get_mac_vendor(mac_addr)}")
+                print(f"Mac Vendor is {get_mac_vendor(mac_addr)}")
             else:
                 print("Invalid MAC Address entered, Please Try again")
         elif input1 == '7':

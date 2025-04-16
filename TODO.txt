@@ -10,7 +10,6 @@ todo-9: adding extra functionalities like,
     prettytable>=3.6.0    # Clean terminal output formatting
     colorama>=0.4.6       # Cross-platform colored terminal text
     tqdm>=4.64.1          # Progress bars for long scans
-    manuf>=1.1.5          # MAC address vendor lookup
 
 Extra functionalities:
 - arguments mode development
@@ -18,5 +17,11 @@ Extra functionalities:
 - update documentation**
 after doing **, pull to the main branch
 
---disable-arp-ping, -Pn, (-a) not with the script
+--disable-arp-ping, (-a) not with the script
 -o-all, -oX, -oG
+
+# json
+- ask at starting to write to json file or not
+- writing to json file, when user run scan,
+- reading from json file
+- clear json file, scan results

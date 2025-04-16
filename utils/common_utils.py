@@ -1,6 +1,8 @@
+import json
 import os
 import platform
 import subprocess
+from datetime import datetime
 
 import utils.documentation_utils as doc_utils
 
@@ -77,6 +79,32 @@ def run_command(command):
     print()
     subprocess.run(command)
     input("Press Enter to continue...")
+
+# in testing phase, https://tr.ee/X0qTHG
+# def run_command_live(command, scan_type, filename):
+#     # Ensure the scans directory exists
+#     os.makedirs("scans", exist_ok=True)
+#     filepath = os.path.join("scans", filename)
+#     process = subprocess.Popen(
+#         command,
+#         shell=True,
+#         stdout=subprocess.PIPE,
+#         stderr=subprocess.STDOUT,
+#         text=True,
+#         bufsize=1
+#     )
+#     output = ""
+#     for line in process.stdout:
+#         print(line, end="")
+#         output += line
+#     process.wait()
+#     data = {
+#         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#         "scan_type": scan_type,
+#         "result": output
+#     }
+#     with open(filepath, "w") as f:
+#         json.dump(data, f, indent=4)
 
 
 if __name__ == "__main__":

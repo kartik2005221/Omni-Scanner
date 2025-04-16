@@ -10,16 +10,6 @@ import requests
 from utils.common_utils import run_command
 
 
-# def traceroute_all_os():
-#     """Just a Simple Traceroute Function
-#     :returns : 0"""
-#     if oper_system == "windows":
-#         run_command(["tracert", input("Enter IP for traceroute : ")])
-#     else:
-#         run_command(["traceroute", input("Enter IP for traceroute : ")])
-#     return 0
-
-
 def validate_ip(ip):
     """To validate the IP address.
     Return True if valid, else False
@@ -130,15 +120,10 @@ def validate_mac(mac: str) -> bool:
     return False
 
 
-def bypass_firewall(ip_addr):
-    """Bypass Firewall
-    :returns: 0"""
-    print("Wait a Minute, Bypassing Firewall...")
-    run_command(["nmap", "-Pn", ip_addr])
-    return 0
-
-
 def run_tcp_traceroute_windows(target):
+    """Runs TCP-based traceroute using Nmap on Windows
+    :param target: Target IP address or hostname
+    :returns: None"""
     print(f"\nRunning TCP-based traceroute to {target}...\n")
     try:
         result = subprocess.run(
