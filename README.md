@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%20%7C%20Windows-lightgrey)
 
 **Discover. Analyze. Secure.**  
 A Python-powered network scanning suite for ethical hackers, sysadmins, and security enthusiasts.
@@ -39,25 +39,21 @@ A Python-powered network scanning suite for ethical hackers, sysadmins, and secu
    pip install -r requirements.txt
    ```
 
-3. Run the scanner (Linux/macOS):
+3. Run the scanner:
    ```bash
    sudo python3 main.py
+   ```
+   OR
+   ```bash
+   python main.py
    ```
 
 ---
 
-## 🖥️ Usage
-
-```bash
-# Basic ARP scan (Linux/macOS)
-sudo python3 main.py --arp --range 192.168.1.1/24
-
-# Advanced Nmap scan (All platforms)
-python3 main.py --nmap -t 80,443 -i 10.0.0.5
-```
+## 🖥️ Screenshots
 
 **Interactive Menu**  
-![Menu Demo](https://raw.githubusercontent.com/kartik2005221/Omni-Scanner/refs/heads/master/screenshot.png)
+![Menu Demo](/Medias/screenshot.png)
 
 ---
 
@@ -91,7 +87,7 @@ We welcome contributions! Here's how:
 **Fuel My Code ☢️**  
 If this tool saved you time or helped secure your network:
 
-- **UPI (India)**: coming soon
+- **UPI (India)**: [kartik2005221@upi](/Medias/QR_1744889718.png)
 - **PayPal**: [paypal.me/kartik2005221](https://paypal.me/kartik2005221)
 
 *Every contribution helps me stay caffeinated while patching vulnerabilities!*
