@@ -106,11 +106,7 @@ Distributed under **MIT License**. See [LICENSE](LICENSE) for details.
 
 ## 📬 Contact
 
-**Your Name**
-- ✉️ Email: [kartik2005221@proton.me](mailto:kartik2005221@proton.me)
-- 💻 GitHub: [@kartik2005221](https://github.com/kartik2005221)
-- 🐦 Twitter: [@kartik2005221](https://twitter.com/kartik2005221)
-- 🔗 LinkedIn: [/in/kartik2005221](https://linkedin.com/in/kartik2005221)
+[![Email](https://img.shields.io/badge/proton%20mail-6D4AFF?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:kartik2005221@proton.me) [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kartik2005221) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kartik2005221/) [![Signal](https://img.shields.io/badge/Signal-3A76F0?style=for-the-badge&logo=signal&logoColor=white)](https://signal.me/#eu/NKRjNORoYBKevqLxymZOoG7HZv5v_YBZ3hSgA8r5FsJ-0I-yzu9OGYJQS8jiXVgZ)
 
 ---
 
