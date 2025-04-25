@@ -154,8 +154,9 @@ def level_4(number_of_ip=0):
               "\n\t1. Simple Nmap (Fast)(Dont use it with any other argument)\n\t2. Detect OS\n\t"
               "3. Detect running service & its version"
               " from open ports\n\t4. SYN Scan\n\t5. UDP Scan\n\t6. Specific Port scan \n\t"
-              "7. All Port scan(6 or 7, not both)\n\t8. Aggressive Scan (Slower)\n\t9. Firewall Bypass scan"
-              "\n\tP. Top 50  network ports used.\n\tH. Help\n\t0. Previous Menu")
+              "7. All Port scan(6 or 7, not both)\n\t8. Aggressive Scan (Slower)\n\t9. Firewall Bypass scan\n\t"
+              "10. Disable Arp Ping for bypassing routers\n\t"
+              "P. Top 50  network ports used.\n\tH. Help\n\t0. Previous Menu")
         input2 = input("::: ").lower() or '0'
         input2 = input2.split()
         if input2 == 'h':
@@ -201,6 +202,9 @@ def level_4(number_of_ip=0):
 
                     if '9' in input2:
                         list_of_commands.append("-Pn")
+
+                    if '10' in input2:
+                        list_of_commands.append("-disable-arp-ping")
 
                     list_of_commands.append(ip)
                     # print(list_of_commands)

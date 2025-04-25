@@ -1,8 +1,6 @@
-import json
 import os
 import platform
 import subprocess
-from datetime import datetime
 
 import utils.documentation_utils as doc_utils
 
@@ -79,6 +77,7 @@ def run_command(command):
     print()
     subprocess.run(command)
     input("Press Enter to continue...")
+
 
 # in testing phase, https://tr.ee/X0qTHG
 # def run_command_live(command, scan_type, filename):

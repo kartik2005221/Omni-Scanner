@@ -22,12 +22,14 @@ A Python-powered network scanning suite for ethical hackers, sysadmins, and secu
 ## ⚙️ Installation
 
 ### Prerequisites
+
 - Python 3.8+
 - `nmap` installed ([Download here](https://nmap.org/download.html))
 - **Linux/macOS**: `arp-scan` (install via package manager)
 - **Windows**: [Npcap](https://npcap.com/) for raw packet support
 
 ### Steps
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/kartik2005221/Omni-Scanner.git
@@ -60,11 +62,13 @@ A Python-powered network scanning suite for ethical hackers, sysadmins, and secu
 ## ⚠️ Legal & Ethical Disclaimer
 
 **BEFORE RUNNING THIS TOOL**:
+
 1. Obtain **written permission** for any network you don't own.
 2. Do **NOT** scan public/critical infrastructure.
 3. Usage for illegal purposes is strictly prohibited.
 
 By using Omni-Scanner, you agree to:
+
 - Comply with all local/global laws (e.g., Computer Fraud and Abuse Act)
 - Assume full responsibility for your actions
 
@@ -73,6 +77,7 @@ By using Omni-Scanner, you agree to:
 ## 🤝 Contributing
 
 We welcome contributions! Here's how:
+
 1. 🐛 **Report Bugs**: Open an issue with "Bug" label
 2. 💡 **Suggest Features**: Use "Enhancement" label
 3. 👩💻 **Code Contributions**:
