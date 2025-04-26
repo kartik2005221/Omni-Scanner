@@ -12,12 +12,5 @@ todo-9: adding extra functionalities like,
 
 Extra functionalities:
 - arguments mode development
-- add a section in readme for preparing user's os to run this script**
-- update documentation**
-after doing **, pull to the main branch
-
-# json
-- ask at starting to write to json file or not
-- writing to json file, when user run scan,
-- reading from json file
-- clear json file, scan results
+- add a section in readme for preparing user's os to run this script
+- update documentation

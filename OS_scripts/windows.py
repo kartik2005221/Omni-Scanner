@@ -1,10 +1,11 @@
-from utils.common_utils import documentation, run_command
+from utils.common_utils import documentation, run_command_save
 from utils.menu_utils import validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, validate_mac, \
     run_tcp_traceroute_windows, run_nmap_scan_firewall
 
 
 def level_1():
     """Menu Based : All IP Scanner"""
+    scan = "arp-scan"
     while True:
         print("\nSelect a Option:\n\t1. Scan All IPs in your Network (High Speed, Less Detailed)"
               "(linux/macos only)\n\t2. Scan specific IPs (High Speed, Less Detailed)"
@@ -22,31 +23,32 @@ def level_1():
             ip_addr = input("Enter range of IPs (eg. 192.168.1.1-255)\n::: ") or "127.0.0.1"
             if validate_ip_range(ip_addr):
                 if input2 == '2':
-                    run_command(["nmap", "-sn", "-T5", "--min-parallelism", "100",
-                                 "--host-timeout", "2000ms", ip_addr])
+                    run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100",
+                                 "--host-timeout", "2000ms", ip_addr], scan)
 
                 elif input2 == '3':
                     # try:
                     #     subprocess.run(["nmap", ip_addr])
-                    #     input ("Press Enter to continue...")
                     # except KeyboardInterrupt:
                     #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
-                    #     if user does not have enough time]")
+                    #     if the user does not have enough time]")
                     insert_spinner(["nmap", ip_addr])
             else:
                 print("Invalid IP range entered, Please Try again")
         # elif input2 == '4':
-        #     mac_addr = input("Enter MAC Address to look up (eg. 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
+        #     mac_addr = input("Enter MAC Address to look up
+        #     (e.g., 00:00:00:00:00:00)\n::: ") or "00:00:00:00:00:00"
         #     if validate_mac(mac_addr):
         #         print(f"Mac Vendor for {mac_addr} is {get_mac_vendor(mac_addr)}")
         #     else:
-        #         print("Invalid MAC Address entered, Please Try again")
+        #         print ("Invalid MAC Address entered, Please Try again")
         else:
             print("Unsupported Option selected, Please Try again")
 
 
 def level_2():
     """Menu Based : Ping option's function"""
+    scan = "ping"
     while True:
         print("\nSelect a Option:\n\t1. Simple finite ping\n\t2. Large Ping\n\t3. Ping for slow network"
               "\n\t4. Flood Ping (linux/mac only)\n\tH. Help\n\t0. Previous Menu")
@@ -68,16 +70,16 @@ def level_2():
                         ping_count = "-t"
 
                     if input2 == '1':
-                        run_command(["ping", ping_count, ip_addr])
+                        run_command_save(["ping", ping_count, ip_addr], scan)
 
                     elif input2 == '2':
-                        run_command(
-                            ["ping", ping_count, "-l", input("Enter size of packet to send (0-65500)"), ip_addr])
+                        run_command_save(
+                            ["ping", ping_count, "-l", input("Enter size of packet to send (0-65500)"), ip_addr], scan)
 
                     elif input2 == '3':
-                        run_command(
+                        run_command_save(
                             ["ping", ping_count, "-w", str(int(input("How much time (sec.) to wait?\n::: ")) * 1000),
-                             ip_addr])
+                             ip_addr], scan)
 
                 else:
                     print("Invalid IP entered, Please Try again")
@@ -96,6 +98,7 @@ def level_2():
 
 def level_3():
     """Menu Based : Traceroute option's function"""
+    scan = "traceroute-scan"
     while True:
         print("\nSelect a Option:\n\t1. Standard Traceroute (ICMP/UDP)\n\t2. Firewall-Evasion Traceroute (TCP port 80)"
               "(sudo required in linux/mac-os)\n\tH. Help\n\t0. Previous Menu")
@@ -109,12 +112,12 @@ def level_3():
             ip_addr = input("Enter IP/Domain for traceroute : ") or "127.0.0.1"
             # if validate_ip(ip_addr):
             if input2 == '1':
-                run_command(["tracert", ip_addr])
+                run_command_save(["tracert", ip_addr], scan)
             elif input2 == '2':
-                # run_command(["nmap", "--traceroute", "-p", "80", ip_addr])
+                # run_command_save(["nmap", "--traceroute", "-p", "80", ip_addr])
                 run_tcp_traceroute_windows(ip_addr)
             # else:
-            #     print("Invalid IP entered, Please Try again")
+            #     print ("Invalid IP entered, Please Try again")
         else:
             print("Unsupported Option selected, Please Try again")
 
@@ -126,6 +129,7 @@ def level_4(number_of_ip=0):
     else:
         validate = validate_ip_range
 
+    scan = "nmap-scan"
     while True:
         print("\nSelect Required option: (separated by spaces)"
               "\n\t1. Simple Nmap (Fast)(Dont use it with any other argument)\n\t2. Detect OS\n\t"
@@ -150,7 +154,7 @@ def level_4(number_of_ip=0):
             ip_addr = input("Enter IP to scan(eg - 192.168.1.1)\n::: ") or "127.0.0.1"
             if validate(ip_addr):
                 if '1' in input2:
-                    run_command(["nmap", ip_addr])
+                    run_command_save(["nmap", ip_addr], scan)
 
                 else:
                     # new_input2 = input2.split("")
@@ -187,7 +191,7 @@ def level_4(number_of_ip=0):
 
                     list_of_commands.append(ip_addr)
                     # print(list_of_commands)
-                    # run_command(list_of_commands)
+                    # run_command_save(list_of_commands)
                     run_nmap_scan_firewall(list_of_commands)
 
             else:
@@ -236,7 +240,7 @@ Select a Option :
             else:
                 print("Invalid MAC Address entered, Please Try again")
         elif input1 == '7':
-            run_command(["ipconfig"])
+            run_command_save(["ipconfig"])
         else:
             print("Unsupported Option selected, Please Try again")
 
