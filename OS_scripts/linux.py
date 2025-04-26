@@ -1,7 +1,7 @@
 from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
 from utils.common_utils import documentation, run_command_save
 from utils.menu_utils import validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
-    validate_mac, run_nmap_scan_firewall
+    validate_mac, run_nmap_scan_firewall, validate_port
 
 
 def level_1():
@@ -198,8 +198,9 @@ def level_4(number_of_ip=0):
                         list_of_commands.append("-p-")
                     elif '6' in input2:
                         list_of_ports = input("Enter port range (Eg. 1-65535) : ") or '1-65535'
-                        list_of_commands.append("-p")
-                        list_of_commands.append(list_of_ports)
+                        if validate_port(list_of_ports):
+                            list_of_commands.append("-p")
+                            list_of_commands.append(list_of_ports)
 
                     if '8' in input2:
                         list_of_commands.append("-A")

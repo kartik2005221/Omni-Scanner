@@ -189,6 +189,63 @@ def run_nmap_scan_firewall(command):
             print("Okay, Exiting...")
 
 
+def validate_port(port):
+    """
+    Validate the port number.
+
+    :param port: Port number to validate
+    :return: True if valid, False otherwise
+    """
+    ports_list = []
+
+    # Split the input based on ',' and '-'
+    if "," in port:
+        ports = port.split(",")
+        for p in ports:
+            if "-" in p:
+                sub_ports = p.split("-")
+                if len(sub_ports) != 2:
+                    print(f"Invalid range format: {p}")
+                    return False
+                start, end = sub_ports
+                if not start.strip().isdigit() or not end.strip().isdigit():
+                    print(f"Invalid range: {p} contains non-numeric values")
+                    return False
+                if int(start.strip()) > int(end.strip()):
+                    print(f"Invalid range: {p} start is greater than end")
+                    return False
+                ports_list.extend(sub_ports)
+            else:
+                ports_list.append(p.strip())
+    elif "-" in port:
+        sub_ports = port.split("-")
+        if len(sub_ports) != 2:
+            print(f"Invalid range format: {port}")
+            return False
+        start, end = sub_ports
+        if not start.strip().isdigit() or not end.strip().isdigit():
+            print(f"Invalid range: {port} contains non-numeric values")
+            return False
+        if int(start.strip()) > int(end.strip()):
+            print(f"Invalid range: {port} start is greater than end")
+            return False
+        ports_list.extend(sub_ports)
+    else:
+        ports_list.append(port.strip())
+
+    print(ports_list)
+
+    # Validate each port in the list
+    for p in ports_list:
+        if not p.isdigit():
+            print(f"Invalid port: {p} is not a number")
+            return False
+        if not (1 <= int(p) <= 65535):
+            print(f"Invalid port: {p} is out of range (1-65535)")
+            return False
+    return True
+
+
 # import importlib.util
 # def is_module_installed(module_name):
 #     """Check if a module is installed
