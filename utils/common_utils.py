@@ -95,6 +95,11 @@ output = None
 
 def run_command_save(command, scan_type="other-scan"):
     global process, output
+
+    print("\nExecuting: ", end="")
+    for i in command:
+        print(i, end=" ")
+    print()
     filename = f"{scan_type}.json"  # Ensure the scans directory exists
     os.makedirs("scans", exist_ok=True)
     filepath = os.path.join("scans", filename)
@@ -116,6 +121,8 @@ def run_command_save(command, scan_type="other-scan"):
     except KeyboardInterrupt:
         process.terminate()
         print("\nProcess terminated by user.")
+    finally:
+        input("Press Enter to continue...")
     data = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "scan_type": scan_type,
