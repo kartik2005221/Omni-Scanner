@@ -1,8 +1,7 @@
 import ctypes
 import os
+import subprocess
 import sys
-
-from utils.common_utils import run_command
 
 
 # Windows
@@ -59,7 +58,7 @@ def is_sudo_linux():
 
 def run_with_sudo_linux():
     """Ask from the user to run with sudo or not, then Restart the script with sudo privileges."""
-    run_command(["sudo", "python3"] + sys.argv)
+    subprocess.run(["sudo", "python3"] + sys.argv)
     sys.exit()
 
 

@@ -1,6 +1,8 @@
+import json
 import os
 import platform
 import subprocess
+from datetime import datetime
 
 import utils.documentation_utils as doc_utils
 
@@ -8,26 +10,34 @@ Oper_system = platform.system()
 oper_system = Oper_system.lower()
 
 
+# kkkkkkkk                                                          tttt            iiii  kkkkkkkk
+# k::::::k                                                       ttt:::t           i::::i k::::::k
+# k::::::k                                                       t:::::t            iiii  k::::::k
+# k::::::k                                                       t:::::t                  k::::::k
+#  k:::::k    kkkkkkk  aaaaaaaaaaaaa   rrrrr   rrrrrrrrr   ttttttt:::::ttttttt    iiiiiii  k:::::k    kkkkkkk
+#  k:::::k   k:::::k   a::::::::::::a  r::::rrr:::::::::r  t:::::::::::::::::t    i:::::i  k:::::k   k:::::k
+#  k:::::k  k:::::k    aaaaaaaaa:::::a r:::::::::::::::::r t:::::::::::::::::t     i::::i  k:::::k  k:::::k
+#  k:::::k k:::::k              a::::a rr::::::rrrrr::::::rtttttt:::::::tttttt     i::::i  k:::::k k:::::k
+#  k::::::k:::::k        aaaaaaa:::::a  r:::::r     r:::::r      t:::::t           i::::i  k::::::k:::::k
+#  k:::::::::::k       aa::::::::::::a  r:::::r     rrrrrrr      t:::::t           i::::i  k:::::::::::k
+#  k:::::::::::k      a::::aaaa::::::a  r:::::r                  t:::::t           i::::i  k:::::::::::k
+#  k::::::k:::::k    a::::a    a:::::a  r:::::r                  t:::::t    tttttt i::::i  k::::::k:::::k
+# k::::::k k:::::k   a::::a    a:::::a  r:::::r                  t::::::tttt:::::ti::::::ik::::::k k:::::k
+# k::::::k  k:::::k  a:::::aaaa::::::a  r:::::r                  tt::::::::::::::ti::::::ik::::::k  k:::::k
+# k::::::k   k:::::k  a::::::::::aa:::a r:::::r                    tt:::::::::::tti::::::ik::::::k   k:::::k
+# kkkkkkkk    kkkkkkk  aaaaaaaaaa  aaaa rrrrrrr                      ttttttttttt  iiiiiiiikkkkkkkk    kkkkkkk
+
 def splash_screen():
     """To print the splash screen"""
     print(r'''
-kkkkkkkk                                                          tttt            iiii  kkkkkkkk
-k::::::k                                                       ttt:::t           i::::i k::::::k
-k::::::k                                                       t:::::t            iiii  k::::::k
-k::::::k                                                       t:::::t                  k::::::k
- k:::::k    kkkkkkk  aaaaaaaaaaaaa   rrrrr   rrrrrrrrr   ttttttt:::::ttttttt    iiiiiii  k:::::k    kkkkkkk
- k:::::k   k:::::k   a::::::::::::a  r::::rrr:::::::::r  t:::::::::::::::::t    i:::::i  k:::::k   k:::::k
- k:::::k  k:::::k    aaaaaaaaa:::::a r:::::::::::::::::r t:::::::::::::::::t     i::::i  k:::::k  k:::::k
- k:::::k k:::::k              a::::a rr::::::rrrrr::::::rtttttt:::::::tttttt     i::::i  k:::::k k:::::k
- k::::::k:::::k        aaaaaaa:::::a  r:::::r     r:::::r      t:::::t           i::::i  k::::::k:::::k
- k:::::::::::k       aa::::::::::::a  r:::::r     rrrrrrr      t:::::t           i::::i  k:::::::::::k
- k:::::::::::k      a::::aaaa::::::a  r:::::r                  t:::::t           i::::i  k:::::::::::k
- k::::::k:::::k    a::::a    a:::::a  r:::::r                  t:::::t    tttttt i::::i  k::::::k:::::k
-k::::::k k:::::k   a::::a    a:::::a  r:::::r                  t::::::tttt:::::ti::::::ik::::::k k:::::k
-k::::::k  k:::::k  a:::::aaaa::::::a  r:::::r                  tt::::::::::::::ti::::::ik::::::k  k:::::k
-k::::::k   k:::::k  a::::::::::aa:::a r:::::r                    tt:::::::::::tti::::::ik::::::k   k:::::k
-kkkkkkkk    kkkkkkk  aaaaaaaaaa  aaaa rrrrrrr                      ttttttttttt  iiiiiiiikkkkkkkk    kkkkkkk
-
+88                                     88 88        ad88888b,    ,a888a,       ,a888a,    888888888   ad88888b,  ad88888b,     88 
+88                               ,d    "" 88       d8"    "88  ,8P"' `"Y8,   ,8P"' `"Y8,  88         d8"    "88 d8"    "88   ,d88 
+88                               88       88              a8P ,8P       Y8, ,8P       Y8, 88  ___           a8P        a8P 888888 
+88   ,d8 ,adPPYYba, 8b,dPPYba, MM88MMM 88 88   ,d8      ,8P"  88         88 88         88 88a8PPP8b,      ,8P"       ,8P"      88 
+88 ,a8"  ""     `Y8 88P'   "Y8   88    88 88 ,a8"     a8P     88         88 88         88 PP"    `8b    a8P        a8P         88 
+8888[    ,adPPPPP88 88           88    88 8888[     a8P'      `8b       d8' `8b       d8'         d8  a8P'       a8P'          88 
+88`"Yba, 88,    ,88 88           88,   88 88`"Yba, d8"         `8ba, ,ad8'   `8ba, ,ad8'  Y8a    a8P d8"        d8"            88 
+88   `Y8 `"8bbdP"Y8 88           "Y888 88 88   `Y8a8888888888    "Y888P"       "Y888P"     "Y8888P"  8888888888 8888888888     88 
 
               ***********************************************************************
               ***********************************************************************
@@ -68,43 +78,72 @@ def documentation(i):
         return "Documentation not available"
 
 
-def run_command(command):
-    """Running commands, with subprocess
-    :param command: Command to run"""
+# def run_command(command):
+#     """Running commands, with subprocess
+#     :param command: Command to run"""
+#     print("\nExecuting: ", end="")
+#     for i in command:
+#         print(i, end=" ")
+#     print()
+#     subprocess.run(command)
+#     input("Press Enter to continue...")
+
+
+process = None
+output = None
+
+
+def run_command_save(command, scan_type="other-scan"):
+    global process, output
+
     print("\nExecuting: ", end="")
     for i in command:
         print(i, end=" ")
     print()
-    subprocess.run(command)
-    input("Press Enter to continue...")
+    filename = f"{scan_type}.json"  # Ensure the scans directory exists
+    os.makedirs("scans", exist_ok=True)
+    filepath = os.path.join("scans", filename)
+    try:
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1
+        )
+        # output = ""
+        output = []
+        for line in process.stdout:
+            print(line, end="")
+            # output += line
+            output.append(line.strip())  # Store each line of output
+        process.wait()
+    except KeyboardInterrupt:
+        process.terminate()
+        print("\nProcess terminated by user.")
+    finally:
+        input("Press Enter to continue...")
+    data = {
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "scan_type": scan_type,
+        "operating_system": Oper_system,
+        "command": " ".join(command),
+        "result": output,
+    }
+    if os.path.exists(filepath):  # Read existing data or make an empty list
+        with open(filepath, "r") as f:
+            try:
+                existing_data = json.load(f)
+            except json.JSONDecodeError:
+                existing_data = []
+    else:
+        existing_data = []
+    existing_data.append(data)
+    with open(filepath, "w") as f:  # Write updated data back to the file
+        json.dump(existing_data, f, indent=4)
 
 
-# in testing phase, https://tr.ee/X0qTHG
-# def run_command_live(command, scan_type, filename):
-#     # Ensure the scans directory exists
-#     os.makedirs("scans", exist_ok=True)
-#     filepath = os.path.join("scans", filename)
-#     process = subprocess.Popen(
-#         command,
-#         shell=True,
-#         stdout=subprocess.PIPE,
-#         stderr=subprocess.STDOUT,
-#         text=True,
-#         bufsize=1
-#     )
-#     output = ""
-#     for line in process.stdout:
-#         print(line, end="")
-#         output += line
-#     process.wait()
-#     data = {
-#         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-#         "scan_type": scan_type,
-#         "result": output
-#     }
-#     with open(filepath, "w") as f:
-#         json.dump(data, f, indent=4)
-
+# run_command_live("echo 'Running scan...1'", "test1_scan")
 
 if __name__ == "__main__":
     # This file is not meant to be run directly

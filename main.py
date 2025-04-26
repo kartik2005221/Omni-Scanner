@@ -16,19 +16,8 @@ if __name__ == "__main__":
                 menu_windows()
             elif oper_system == 'linux':
                 menu_linux()
-
-            exit_finally = input("Press 0 to exit (finally) :::  ") or '1'
-            if exit_finally.lower() == '0':
-                print("Exiting...")
-                clear_screen()
-                break
-            else:
-                print("Aborting Exit...")
+            break
     except KeyboardInterrupt:
-        try:
-            input("\n[Ctrl-C] Exiting...")
-        except KeyboardInterrupt:
-            pass
-        finally:
-            clear_screen()
-            exit(0)
+        pass
+    finally:
+        clear_screen()

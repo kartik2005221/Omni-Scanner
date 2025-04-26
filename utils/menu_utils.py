@@ -7,7 +7,7 @@ import time
 
 import requests
 
-from utils.common_utils import run_command
+from utils.common_utils import run_command_save
 
 
 def validate_ip(ip):
@@ -71,9 +71,6 @@ def insert_spinner(command):
         print("\n \n", stdout)
         if stderr:
             print("\nErrors:\n", stderr)
-
-        input("Press Enter to continue...")
-
     except KeyboardInterrupt:
         process.terminate()  # Kill Nmap process if the user presses Ctrl+C
         print("\nStopping...")
@@ -146,7 +143,7 @@ def run_tcp_traceroute_windows(target):
                 continue
             elif in_traceroute:
                 if line.strip() == "":
-                    break  # End of traceroute section
+                    break  # End of the traceroute section
 
                 match = re.match(r'^\s*(\d+)\s+([\d.]+)\s+(.+)$', line)
                 if match:
@@ -176,7 +173,7 @@ def run_nmap_scan_firewall(command):
     while True:
         line = proces.stdout.readline()
         if not line and proces.poll() is not None:
-            break  # Exit loop when process finishes
+            break  # Exit loop when a process finishes
         print(line, end='')  # Print live output
         if "Note: Host seems down" in line:
             host_down_detected = True
@@ -187,7 +184,7 @@ def run_nmap_scan_firewall(command):
             new_command = command + ['-Pn']
             # print(f"Running command: {' '.join(new_command)}")
             # subprocess.run(new_command)
-            run_command(new_command)
+            run_command_save(new_command, scan_type="nmap-scan")
         else:
             print("Okay, Exiting...")
 
@@ -196,7 +193,7 @@ def run_nmap_scan_firewall(command):
 # def is_module_installed(module_name):
 #     """Check if a module is installed
 #     :param module_name: Name of the module to check
-#     :returns: True if installed, else False"""
+#     :returns : True if installed, else False"""
 #     spec = importlib.util.find_spec(module_name)
 #     return spec is not None
 #
