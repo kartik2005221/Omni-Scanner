@@ -1,3 +1,5 @@
+import time
+
 from OS_scripts.linux import menu_linux
 from OS_scripts.windows import menu_windows
 from utils.common_utils import clear_screen, splash_screen, oper_system
@@ -9,6 +11,7 @@ if __name__ == "__main__":
         #     print("Installing requests module...")
         #     run_command(["pip", "install", "requests"])
         install_requirements_once()
+        time.sleep(0.7)
         clear_screen()
         splash_screen()
         while True:
@@ -20,4 +23,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
     finally:
+        time.sleep(0.5)
         clear_screen()

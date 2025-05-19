@@ -179,7 +179,7 @@ def run_nmap_scan_firewall(command):
             host_down_detected = True
     if host_down_detected:
         choice = input("\nHost may be blocking ping probes. Press 0 to retry with firewall Bypass option? "
-                       "\n::: ").strip().lower()
+                       "\nOmni-Scanner > ").strip().lower()
         if choice == '0':
             new_command = command + ['-Pn']
             # print(f"Running command: {' '.join(new_command)}")

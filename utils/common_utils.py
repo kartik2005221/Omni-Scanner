@@ -2,6 +2,7 @@ import json
 import os
 import platform
 import subprocess
+import time
 from datetime import datetime
 
 import utils.documentation_utils as doc_utils
@@ -9,6 +10,15 @@ import utils.documentation_utils as doc_utils
 Oper_system = platform.system()
 oper_system = Oper_system.lower()
 
+
+# 88                                     88 88        ad88888b,    ,a888a,       ,a888a,    888888888   ad88888b,  ad88888b,     88
+# 88                               ,d    "" 88       d8"    "88  ,8P"' `"Y8,   ,8P"' `"Y8,  88         d8"    "88 d8"    "88   ,d88
+# 88                               88       88              a8P ,8P       Y8, ,8P       Y8, 88  ___           a8P        a8P 888888
+# 88   ,d8 ,adPPYYba, 8b,dPPYba, MM88MMM 88 88   ,d8      ,8P"  88         88 88         88 88a8PPP8b,      ,8P"       ,8P"      88
+# 88 ,a8"  ""     `Y8 88P'   "Y8   88    88 88 ,a8"     a8P     88         88 88         88 PP"    `8b    a8P        a8P         88
+# 8888[    ,adPPPPP88 88           88    88 8888[     a8P'      `8b       d8' `8b       d8'         d8  a8P'       a8P'          88
+# 88`"Yba, 88,    ,88 88           88,   88 88`"Yba, d8"         `8ba, ,ad8'   `8ba, ,ad8'  Y8a    a8P d8"        d8"            88
+# 88   `Y8 `"8bbdP"Y8 88           "Y888 88 88   `Y8a8888888888    "Y888P"       "Y888P"     "Y8888P"  8888888888 8888888888     88
 
 # kkkkkkkk                                                          tttt            iiii  kkkkkkkk
 # k::::::k                                                       ttt:::t           i::::i k::::::k
@@ -26,29 +36,30 @@ oper_system = Oper_system.lower()
 # k::::::k  k:::::k  a:::::aaaa::::::a  r:::::r                  tt::::::::::::::ti::::::ik::::::k  k:::::k
 # k::::::k   k:::::k  a::::::::::aa:::a r:::::r                    tt:::::::::::tti::::::ik::::::k   k:::::k
 # kkkkkkkk    kkkkkkk  aaaaaaaaaa  aaaa rrrrrrr                      ttttttttttt  iiiiiiiikkkkkkkk    kkkkkkk
+#               ***********************************************************************
+#               ***********************************************************************
+#               ****                                                               ****
+#               ****            © Copyright of @kartik2005221 - 2025               ****
+#               ****                                                               ****
+#               ***********************************************************************
+#               *****************************************************[Ethical Use Only]
+
 
 def splash_screen():
     """To print the splash screen"""
-    print(r'''
-88                                     88 88        ad88888b,    ,a888a,       ,a888a,    888888888   ad88888b,  ad88888b,     88 
-88                               ,d    "" 88       d8"    "88  ,8P"' `"Y8,   ,8P"' `"Y8,  88         d8"    "88 d8"    "88   ,d88 
-88                               88       88              a8P ,8P       Y8, ,8P       Y8, 88  ___           a8P        a8P 888888 
-88   ,d8 ,adPPYYba, 8b,dPPYba, MM88MMM 88 88   ,d8      ,8P"  88         88 88         88 88a8PPP8b,      ,8P"       ,8P"      88 
-88 ,a8"  ""     `Y8 88P'   "Y8   88    88 88 ,a8"     a8P     88         88 88         88 PP"    `8b    a8P        a8P         88 
-8888[    ,adPPPPP88 88           88    88 8888[     a8P'      `8b       d8' `8b       d8'         d8  a8P'       a8P'          88 
-88`"Yba, 88,    ,88 88           88,   88 88`"Yba, d8"         `8ba, ,ad8'   `8ba, ,ad8'  Y8a    a8P d8"        d8"            88 
-88   `Y8 `"8bbdP"Y8 88           "Y888 88 88   `Y8a8888888888    "Y888P"       "Y888P"     "Y8888P"  8888888888 8888888888     88 
-
-              ***********************************************************************
-              ***********************************************************************
-              ****                                                               ****
-              ****                © Copyright of Kartik - 2025                   ****
-              ****                                                               ****
-              ***********************************************************************
-              *****************************************************[Ethical Use Only]
-                  
-## Welcome to Kartik's OmniScanner
-''')
+    print(r'''╔═══════════════════════════════════════════════════════╗
+║                                                       ║
+║   ░█▀█░█▄█░█▀█░▀█▀░░░░░█▀▀░█▀▀░█▀█░█▀█░█▀█░█▀▀░█▀▄    ║
+║   ░█░█░█░█░█░█░░█░░▄▄▄░▀▀█░█░░░█▀█░█░█░█░█░█▀▀░█▀▄    ║
+║   ░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀░▀    ║
+║                                                       ║
+║                 Omni-Scanner v1.0                     ║
+║                Crafted by AiR ©2025                   ║
+║        An All-in-One Network Scanning Tool            ║
+║                                                       ║
+╚═════════════════════════════════════[Ethical Use Only]╝
+## Welcome to Omni-Scanner''')
+    time.sleep(1)
     # print(f"## Welcome to Kartik's OmniScanner ({Oper_system} Version)")
 
 
@@ -141,6 +152,8 @@ def run_command_save(command, scan_type="other-scan"):
     existing_data.append(data)
     with open(filepath, "w") as f:  # Write updated data back to the file
         json.dump(existing_data, f, indent=4)
+
+    time.sleep(0.3)
 
 
 # run_command_live("echo 'Running scan...1'", "test1_scan")

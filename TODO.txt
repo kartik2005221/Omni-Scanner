@@ -9,3 +9,7 @@ Extra functionalities:
 - argument mode development
 - add a section in readme for preparing user's os to run this script
 - update documentation
+- make full fledge documentation
+
+- scrapy - basic network sniffer
+- snort - intrusion detection system
