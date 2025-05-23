@@ -1,70 +1,162 @@
 help0 = r"""
-Omni-Scanner Documentation (Help Menu)
+╔═══════════════════════════════════════════════════════╗
+║                                                       ║
+║   ░█▀█░█▄█░█▀█░▀█▀░░░░░█▀▀░█▀▀░█▀█░█▀█░█▀█░█▀▀░█▀▄    ║
+║   ░█░█░█░█░█░█░░█░░▄▄▄░▀▀█░█░░░█▀█░█░█░█░█░█▀▀░█▀▄    ║
+║   ░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀░▀    ║
+║                                                       ║
+║                 Omni-Scanner v1.0                     ║
+║                Crafted by AiR ©2025                   ║
+║        An All-in-One Network Scanning Tool            ║
+║                                                       ║
+╚═════════════════════════════════════[Ethical Use Only]╝
+
+Omni-Scanner v1.0 Documentation
     Ethical and Legal Use Only
-    Author is not responsible for any illegal use
+    Brand is not responsible for any illegal use
 
-Omni-Scanner is a comprehensive network analysis tool designed for reconnaissance, diagnostics, and security auditing. Below is a detailed explanation of the core functionalities available in the main menu:
+Omni-Scanner is a professional network analysis suite designed for comprehensive reconnaissance, diagnostics, and security auditing. Below is the complete documentation for v1.0's enhanced functionality:
 
-1. Scanning Full Network, Finding Specific Target
-    This option allows you to discover active devices and analyze targets within your network.
+1. Scanning Full Network (Find Specific Host)
+    Advanced network discovery with multiple scanning methodologies.
     - How It Works:
-        Scan All IPs (High Speed): Uses ARP (Address Resolution Protocol) to rapidly identify all devices connected to the local network. ARP scanning is lightweight and efficient, making it ideal for quick network inventories. (sudo required) (linux & macos only)
-        Scan Specific IPs (Detailed): Leverages Nmap, a industry-standard tool, to perform deep scans on user-specified IP ranges. This method provides detailed insights into open ports, services, and device configurations.
+        ARP Scan (High Speed): Utilizes Address Resolution Protocol for lightning-fast detection of all active devices on the local network segment. This method is optimized for efficiency with minimal network overhead. (sudo required) (Linux/macOS only)
+        Nmap-Based Scan: Implements intelligent target selection with customizable IP ranges, providing detailed port mapping and service detection.
+    - New Features:
+        Automatic subnet detection for simplified scanning
+        Interactive host selection post-discovery
+        Exportable results in multiple formats
     - When to Use:
-        ARP scanning is best for immediate device discovery (e.g., identifying unknown devices on a home network).
-        Nmap-based scanning is suited for security audits or troubleshooting specific devices (e.g., servers, IoT devices).
+        ARP for immediate network inventory
+        Nmap for targeted security assessments
 
-2. Pinging (Custom) a Specific IP
-    Ping is a foundational network utility to test connectivity and latency. This menu offers advanced customization for tailored diagnostics.
+2. Ping Custom IP (Enhanced)
+    Advanced ICMP diagnostics with professional customization.
     - How It Works:
-        The tool uses ICMP (Internet Control Message Protocol) to send echo requests to a target IP. Customizations include adjusting packet size, timeout durations, and flood pinging.
-        Flood Ping: Sends a high volume of packets in quick succession to test network resilience or simulate Denial-of-Service (DoS) conditions (use with extreme caution).
+        Standard Ping: ICMP echo requests with configurable packet size, interval, and timeout.
+        Flood Ping Mode: High-velocity packet transmission (100+ pings/sec) for network stress testing (requires sudo).
+        New: Jitter calculation and packet loss statistics
     - When to Use:
-        Basic ping to verify if a host is online.
-        Custom packet sizes to diagnose MTU (Maximum Transmission Unit) issues.
-        Flood ping for stress-testing networks (ethical and controlled environments only).
+        Baseline connectivity testing
+        MTU path discovery
+        Network resilience testing (ethical use only)
 
-3. TraceRouting
-    TraceRoute maps the path packets take to reach a target IP, showing each hop (router/gateway) along the way
+3. Trace Routing (Professional Edition)
+    Comprehensive path analysis with next-gen features.
     - How It Works:
-        Uses a combination of ICMP, UDP, or TCP packets with incrementally increasing TTL (Time-to-Live) values to identify each hop.
+        Hybrid TTL-based tracing using ICMP/UDP/TCP protocols
+        New: GeoIP lookup for each hop (when available)
+        ASN (Autonomous System Number) identification
+        Latency profiling at each network segment
     - When to Use:
-        Diagnose network latency issues.
-        Identify misconfigured routers or network bottlenecks.
+        Diagnosing international routing issues
+        Identifying peering point bottlenecks
+        Network topology mapping
 
-4. Advance Scan
-    A suite of professional-grade scanning techniques powered by Nmap for in-depth network analysis.
+4. Advanced Scanning (Single IP)
+    Enterprise-grade single target analysis.
     - How It Works:
-        Nmap Integration: Executes advanced scans such as SYN (stealth), UDP, OS detection, and version scanning. These methods go beyond basic port checks to gather detailed intelligence about target systems.
+        Nmap-powered scanning suite with:
+        - SYN Stealth Scan (-sS)
+        - Full TCP Connect Scan (-sT)
+        - Version Detection (-sV)
+        - OS Fingerprinting (-O)
+        New: Vulnerability probability assessment
     - When to Use:
-        SYN Scan: For stealthy port scanning without completing full TCP handshakes.
-        UDP Scan: To identify open UDP ports (commonly used by DNS, DHCP, and VoIP services).
-        OS Detection: To fingerprint the operating system of a remote device.
-        Aggressive Scan: Combines multiple techniques for a holistic view of the target (slower but thorough).
+        Penetration testing engagements
+        Critical server audits
+        Compliance verification
+
+5. Advanced Scanning (IP Range)
+    Large-scale network reconnaissance.
+    - How It Works:
+        Parallelized Nmap scanning with:
+        - Customizable concurrency controls
+        - Intelligent host grouping
+        - Adaptive timing profiles
+        New: CIDR notation support (/24, /16 etc.)
+    - When to Use:
+        Enterprise network audits
+        Data center inventories
+        Security posture assessments
+
+6. MAC Vendor Lookup (Online)
+    Enhanced device identification.
+    - How It Works:
+        Real-time OUI (Organizationally Unique Identifier) database queries
+        Local cache for offline lookups
+        New: Device type classification
+    - When to Use:
+        Identifying unknown network devices
+        Security incident investigations
+        Network documentation
+
+7. Show Network Info
+    Comprehensive local network intelligence.
+    - How It Works:
+        Displays:
+        - All active network interfaces
+        - IP addresses and netmasks
+        - Default gateways
+        - DNS configurations
+        New: Bandwidth usage monitoring
+    - When to Use:
+        Quick network status checks
+        Troubleshooting connectivity issues
+        System configuration verification
+
+[S] Switch to SUDO Mode
+    Dynamic privilege escalation.
+    - How It Works:
+        Seamless transition between user and root privileges
+        Maintains session state during escalation
+        New: Privilege verification system
+    - When to Use:
+        When ARP or flood ping features are needed
+        For advanced Nmap scanning options
 
 Additional Commands
-    H (Help): Displays this documentation.
-    0 (Exit): Safely terminates the program.
+    [H] Help: Displays this documentation
+    [0] Quit: Safely terminates the program
 
 Important Notes
-    - Ensure Ethical Use:
-        Always obtain explicit permission before scanning networks or devices you do not own. Unauthorized scanning may violate local laws.
-        Flood ping and DoS-related features should only be used in controlled environments (e.g., penetration testing labs).
-    - Performance Tips:
-        ARP scans are fastest for local network discovery.
-        Nmap scans can be resource-intensive; adjust thread counts and timeouts for large networks.
-    - Dependencies:
-        Requires root/sudo privileges for ARP, SYN, and flood ping operations.
-        Ensure Nmap and Python dependencies are installed (see requirements.txt).
+    - Ethical Compliance:
+        All scanning activities must comply with local laws and regulations.
+        Written authorization is required for scanning third-party networks.
+        Flood testing requires explicit network owner consent.
+    - Performance Optimization:
+        Use ARP scans for local network discovery (fastest method)
+        Adjust thread count in settings for large IP ranges
+        Consider network bandwidth during intensive operations
+    - System Requirements:
+        Python 3.8+ with required dependencies
+        Nmap 7.80+ for advanced features
+        Root privileges for certain operations
+        Internet access for MAC vendor lookups
 
-© Kartik | Licensed for Ethical Use Only
+© AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
 
 help1 = r"""
-Selected Option 1: Scanning Full Network, Finding Specific Target
-This menu provides two methods to identify and analyze devices on your network.
+╔═══════════════════════════════════════════════════════╗
+║                                                       ║
+║   ░█▀█░█▄█░█▀█░▀█▀░░░░░█▀▀░█▀▀░█▀█░█▀█░█▀█░█▀▀░█▀▄    ║
+║   ░█░█░█░█░█░█░░█░░▄▄▄░▀▀█░█░░░█▀█░█░█░█░█░█▀▀░█▀▄    ║
+║   ░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀░▀    ║
+║                                                       ║
+║                 Omni-Scanner v1.0                     ║
+║                Crafted by AiR ©2025                   ║
+║        An All-in-One Network Scanning Tool            ║
+║                                                       ║
+╚═════════════════════════════════════[Ethical Use Only]╝
 
-1. Scan All IPs (High Speed, Less Detailed)
+Omni-Scanner v1.0 Documentation
+    Ethical and Legal Use Only
+    Brand is not responsible for any illegal use
+
+Arp Menu - This menu provides three methods to identify and analyze devices on your network.
+
+1. Fast Scan: All IPs on Network (Less Detailed)
     Purpose: Rapidly discover all active devices on the local network.
     Technical Details:
         Method: ARP (Address Resolution Protocol) scanning.
@@ -78,41 +170,57 @@ This menu provides two methods to identify and analyze devices on your network.
     When to Use:
         - Quickly audit connected devices (e.g., home/office networks).
         - Identify unauthorized devices (e.g., intruders on a Wi-Fi network).
-    Availability: Linux & macOS only with sudo privileges.
+    Availability: Linux only with sudo privileges.
     Limitations:
         - No port or service details.
         - Limited to the local subnet.
 
-2. Scan Specific IPs (Slow Speed, More Detailed)
-Purpose: Perform an in-depth analysis of specific IPs or ranges.
-Technical Details:
-    Method: Nmap-based scanning.
-    How It Works:
-        - Uses nmap <IP range> to probe ports, services, and host behavior.
-        - Can detect:
-        - Open/closed ports.
-        - Running services (e.g., HTTP, SSH).
-        - Operating system fingerprints.
-    Speed: Slower due to comprehensive checks (seconds to minutes).
-When to Use:
-    - Security audits of critical devices (e.g., servers, routers).
-    - Troubleshooting connectivity or service issues.
-Example Commands:
-    - nmap 192.168.1.1-50 → Scans IPs 1 to 50.
-    - nmap 192.168.1.10 → Scans a single IP.
+2. Fast Scan: Specific IP(s) (Less Detailed)
+    Purpose: Quickly check the status of specific IP addresses.
+    Technical Details:
+        Method: ICMP ping sweep.
+        How It Works:
+            - Sends ICMP echo requests to specified IPs.
+            - Identifies responsive hosts.
+        Speed: Faster than Nmap-based scans.
+    When to Use:
+        - Verify if specific hosts are online.
+        - Quick connectivity checks.
+    Limitations:
+        - Less detailed than Nmap scans.
+        - May be blocked by firewalls.
+
+3. Deep Scan: Specific IP(s) (More Detailed, Slower)
+    Purpose: Perform an in-depth analysis of specific IPs or ranges.
+    Technical Details:
+        Method: Nmap-based scanning.
+        How It Works:
+            - Uses nmap <IP range> to probe ports, services, and host behavior.
+            - Can detect:
+                - Open/closed ports.
+                - Running services (e.g., HTTP, SSH).
+                - Operating system fingerprints.
+        Speed: Slower due to comprehensive checks (seconds to minutes).
+    When to Use:
+        - Security audits of critical devices (e.g., servers, routers).
+        - Troubleshooting connectivity or service issues.
+    Example Commands:
+        - nmap 192.168.1.1-50 → Scans IPs 1 to 50.
+        - nmap 192.168.1.10 → Scans a single IP.
 
 Key Differences -
-Feature	      | Scan All IPs (ARP)  | Scan Specific IPs (Nmap)
---------------|---------------------|--------------------------------
-Speed	      | Instant	            | Slow to Moderate
-Detail Level  | Basic (IP + MAC)    | Advanced (Ports, Services, OS)
-Network Scope | Local Subnet Only   | Any Reachable IP/Subnet
-Privileges	  | Requires sudo       | Optional (depends on scan type)
+Feature          | Fast Scan All IPs | Fast Scan Specific IPs | Deep Scan Specific IPs
+----------------|-------------------|------------------------|------------------------
+Method           | ARP               | ICMP Ping              | Nmap
+Speed            | Instant           | Fast                   | Slow to Moderate
+Detail Level     | Basic (IP+MAC)    | Basic (Online Status)   | Advanced (Ports,Services,OS)
+Network Scope    | Local Subnet Only | Any Reachable IP        | Any Reachable IP/Subnet
+Privileges       | Requires sudo     | Optional               | Optional (depends on scan type)
 
 Important Notes
     Ethical Use:
         - Always obtain explicit permission before scanning. Unauthorized scanning may violate privacy laws.
-        - ARP scans are passive and less intrusive. Nmap scans may trigger security alerts.
+        - ARP and ICMP scans are less intrusive. Nmap scans may trigger security alerts.
     
     Performance Tips:
         - For ARP scans, avoid overlapping with other network-heavy tasks.
@@ -121,92 +229,126 @@ Important Notes
     Dependencies:
         - ARP Scan: Requires scapy Python library.
         - Nmap Scan: Requires nmap installed on the system.
+        - ICMP Scan: Requires standard networking tools.
 
-To Return to the Main Menu, press 0.
-For Sub-Option Help, type H within any feature.
+Navigation:
+    [H] Help        [0] Back to Main Menu
 
-© Kartik | Licensed for Ethical Use Only
+© AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
 
 help2 = r"""
-Selected Option 2: Pinging (Custom) a Specific IP
-This menu allows advanced customization of ICMP (Internet Control Message Protocol) ping requests to diagnose connectivity, test network performance, or simulate stress conditions.
+╔═══════════════════════════════════════════════════════╗
+║                                                       ║
+║   ░█▀█░█▄█░█▀█░▀█▀░░░░░█▀▀░█▀▀░█▀█░█▀█░█▀█░█▀▀░█▀▄    ║
+║   ░█░█░█░█░█░█░░█░░▄▄▄░▀▀█░█░░░█▀█░█░█░█░█░█▀▀░█▀▄    ║
+║   ░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀░▀    ║
+║                                                       ║
+║                 Omni-Scanner v1.0                     ║
+║                Crafted by AiR ©2025                   ║
+║        An All-in-One Network Scanning Tool            ║
+║                                                       ║
+╚═════════════════════════════════════[Ethical Use Only]╝
 
-1. Simple Finite Ping
+Omni-Scanner v1.0 Documentation
+    Ethical and Legal Use Only
+    Brand is not responsible for any illegal use
+
+Ping Menu - This menu allows advanced customization of ICMP (Internet Control Message Protocol) ping requests to diagnose connectivity, test network performance, or simulate stress conditions.
+
+[1] Simple Ping
     Purpose: Basic connectivity check to verify if a target IP is reachable.
     Technical Details:
         Method: Standard ICMP echo request/reply.
         Default Settings:
-            - Packet Size: 56 bytes (64 bytes with headers).
-            - Timeout: 2 seconds per reply.
-            - Number of Request: 7 only, for stopping condition
+            - Packet Size: 56 bytes (64 bytes with headers)
+            - Timeout: 2 seconds per reply
+            - Number of Requests: 7 (automatic stop)
     When to Use:
-        - Confirm if a device is online (e.g., router, server).
-        - Measure average latency (round-trip time).
+        - Confirm if a device is online (router, server, etc.)
+        - Measure average latency (round-trip time)
 
-2. Large Ping
-    Purpose: Test network performance with oversize packets.
+[2] Extended Ping
+    Purpose: Test network performance with customizable packets.
     Technical Details:
-    Method: Sends ICMP packets with user-defined sizes.
-    Customization: 
-        - Packet size: Packet sizes will be size of 65,500 bytes (largest possible).
-        - Number of Request: Infinite
+        Method: Sends ICMP packets with user-defined sizes
+        Customization: 
+            - Packet size: Up to 65,500 bytes (maximum possible)
+            - Number of Requests: Infinite or custom count
     Use Case:
-        - Diagnose packet fragmentation issues.
-        - Test maximum transmission unit (MTU) compatibility.
-    Note: Extremely large packets may be dropped by routers or firewalls.
+        - Diagnose packet fragmentation issues
+        - Test maximum transmission unit (MTU) compatibility
+    Note: Large packets may be dropped by routers/firewalls
 
-3. Ping for Slow Network
-    Purpose: Adjust timeout for high-latency networks.
+[3] Slow-Network Ping
+    Purpose: Adjust settings for high-latency networks.
     Technical Details:
-        Method: Increases the wait time for ICMP replies.
-        Customization: Timeout can be set to 1–30 seconds.
+        Method: Increases wait time for ICMP replies
+        Customization:
+            - Timeout: Configurable (1-30 seconds)
+            - Packet size: Adjustable for bandwidth testing
     Use Case:
-        - Diagnose satellite/WAN links with high latency.
-        - Test connectivity over unstable connections (e.g., mobile networks).
+        - Diagnose satellite/WAN links with high latency
+        - Test unstable connections (mobile networks, etc.)
 
-4. Flood Ping (Requires Sudo)
-    Purpose: Stress-test a target by flooding it with ICMP packets.(Linux/macOS only).
+[4] Flood Ping (sudo required)(linux only)
+    Purpose: Stress-test a target with high-speed ICMP packets.
     Technical Details:
-    Method: Sends packets as fast as possible (DoS simulation).
-    Requirements:
-        - sudo/root privileges.
-        - Linux/macOS only (not supported on Windows).
+        Method: Sends packets as fast as possible (DoS simulation)
+        Requirements:
+            - sudo/root privileges
+            - Linux systems only
+        Default Duration: 5 seconds (auto-stop)
     Use Case:
-        - Test network/server resilience under heavy load.
-        - Ethical Note: Only use on authorized networks!
+        - Test network/server resilience under heavy load
+        - Bandwidth capacity testing
     Warnings:
-        - May degrade network performance or trigger security alerts.
-        - Flooding public IPs is illegal without explicit permission.
+        - May trigger security systems or cause network disruption
+        - Requires explicit authorization before use
 
 Key Notes
     Ethical Use:
-        - Flood Ping is a high-risk feature. Obtain written consent before use.
-        - Avoid targeting critical infrastructure (e.g., hospitals, ISPs).
+        - Flood Ping is a high-risk feature requiring written consent
+        - Never target unauthorized systems or critical infrastructure
     Performance Tips:
-        - For large pings, start with 1500 bytes to test MTU.
-        - Use flood pings sparingly (1-5 seconds max).
+        - For MTU testing, start with 1500 byte packets
+        - Limit flood pings to 5 seconds maximum
     Dependencies:
-        - Requires system-level ping utility.
-        - Flood Ping requires UNIX-based OS (Linux/macOS).
+        - Requires system ping utility
+        - Flood Ping requires Linux environment
 
-To Return to the Main Menu, press 0.
-For Sub-Option Help, type H within any feature.
+Navigation:
+    [H] Help        [0] Back to Main Menu
 
-© Kartik | Licensed for Ethical Use Only
+© AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
 help3 = r"""
-Selected Option 3: Traceroute any IP or Domain name.
-This menu allows to track any ip address and domain name, to find the path of packets from your system to the target host. It provides two options for different scenarios.
+╔═══════════════════════════════════════════════════════╗
+║                                                       ║
+║   ░█▀█░█▄█░█▀█░▀█▀░░░░░█▀▀░█▀▀░█▀█░█▀█░█▀█░█▀▀░█▀▄    ║
+║   ░█░█░█░█░█░█░░█░░▄▄▄░▀▀█░█░░░█▀█░█░█░█░█░█▀▀░█▀▄    ║
+║   ░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀░▀    ║
+║                                                       ║
+║                 Omni-Scanner v1.0                     ║
+║                Crafted by AiR ©2025                   ║
+║        An All-in-One Network Scanning Tool            ║
+║                                                       ║
+╚═════════════════════════════════════[Ethical Use Only]╝
 
-1: Standard Traceroute (ICMP/UDP)
-    Description: Performs a traditional traceroute using ICMP (Windows) or UDP (Linux/macOS) packets to map the route from your machine to the target host. This option is compatible with most networks unless outbound ICMP or UDP traffic is blocked.
+Omni-Scanner v1.0 Documentation
+    Ethical and Legal Use Only
+    Brand is not responsible for any illegal use
+
+Traceroute menu - This menu allows you to track any IP address or domain name to find the path of packets from your system to the target host.
+
+[1] Standard Traceroute (ICMP/UDP)
+    Description: Performs a traditional traceroute using ICMP (Windows) or UDP (Linux/macOS) packets to map the route from your machine to the target host.
     How It Works: 
         Linux/macOS: Uses traceroute command which sends UDP packets with increasing TTL values.
         Windows: Uses tracert command that sends ICMP Echo Requests.
     Use Case:
         General-purpose path tracing.
-        Diagnosing routing issues or high-latency links on open networks.
+        Diagnosing routing issues or high-latency links.
     Commands Used:
         Linux/macOS:
             traceroute <target>
@@ -216,38 +358,33 @@ This menu allows to track any ip address and domain name, to find the path of pa
         traceroute must be installed (Linux).
         No elevated privileges needed unless restricted by system policy.
 
-2: Firewall-Evasion Traceroute (TCP Port 80)
-    Description: Performs a traceroute using TCP SYN packets to a well-known open port (default: 80). This is useful in environments where ICMP or UDP packets are filtered by a firewall or router, but HTTP traffic is allowed.
+[2] Firewall-Evasion Traceroute (TCP port 80) (sudo required)(linux only)
+    Description: Performs a traceroute using TCP SYN packets to port 80 (HTTP). Linux-only in current version.
     How It Works:
         Sends TCP SYN packets to port 80 (HTTP).
-        Mimics standard web traffic to bypass firewalls that block ping or UDP probes.
+        Mimics web traffic to bypass firewalls blocking ping/UDP.
     Use Case:
         Tracing routes through firewalled networks.
-        Penetration testing or red team scenarios.
-        More accurate routing paths through load-balanced or ICMP-blocked infrastructure.
+        Penetration testing scenarios.
     Commands Used:
         Linux/macOS:
             sudo traceroute -T -p 80 <target>
-        Windows (via Nmap):
-            nmap --traceroute -p 80 <target>
-            Windows tracert does not support TCP mode natively. We use nmap as a fallback.
     Requirements: 
-        Requires sudo (admin) privileges on Linux/macOS.
-        nmap must be installed for Windows.
+        Requires sudo privileges.
+        Linux systems only in current version.
 
-Notes & Recommendations
-    For most networks, Option 1 is sufficient and faster.
-    If Option 1 returns timeouts or incomplete hops, try Option 2.
-    Always run the tool with necessary privileges or you'll get misleading results.
-    Consider automating fallback in future versions using a “Smart Traceroute” logic.
+[H] Help        [0] Back
 
-Warnings
-    Ethical Use: Always obtain permission before scanning. Unauthorized scans may be illegal.
+Notes:
+1. For most networks, Option 1 is sufficient and faster.
+2. If Option 1 fails, try Option 2 (Linux only).
+3. Always run with necessary privileges for accurate results.
 
-To Return to the Main Menu, press 0.
-For this Help Screen, press H.
+Warnings:
+• Ethical Use: Always obtain proper authorization before scanning.
+• Unauthorized scanning may violate laws and network policies.
 
-© Kartik | Licensed for Ethical Use Only
+© AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
 help4 = r"""
 Advanced Scan Overview
