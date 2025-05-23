@@ -133,7 +133,6 @@ Select an Option:
             time.sleep(0.3)
 
 
-
 def level_3():
     """Menu Based : Traceroute option's function"""
     scan = "traceroute-scan"
@@ -261,7 +260,7 @@ Select required options (separate by space):
 def menu_linux():
     """Function for Initial Menu to show in front of the user"""
     check_and_run_sudo_linux()
-    print(f"(Linux {'SUDO' if is_sudo_linux() else 'Limited Functionality'} Version)")
+    print(f"(Linux {'Full' if is_sudo_linux() else 'Limited'} Functionality Version)")
     while True:
         print(r"""
 Select an Option:

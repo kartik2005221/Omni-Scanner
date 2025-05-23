@@ -15,38 +15,34 @@ Omni-Scanner v1.0 Documentation
     Ethical and Legal Use Only
     Brand is not responsible for any illegal use
 
-Omni-Scanner is a professional network analysis suite designed for comprehensive reconnaissance, diagnostics, and security auditing. Below is the complete documentation for v1.0's enhanced functionality:
+Omni-Scanner is a professional network analysis suite designed for comprehensive reconnaissance, diagnostics, and security auditing. Below is the complete documentation for v1.0's functionality:
 
 1. Scanning Full Network (Find Specific Host)
-    Advanced network discovery with multiple scanning methodologies.
+    Advanced network discovery with multiple scanning methodologies like Arp-Scan and NMap Scan.
     - How It Works:
-        ARP Scan (High Speed): Utilizes Address Resolution Protocol for lightning-fast detection of all active devices on the local network segment. This method is optimized for efficiency with minimal network overhead. (sudo required) (Linux/macOS only)
+        ARP Scan (High Speed): Utilizes Address Resolution Protocol for lightning-fast detection of all active devices on the local network segment. This method is optimized for efficiency with minimal network overhead. (sudo required) (Linux only)
         Nmap-Based Scan: Implements intelligent target selection with customizable IP ranges, providing detailed port mapping and service detection.
-    - New Features:
-        Automatic subnet detection for simplified scanning
-        Interactive host selection post-discovery
-        Exportable results in multiple formats
+    - Features:
+        Automatic subnet detection for simplified scanning in ARP Scan mode
     - When to Use:
         ARP for immediate network inventory
-        Nmap for targeted security assessments
+        Nmap for targeted security assessments or when in windows
 
 2. Ping Custom IP (Enhanced)
     Advanced ICMP diagnostics with professional customization.
     - How It Works:
         Standard Ping: ICMP echo requests with configurable packet size, interval, and timeout.
         Flood Ping Mode: High-velocity packet transmission (100+ pings/sec) for network stress testing (requires sudo).
-        New: Jitter calculation and packet loss statistics
+        and more available.
     - When to Use:
         Baseline connectivity testing
         MTU path discovery
         Network resilience testing (ethical use only)
 
-3. Trace Routing (Professional Edition)
+3. Trace Routing
     Comprehensive path analysis with next-gen features.
     - How It Works:
         Hybrid TTL-based tracing using ICMP/UDP/TCP protocols
-        New: GeoIP lookup for each hop (when available)
-        ASN (Autonomous System Number) identification
         Latency profiling at each network segment
     - When to Use:
         Diagnosing international routing issues
@@ -61,13 +57,13 @@ Omni-Scanner is a professional network analysis suite designed for comprehensive
         - Full TCP Connect Scan (-sT)
         - Version Detection (-sV)
         - OS Fingerprinting (-O)
-        New: Vulnerability probability assessment
+        and more available.
     - When to Use:
         Penetration testing engagements
         Critical server audits
         Compliance verification
 
-5. Advanced Scanning (IP Range)
+5. Advanced Scanning (Range of IPs)
     Large-scale network reconnaissance.
     - How It Works:
         Parallelized Nmap scanning with:
@@ -84,29 +80,28 @@ Omni-Scanner is a professional network analysis suite designed for comprehensive
     Enhanced device identification.
     - How It Works:
         Real-time OUI (Organizationally Unique Identifier) database queries
-        Local cache for offline lookups
-        New: Device type classification
+        Device brand classification
     - When to Use:
         Identifying unknown network devices
         Security incident investigations
         Network documentation
 
 7. Show Network Info
-    Comprehensive local network intelligence.
+    Comprehensive local network information.
     - How It Works:
         Displays:
         - All active network interfaces
         - IP addresses and netmasks
         - Default gateways
         - DNS configurations
-        New: Bandwidth usage monitoring
+        and more of current device.
     - When to Use:
         Quick network status checks
         Troubleshooting connectivity issues
         System configuration verification
 
 [S] Switch to SUDO Mode
-    Dynamic privilege escalation.
+    Switching to Full Functionality Mode (Linux Only)
     - How It Works:
         Seamless transition between user and root privileges
         Maintains session state during escalation
@@ -163,14 +158,14 @@ Arp Menu - This menu provides three methods to identify and analyze devices on y
         How It Works:
             - Broadcasts ARP requests across the network.
             - Lists devices that respond with their IP and MAC addresses.
-        Speed: Completes in seconds (covers 254 IPs in under 3 seconds).
+        Speed: Completes in seconds (covers 254 IPs in under 3 seconds approx).
         Requirements:
-            - sudo/administrator privileges (raw packet crafting).
+            - Full Functionality Mode (raw packet crafting).
             - Local network access (does not work across subnets).
     When to Use:
         - Quickly audit connected devices (e.g., home/office networks).
         - Identify unauthorized devices (e.g., intruders on a Wi-Fi network).
-    Availability: Linux only with sudo privileges.
+    Availability: Linux only with Full Functionality mode.
     Limitations:
         - No port or service details.
         - Limited to the local subnet.
@@ -210,11 +205,11 @@ Arp Menu - This menu provides three methods to identify and analyze devices on y
 
 Key Differences -
 Feature          | Fast Scan All IPs | Fast Scan Specific IPs | Deep Scan Specific IPs
-----------------|-------------------|------------------------|------------------------
+-----------------|-------------------|------------------------|------------------------
 Method           | ARP               | ICMP Ping              | Nmap
 Speed            | Instant           | Fast                   | Slow to Moderate
-Detail Level     | Basic (IP+MAC)    | Basic (Online Status)   | Advanced (Ports,Services,OS)
-Network Scope    | Local Subnet Only | Any Reachable IP        | Any Reachable IP/Subnet
+Detail Level     | Basic (IP+MAC)    | Basic (Online Status)  | Advanced (Ports,Services,OS)
+Network Scope    | Local Subnet Only | Any Reachable IP       | Any Reachable IP/Subnet
 Privileges       | Requires sudo     | Optional               | Optional (depends on scan type)
 
 Important Notes
@@ -263,7 +258,6 @@ Ping Menu - This menu allows advanced customization of ICMP (Internet Control Me
         Default Settings:
             - Packet Size: 56 bytes (64 bytes with headers)
             - Timeout: 2 seconds per reply
-            - Number of Requests: 7 (automatic stop)
     When to Use:
         - Confirm if a device is online (router, server, etc.)
         - Measure average latency (round-trip time)
@@ -274,7 +268,6 @@ Ping Menu - This menu allows advanced customization of ICMP (Internet Control Me
         Method: Sends ICMP packets with user-defined sizes
         Customization: 
             - Packet size: Up to 65,500 bytes (maximum possible)
-            - Number of Requests: Infinite or custom count
     Use Case:
         - Diagnose packet fragmentation issues
         - Test maximum transmission unit (MTU) compatibility
@@ -298,7 +291,7 @@ Ping Menu - This menu allows advanced customization of ICMP (Internet Control Me
         Requirements:
             - sudo/root privileges
             - Linux systems only
-        Default Duration: 5 seconds (auto-stop)
+        Default Duration: 5 seconds
     Use Case:
         - Test network/server resilience under heavy load
         - Bandwidth capacity testing
@@ -349,29 +342,21 @@ Traceroute menu - This menu allows you to track any IP address or domain name to
     Use Case:
         General-purpose path tracing.
         Diagnosing routing issues or high-latency links.
-    Commands Used:
-        Linux/macOS:
-            traceroute <target>
-        Windows:
-            tracert <target>
     Requirements:
         traceroute must be installed (Linux).
         No elevated privileges needed unless restricted by system policy.
 
 [2] Firewall-Evasion Traceroute (TCP port 80) (sudo required)(linux only)
-    Description: Performs a traceroute using TCP SYN packets to port 80 (HTTP). Linux-only in current version.
+    Description: Performs a traceroute using TCP SYN packets to port 80 (HTTP). Linux-only.
     How It Works:
         Sends TCP SYN packets to port 80 (HTTP).
         Mimics web traffic to bypass firewalls blocking ping/UDP.
     Use Case:
         Tracing routes through firewalled networks.
         Penetration testing scenarios.
-    Commands Used:
-        Linux/macOS:
-            sudo traceroute -T -p 80 <target>
     Requirements: 
         Requires sudo privileges.
-        Linux systems only in current version.
+        Linux systems only.
 
 [H] Help        [0] Back
 
