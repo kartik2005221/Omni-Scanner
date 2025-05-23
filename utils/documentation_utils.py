@@ -387,137 +387,173 @@ Warnings:
 © AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
 help4 = r"""
-Advanced Scan Overview
-The Advanced Scan menu offers powerful network reconnaissance tools to analyze targets in depth. Each option focuses on different aspects of network exploration, from detecting open ports to identifying software vulnerabilities. Below is a breakdown of what each scan does, how it works, and when to use it.
+╔═══════════════════════════════════════════════════════╗
+║                                                       ║
+║   ░█▀█░█▄█░█▀█░▀█▀░░░░░█▀▀░█▀▀░█▀█░█▀█░█▀█░█▀▀░█▀▄    ║
+║   ░█░█░█░█░█░█░░█░░▄▄▄░▀▀█░█░░░█▀█░█░█░█░█░█▀▀░█▀▄    ║
+║   ░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀░▀    ║
+║                                                       ║
+║                 Omni-Scanner v1.0                     ║
+║                Crafted by AiR ©2025                   ║
+║        An All-in-One Network Scanning Tool            ║
+║                                                       ║
+╚═════════════════════════════════════[Ethical Use Only]╝
 
-Scan Options
-    1. Simple Nmap (Fast)
-        Purpose: Quickly check for open ports on a target.
-        How It Works: Scans the 1,000 most common ports used by services like web servers, email, and file sharing.
-        Best For: A rapid overview of a target’s active services.
-        Output: Lists open ports (e.g., Port 80: HTTP - Open).
-    
-    2. Detect OS
-        Purpose: Guess the target’s operating system (e.g., Windows, Linux).
-        How It Works: Analyzes subtle differences in how devices respond to network requests to fingerprint the OS.
-        Best For: Tailoring further attacks or troubleshooting compatibility issues.
-        Output: Displays OS name and confidence level (e.g., Likely: Linux 4.x).
-    
-    3. Detect Running Service & Version
-        Purpose: Identify software running on open ports (e.g., Apache 2.4.49).
-        How It Works: Sends probes to open ports and analyzes responses to determine service details.
-        Best For: Finding outdated or vulnerable software.
-        Output: Lists service names and versions (e.g., Port 22: OpenSSH 8.2p1).
-    
-    4. SYN Scan (Stealth)
-        Purpose: Discover open ports without fully connecting to the target.
-        How It Works: Sends partial connection requests to avoid logging.
-        Best For: Avoiding detection by basic firewalls or intrusion systems.
-        Output: Lists open ports marked as "stealth" (e.g., Port 443: HTTPS - Stealth Open).
-    
-    5. UDP Scan
-        Purpose: Find open UDP ports (used by DNS, VoIP, and gaming services).
-        How It Works: Sends lightweight UDP packets to check for responses.
-        Best For: Discovering services that don’t use TCP (e.g., DHCP servers).
-        Output: Lists open UDP ports (e.g., Port 53: DNS - Open).
-    
-    6. Specific Port Scan
-        Purpose: Scan user-defined ports (e.g., 80, 443, 22).
-        How It Works: Focuses only on the ports you specify, ignoring others.
-        Best For: Targeting critical services (e.g., checking if SSH or HTTP is exposed).
-        Output: Detailed results for selected ports only.
-    
-    7. All Port Scan
-        Purpose: Check all 65,535 ports on a target.
-        How It Works: Systematically tests every possible port.
-        Best For: Comprehensive security audits or finding hidden services.
-        Output: Full list of open ports (warning: this can be very long!).
-    
-    8. Aggressive Scan (Slower)
-        Purpose: Combine multiple advanced techniques for a deep dive.
-        What’s Included:
-            OS Detection (Option 2).
-            Service Version Detection (Option 3).
-            Script Scanning: Runs vulnerability-checking scripts.
-        Port Scanning: Checks common and suspicious ports.
-        Best For: Full-scale security assessments or penetration testing.
-        Output: Detailed report covering OS, services, scripts, and open ports.
+Omni-Scanner v1.0 Documentation
+    Ethical and Legal Use Only
+    Brand is not responsible for any illegal use
 
-Key Rules
-    Combining Options:
-        You can select multiple scans (e.g., 2 3 4 for OS, service versions, and stealth scan).
-        Do NOT select both 6 (Specific Ports) and 7 (All Ports)—they conflict!
-    Use Cases:
-        Simple Nmap: Quick check for home networks.
-        Aggressive Scan: Professional security audits.
-        UDP Scan: Diagnosing DNS or gaming server issues.
-    What to Expect:
-        Faster scans (e.g., Simple Nmap) provide less detail.
-        Slower scans (e.g., Aggressive Scan) reveal hidden risks.
+Advanced Scan Menu - The Advanced Scan menu offers powerful network reconnaissance tools to analyze targets in depth. Choose between single IP or IP range scanning, then select from various techniques to suit your needs.
 
-Warnings
-    Ethical Use: Always obtain permission before scanning. Unauthorized scans may be illegal.
-    Performance Impact: Aggressive scans may slow down your network or trigger alarms.
-    Stealth Scans: While harder to detect, they are not invisible to advanced security systems.
+Scan Types:
+    [4] Advanced scan (single IP) - Scan one specific target
+    [5] Advanced scan (IP range) - Scan multiple targets in a range
 
-To Return to the Main Menu, press 0.
-For this Help Screen, press H.
+Scan Options (appear after selecting 4 or 5):
+    [1] Simple Nmap scan (fast)
+        Purpose: Quickly check for open ports on a target
+        Best For: Initial reconnaissance
+        Note: Use alone, not combinable with other options
 
-© Kartik | Licensed for Ethical Use Only
+    [2] Detect operating system
+        Purpose: Identify target's OS (Windows, Linux, etc.)
+        Method: Network response fingerprinting
+
+    [3] Detect running services and versions
+        Purpose: Find software versions on open ports
+        Best For: Vulnerability identification
+
+    [4] SYN scan
+        Purpose: Stealthy port discovery
+        Advantage: Avoids full TCP connection logging
+
+    [5] UDP scan
+        Purpose: Find open UDP ports
+        Critical For: DNS, DHCP, and VoIP services
+
+    [6] Specific port scan
+        Purpose: Focus on user-defined ports
+        Usage: Enter ports like "80,443,22" when prompted
+
+    [7] Full port scan
+        Purpose: Comprehensive 65,535 port check
+        Warning: Time-consuming - use judiciously
+
+    [8] Aggressive scan
+        Includes: OS detection, service versions, script scanning
+        Best For: Professional security audits
+
+    [9] Firewall bypass scan
+        Purpose: Evade basic firewall protections
+        Method: Uses fragmented packets and other techniques
+
+   [10] Disable ARP ping
+        Purpose: Avoid detection by local routers
+        Useful For: Internal network stealth scanning
+
+Utility Options:
+    [P] Show top 50 common ports - Quick reference
+    [H] Help - Display this information
+    [0] Back - Return to main menu
+
+Key Rules:
+    1. Combination Rules:
+       - Can combine most options (e.g., "2 3 4" for OS, services, and SYN scan)
+       - Never combine 6 and 7 (specific vs full port scan)
+       - Option 1 (Simple Nmap) must be used alone
+    
+    2. Performance Considerations:
+       - UDP scans (5) are slower than TCP scans
+       - Aggressive scans (8) generate significant traffic
+       - Firewall bypass (9) increases scan duration
+    
+    3. Ethical Guidelines:
+       - Always obtain proper authorization
+       - Avoid scanning during business-critical hours
+       - Consider using stealth options on production networks
+
+Sample Use Cases:
+• Quick Check: Option 1 (Simple Nmap)
+• Security Audit: "2 3 8" (OS, services, aggressive)
+• Network Troubleshooting: "5" (UDP scan for DNS issues)
+• Stealth Assessment: "4 10" (SYN scan with ARP disable)
+
+Warnings:
+     Unauthorized scanning may violate computer crime laws
+     Aggressive scans may trigger intrusion detection systems
+     Scanning critical systems may cause service disruptions
+
+© AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
 
 ports = r"""
+╔═══════════════════════════════════════════════════════╗
+║                                                       ║
+║   ░█▀█░█▄█░█▀█░▀█▀░░░░░█▀▀░█▀▀░█▀█░█▀█░█▀█░█▀▀░█▀▄    ║
+║   ░█░█░█░█░█░█░░█░░▄▄▄░▀▀█░█░░░█▀█░█░█░█░█░█▀▀░█▀▄    ║
+║   ░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀░▀    ║
+║                                                       ║
+║                 Omni-Scanner v1.0                     ║
+║                Crafted by AiR ©2025                   ║
+║        An All-in-One Network Scanning Tool            ║
+║                                                       ║
+╚═════════════════════════════════════[Ethical Use Only]╝
+
+Omni-Scanner v1.0 Documentation
+    Ethical and Legal Use Only
+    Brand is not responsible for any illegal use
+
 Top 50 Common Network Ports
-    1. 80/TCP        - HTTP (Web traffic)  
-    2. 443/TCP       - HTTPS (Secure web traffic)  
-    3. 22/TCP        - SSH (Secure Shell)  
-    4. 53/TCP/UDP    - DNS (Domain Name System)  
-    5. 25/TCP        - SMTP (Email delivery)  
-    6. 110/TCP       - POP3 (Email retrieval)  
-    7. 143/TCP       - IMAP (Email management)  
-    8. 21/TCP        - FTP Control (File Transfer Protocol)  
-    9. 23/TCP        - Telnet (Unencrypted remote access)  
-    10. 3389/TCP     - RDP (Remote Desktop Protocol)  
-    11. 445/TCP      - SMB (Windows file/printer sharing)  
-    12. 139/TCP      - NetBIOS Session Service  
-    13. 137/UDP      - NetBIOS Name Service  
-    14. 138/UDP      - NetBIOS Datagram Service  
-    15. 3306/TCP     - MySQL Database  
-    16. 5432/TCP     - PostgreSQL Database  
-    17. 587/TCP      - SMTP Submission (Secure email sending)  
-    18. 993/TCP      - IMAPS (IMAP over SSL)  
-    19. 995/TCP      - POP3S (POP3 over SSL)  
-    20. 161/UDP      - SNMP (Network monitoring)  
-    21. 162/UDP      - SNMP Trap (SNMP alerts)  
-    22. 123/UDP      - NTP (Network Time Protocol)  
-    23. 514/UDP      - Syslog (Logging service)  
-    24. 67/UDP       - DHCP Server (IP assignment)  
-    25. 68/UDP       - DHCP Client  
-    26. 389/TCP/UDP  - LDAP (Directory services)  
-    27. 636/TCP      - LDAPS (LDAP over SSL)  
-    28. 8443/TCP     - HTTPS Alternate (Common for web apps)  
-    29. 8080/TCP     - HTTP Alternate (Proxy/web caching)  
-    30. 27017/TCP    - MongoDB Database  
-    31. 6379/TCP     - Redis (In-memory database)  
-    32. 11211/TCP/UDP- Memcached (Caching system)  
-    33. 1194/UDP     - OpenVPN  
-    34. 500/UDP      - IKE (IPsec key exchange)  
-    35. 4500/UDP     - IPsec NAT-Traversal  
-    36. 1433/TCP     - Microsoft SQL Server  
-    37. 1521/TCP     - Oracle Database  
-    38. 2049/TCP/UDP - NFS (Network File System)  
-    39. 873/TCP      - Rsync (File synchronization)  
-    40. 5060/TCP/UDP - SIP (VoIP signaling)  
-    41. 5061/TCP     - SIP-TLS (Secure SIP)  
-    42. 5900/TCP     - VNC (Remote desktop)  
-    43. 25565/TCP    - Minecraft Server  
-    44. 3128/TCP     - Squid Proxy  
-    45. 69/UDP       - TFTP (Trivial File Transfer Protocol)  
-    46. 2222/TCP     - SSH Alternate (Custom deployments)  
-    47. 9200/TCP     - Elasticsearch (Search engine)  
-    48. 9300/TCP     - Elasticsearch Cluster Communication  
-    49. 5601/TCP     - Kibana (Data visualization for Elasticsearch)  
-    50. 2483/TCP     - Oracle Database SSL 
+    [1] 80/TCP       - HTTP (Web traffic)  
+    [2] 443/TCP      - HTTPS (Secure web traffic)  
+    [3] 22/TCP       - SSH (Secure Shell)  
+    [4] 53/TCP/UDP   - DNS (Domain Name System)  
+    [5] 25/TCP       - SMTP (Email delivery)  
+    [6] 110/TCP      - POP3 (Email retrieval)  
+    [7] 143/TCP      - IMAP (Email management)  
+    [8] 21/TCP       - FTP Control (File Transfer Protocol)  
+    [9] 23/TCP       - Telnet (Unencrypted remote access)  
+   [10] 3389/TCP     - RDP (Remote Desktop Protocol)  
+   [11] 445/TCP      - SMB (Windows file/printer sharing)  
+   [12] 139/TCP      - NetBIOS Session Service  
+   [13] 137/UDP      - NetBIOS Name Service  
+   [14] 138/UDP      - NetBIOS Datagram Service  
+   [15] 3306/TCP     - MySQL Database  
+   [16] 5432/TCP     - PostgreSQL Database  
+   [17] 587/TCP      - SMTP Submission (Secure email sending)  
+   [18] 993/TCP      - IMAPS (IMAP over SSL)  
+   [19] 995/TCP      - POP3S (POP3 over SSL)  
+   [20] 161/UDP      - SNMP (Network monitoring)  
+   [21] 162/UDP      - SNMP Trap (SNMP alerts)  
+   [22] 123/UDP      - NTP (Network Time Protocol)  
+   [23] 514/UDP      - Syslog (Logging service)  
+   [24] 67/UDP       - DHCP Server (IP assignment)  
+   [25] 68/UDP       - DHCP Client  
+   [26] 389/TCP/UDP  - LDAP (Directory services)  
+   [27] 636/TCP      - LDAPS (LDAP over SSL)  
+   [28] 8443/TCP     - HTTPS Alternate (Common for web apps)  
+   [29] 8080/TCP     - HTTP Alternate (Proxy/web caching)  
+   [30] 27017/TCP    - MongoDB Database  
+   [31] 6379/TCP     - Redis (In-memory database)  
+   [32] 11211/TCP/UDP- Memcached (Caching system)  
+   [33] 1194/UDP     - OpenVPN  
+   [34] 500/UDP      - IKE (IPsec key exchange)  
+   [35] 4500/UDP     - IPsec NAT-Traversal  
+   [36] 1433/TCP     - Microsoft SQL Server  
+   [37] 1521/TCP     - Oracle Database  
+   [38] 2049/TCP/UDP - NFS (Network File System)  
+   [39] 873/TCP      - Rsync (File synchronization)  
+   [40] 5060/TCP/UDP - SIP (VoIP signaling)  
+   [41] 5061/TCP     - SIP-TLS (Secure SIP)  
+   [42] 5900/TCP     - VNC (Remote desktop)  
+   [43] 25565/TCP    - Minecraft Server  
+   [44] 3128/TCP     - Squid Proxy  
+   [45] 69/UDP       - TFTP (Trivial File Transfer Protocol)  
+   [46] 2222/TCP     - SSH Alternate (Custom deployments)  
+   [47] 9200/TCP     - Elasticsearch (Search engine)  
+   [48] 9300/TCP     - Elasticsearch Cluster Communication  
+   [49] 5601/TCP     - Kibana (Data visualization for Elasticsearch)  
+   [50] 2483/TCP     - Oracle Database SSL 
 
 Key Notes
     - TCP vs. UDP: Some services use both (e.g., DNS, LDAP), while others are UDP-only (e.g., DHCP, SNMP, NTP).  
@@ -528,10 +564,9 @@ Key Notes
 Warnings
     Ethical Use: Always obtain permission before scanning. Unauthorized scans may be illegal.
 
-To Return to the Main Menu, press 0.
-For this Help Screen, press H.
+[0] Back
 
-© Kartik | Licensed for Ethical Use Only
+© AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
 
 if __name__ == "__main__":

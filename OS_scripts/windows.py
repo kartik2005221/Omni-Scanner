@@ -247,7 +247,6 @@ Select an Option:
     [5] Advanced scan (IP range)
     [6] MAC vendor lookup (online)
     [7] Show network info
-    [S] Switch to SUDO
     [H] Help        [0] Quit
         """.rstrip())
         input1 = input("Omni-Scanner > ").lower() or '0'
