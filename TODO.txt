@@ -8,7 +8,7 @@ todo-9: adding extra functionalities like,
 Extra functionalities:
 - argument mode development
 - add a section in readme for preparing user's os to run this script
-- make full fledge documentation
+- make full fledge documentation....postponed bcz its internal documentation is enough for now
 
 - scrapy - basic network sniffer
 - snort - intrusion detection system
