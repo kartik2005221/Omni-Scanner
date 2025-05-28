@@ -3,8 +3,11 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%20%7C%20Windows-lightgrey)
+![Version](https://img.shields.io/badge/Version-1.0-orange?label=Version%20(readme))
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/kartik2005221/omni-scanner?label=Version%20(github)&sort=semver)
 
-**Discover. Analyze. Secure.**  
+**Discover. Analyze. Secure.**
+
 A Python-powered network scanning suite for ethical hackers, sysadmins, and security enthusiasts.
 
 ---
@@ -15,7 +18,6 @@ A Python-powered network scanning suite for ethical hackers, sysadmins, and secu
 - 📡 **Ping Customization**: Simple ping, flood ping, and adaptive latency checks
 - 🗺️ **Traceroute**: Visualize network paths to targets
 - 🔦 **Advanced Scans**: Nmap integration for OS detection, service fingerprinting, and stealth scans
-- 📊 **User-Friendly**: Clean terminal tables, colored output, and progress tracking
 
 ---
 
@@ -92,7 +94,7 @@ We welcome contributions! Here's how:
 **Fuel My Code ☢️**  
 If this tool saved you time or helped secure your network:
 
-- **UPI (India)**: [kartik2005221@upi](/Medias/QR_1744889718.png)
+- **UPI ID (India)**: [kartik2005221@upi](/Medias/QR_1744889718.png)
 - **PayPal**: [paypal.me/kartik2005221](https://paypal.me/kartik2005221)
 
 *Every contribution helps me stay caffeinated while patching vulnerabilities!*
@@ -107,7 +109,7 @@ Distributed under **MIT License**. See [LICENSE](LICENSE) for details.
 
 ## 📬 Contact
 
-[![Email](https://img.shields.io/badge/proton%20mail-6D4AFF?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:kartik2005221@proton.me) [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kartik2005221) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kartik2005221/) [![Signal](https://img.shields.io/badge/Signal-3A76F0?style=for-the-badge&logo=signal&logoColor=white)](https://signal.me/#eu/NKRjNORoYBKevqLxymZOoG7HZv5v_YBZ3hSgA8r5FsJ-0I-yzu9OGYJQS8jiXVgZ)
+[![Email](https://img.shields.io/badge/proton%20mail-6D4AFF?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:kartik2005221@proton.me) [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kartik2005221) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kartik2005221/)
 
 ---
 
