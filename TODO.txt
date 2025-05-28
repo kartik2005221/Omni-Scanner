@@ -9,6 +9,8 @@ Extra functionalities:
 - argument mode development
 - add a section in readme for preparing user's os to run this script
 - make full fledge documentation....postponed bcz its internal documentation is enough for now
+- termux support
+- installing omni-scanner to /usr/share so that user can run omni-scanner only...
 
 - scrapy - basic network sniffer
 - snort - intrusion detection system
