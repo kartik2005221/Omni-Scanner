@@ -59,6 +59,9 @@ process = 0
 
 def insert_spinner(command):
     """Runs Nmap scan with progress indicator and graceful exit"""
+    for i in command:
+        print(i, end=" ")
+    print()
     global process
     try:
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -72,8 +75,11 @@ def insert_spinner(command):
         if stderr:
             print("\nErrors:\n", stderr)
     except KeyboardInterrupt:
-        process.terminate()  # Kill Nmap process if the user presses Ctrl+C
+        process.terminate()
         print("\nStopping...")
+    else:
+        input("Press Enter to continue...")
+        time.sleep(0.3)
 
 
 def get_mac_vendor(mac_address: str) -> str:

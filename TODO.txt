@@ -8,14 +8,22 @@ todo: adding
 todo: add a section in readme for preparing user's os to run this script
 todo: termux support
 todo: automated omni-scanner
+todo: add commom cursor in all files from common-utils as shell
+todo: multiple option selectable in option 2 also
 
 # errors or bugs
 todo: see recorded video at videos folder
     and error is python doesn't install package in a system
     it wants to install in virtual environment
+    *add .venv in git and remove .idea from github, jese tese
 todo: wrong ip identification
     if user wants to enter ip subnet(eg. 192.168.1.1/24)
     merge option 4 and 5 in the main menu
+todo: irregular exits
+todo: remove extra space from option4th and 5th main menu option
+todo: switch to sudo only in limited functionality version
+todo: 'ip a' -> 'ifconfig' in linux
+todo: mention in readme and doc that first startup can take time...wait
 
 # for future
 todo: argument mode development…postponed, until further notice

@@ -151,7 +151,7 @@ Omni-Scanner v1.0 Documentation
 
 Arp Menu - This menu provides three methods to identify and analyze devices on your network.
 
-1. Fast Scan: All IPs on Network (Less Detailed)
+1. Fast Scan 1: All IPs on Network (Less Detailed)
     Purpose: Rapidly discover all active devices on the local network.
     Technical Details:
         Method: ARP (Address Resolution Protocol) scanning.
@@ -170,7 +170,7 @@ Arp Menu - This menu provides three methods to identify and analyze devices on y
         - No port or service details.
         - Limited to the local subnet.
 
-2. Fast Scan: Specific IP(s) (Less Detailed)
+2. Fast Scan 2: Specific IP(s) (Less Detailed)
     Purpose: Quickly check the status of specific IP addresses.
     Technical Details:
         Method: ICMP ping sweep.
@@ -315,6 +315,7 @@ Navigation:
 
 © AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
+
 help3 = r"""
 ╔═══════════════════════════════════════════════════════╗
 ║                                                       ║
@@ -371,6 +372,7 @@ Warnings:
 
 © AiR {Kartik} 2025 | Licensed for Ethical Use Only
 """
+
 help4 = r"""
 ╔═══════════════════════════════════════════════════════╗
 ║                                                       ║

@@ -10,6 +10,8 @@ import utils.documentation_utils as doc_utils
 Oper_system = platform.system()
 oper_system = Oper_system.lower()
 
+shell = "Omni-Scanner > "
+
 
 # 88                                     88 88        ad88888b,    ,a888a,       ,a888a,    888888888   ad88888b,  ad88888b,     88
 # 88                               ,d    "" 88       d8"    "88  ,8P"' `"Y8,   ,8P"' `"Y8,  88         d8"    "88 d8"    "88   ,d88
@@ -132,7 +134,7 @@ def run_command_save(command, scan_type="other-scan"):
     except KeyboardInterrupt:
         process.terminate()
         print("\nProcess terminated by user.")
-    finally:
+    else:
         input("Press Enter to continue...")
     data = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
