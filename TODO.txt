@@ -1,23 +1,25 @@
-todo-9: adding extra functionalities like,
+# extra functionality
+todo: adding
     scapy>=2.5.0 # For ARP scanning and packet manipulation
     python-nmap>=0.7.1 # Nmap integration (requires nmap installed)
     prettytable>=3.6.0 # Clean terminal output formatting
     colorama>=0.4.6 # Cross-platform colored terminal text
     tqdm>=4.64.1 # Progress bars for long scans
+todo: add a section in readme for preparing user's os to run this script
+todo: termux support
+todo: automated omni-scanner
 
-Extra functionalities:
-- argument mode development....postponed, untill further notice
-- add a section in readme for preparing user's os to run this script
-- make full fledge documentation....postponed bcz its internal documentation is enough for now
-- termux support
+# errors or bugs
+todo: see recorded video at videos folder
+    and error is python doesn't install package in a system
+    it wants to install in virtual environment
+todo: wrong ip identification
+    if user wants to enter ip subnet(eg. 192.168.1.1/24)
+    merge option 4 and 5 in the main menu
 
-- socket
-- scrapy - basic network sniffer
-
-- snort (by cisco) - intrusion detection system
-
-- see recorded video at videos folder
-    and error is python dont install package in system,,,it wants to install in virtual environment
-    thanks
-
-- automated omni-scanner
+# for future
+todo: argument mode development…postponed, until further notice
+todo: make full fledge documentation…postponed bcz its internal documentation is enough for now
+todo: socket
+todo: scrapy - basic network sniffer
+todo: snort (by cisco) - intrusion detection system
