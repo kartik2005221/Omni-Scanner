@@ -128,10 +128,6 @@ celerybeat.pid
 *.sage.py
 
 # # Environments
-# .env
-# .venv
-# env/
-# venv/
 # ENV/
 # env.bak/
 # venv.bak/
@@ -176,4 +172,4 @@ cython_debug/
 # my gitignores
 /.modules_installed_marker
 /scans/
-/.idea
+.idea
