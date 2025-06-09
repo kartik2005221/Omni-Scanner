@@ -6,11 +6,18 @@ todo-9: adding extra functionalities like,
     tqdm>=4.64.1 # Progress bars for long scans
 
 Extra functionalities:
-- argument mode development
+- argument mode development....postponed, untill further notice
 - add a section in readme for preparing user's os to run this script
 - make full fledge documentation....postponed bcz its internal documentation is enough for now
 - termux support
-- installing omni-scanner to /usr/share so that user can run omni-scanner only...
 
+- socket
 - scrapy - basic network sniffer
-- snort - intrusion detection system
+
+- snort (by cisco) - intrusion detection system
+
+- see recorded video at videos folder
+    and error is python dont install package in system,,,it wants to install in virtual environment
+    thanks
+
+- automated omni-scanner

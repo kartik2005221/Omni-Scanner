@@ -40,10 +40,10 @@ def get_install_paths(current_platform2):
         if os.geteuid() == 0:  # Root install
             paths['install_dir'] = '/usr/share/omni-scanner'
             paths['bin_dir'] = '/usr/bin'
-        else:  # User install
-            home = os.path.expanduser('~')
-            paths['install_dir'] = os.path.join(home, '.local', 'share', 'omni-scanner')
-            paths['bin_dir'] = os.path.join(home, '.local', 'bin')
+        # else: # User install # not working properly
+        #     home = os.path.expanduser('~')
+        #     paths['install_dir'] = os.path.join(home, '.local', 'share', 'omni-scanner')
+        #     paths['bin_dir'] = os.path.join(home, '.local', 'bin')
     elif current_platform2 == 'windows':
         appdata = os.environ.get('APPDATA')
         paths['install_dir'] = os.path.join(appdata, 'omni-scanner')
@@ -125,7 +125,9 @@ if __name__ == '__main__':
     current_platform = get_platform()
 
     if current_platform == 'linux' and os.geteuid() != 0:
-        print('For system-wide installation, run with sudo. For user installation, continue.')
+        # print ('For system-wide installation, run with sudo. For user installation, continue.')
+        print('For system-wide installation, run with sudo.')
+        sys.exit(0)
 
     choice = input('[+] To install press (Y) to uninstall press (N) >> ').lower()
 
