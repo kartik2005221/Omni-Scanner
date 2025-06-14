@@ -172,8 +172,14 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# Ignore compiled Python files
+/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
 # my gitignores
 /.modules_installed_marker
 /scans/
 .idea
-/__pycache__/
