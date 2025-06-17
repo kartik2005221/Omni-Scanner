@@ -249,7 +249,6 @@ Select required options (separate by space):
                     # print(list_of_commands)
                     # run_command(list_of_commands)
                     run_nmap_scan_firewall(list_of_commands)
-
             else:
                 print("\nInvalid IP entered, Please Try again")
         else:
@@ -270,10 +269,11 @@ Select an Option:
     [4] Advanced scan (single IP)
     [5] Advanced scan (IP range)
     [6] MAC vendor lookup (online)
-    [7] Show network info
-    [S] Switch to SUDO
+    [7] Show network info""" +
+              ("" if is_sudo_linux() else "\n    [S] Switch to SUDO") +
+              r"""
     [H] Help        [0] Quit
-        """.rstrip())
+              """.rstrip())
         input1 = input("Omni-Scanner > ").lower() or '0'
         time.sleep(0.3)
 
@@ -300,7 +300,7 @@ Select an Option:
             else:
                 print("\nInvalid MAC Address entered, Please Try again")
         elif input1 == '7':
-            run_command_save(["ip", "a"])
+            run_command_save(["ifconfig"])
         elif input1 == 's':
             if not is_sudo_linux():
                 print("\nSwitching to SUDO...")
