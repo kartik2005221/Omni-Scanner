@@ -8,7 +8,6 @@ todo: adding
 todo: add a section in readme for preparing user's os to run this script
 todo: termux support
 todo: automated omni-scanner
-todo: add commom cursor in all files from common-utils as shell
 todo: multiple option selectable in option 2 also
 
 # errors or bugs
