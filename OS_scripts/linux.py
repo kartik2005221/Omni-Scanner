@@ -59,6 +59,32 @@ Select an Option:
         time.sleep(0.3)
 
 
+def _append_to_list_ping(input2, list_of_commands, flood=False):
+    if '2' in input2:
+        list_of_commands.append('-s')
+        list_of_commands.append(input("\nEnter size of packet to send (0-65500)\n" + shell) or '56')
+    if '3' in input2:
+        list_of_commands.append('-W')
+        list_of_commands.append(input("\nHow much time(sec.) to wait? \n" + shell) or '1')
+    if flood:
+        if is_sudo_linux() == 1:
+            list_of_commands.insert(0, "sudo")
+            list_of_commands.append("-f")
+        else:
+            print("\nSudo not detected, Try another option or Switch to SUDO")
+
+
+def _finite_or_infinite_ping(list_of_commands):
+    """To run ping command with infinite or finite options"""
+    ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
+    if ping_type == '1':
+        no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
+        list_of_commands.append("-c")
+        list_of_commands.append(no_of_packets)
+    elif ping_type == '2':
+        pass
+
+
 def level_2():
     """Menu Based : Ping option's function"""
     scan = "ping-scan"
@@ -82,46 +108,31 @@ Select required options (separate by space):
             elif all(x in ['1', '2', '3', '4'] for x in input2):
                 ip_addr = input("\nEnter IP to ping\n" + shell) or "127.0.0.1"
                 if validate_ip_addr(ip_addr):
-                    if input2 == '4':
-                        if is_sudo_linux() == 1:
-                            run_command_save(["sudo", "ping", "-f", ip_addr], scan)
-
-                        else:
-                            print("\nSudo not detected, Try another option or Switch to SUDO")
-                        continue
-                    ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
-                    if ping_type == '1':
-                        no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
-                        ping_count = f"-c {no_of_packets}"
-                    else:
-                        ping_count = ""
-
+                    list_of_commands = ['ping']
                     if input2 == '1':
-                        command = ["ping", ip_addr]
-                        if ping_count:
-                            command.insert(1, ping_count)
-                        run_command_save(command, scan)
+                        list_of_commands.append(ip_addr)
+                        run_command_save(list_of_commands, scan)
 
-                    elif input2 == '2':
-                        command = ["ping", ip_addr, "-s",
-                                   input("\nEnter size of packet to send (0-65500)\n" + shell) or '56']
-                        if ping_count:
-                            command.insert(1, ping_count)
-                        run_command_save(command, scan)
+                    flood = '4' in input2
+                    _append_to_list_ping(input2, list_of_commands, flood=flood)
 
-                    elif input2 == '3':
-                        command = ["ping", ip_addr, "-W",
-                                   input("\nHow much time(sec.) to wait? \n" + shell) or '1']
-                        if ping_count:
-                            command.insert(1, ping_count)
-                        run_command_save(command, scan)
+                    if not flood:
+                        _finite_or_infinite_ping(list_of_commands)
 
-                    # elif input2 == '4':
-                    #     if is_sudo_linux() == 1:
-                    #         run_command(["sudo", "ping", "-f", ip_addr])
-                    #
-                    #     else:
-                    #         print ("Sudo not detected, Try another option, or Switch to SUDO")
+                    list_of_commands.append(ip_addr)
+                    run_command_save(list_of_commands, scan)
+
+                    # clear but longer same logic for above code
+                    # if '4' not in input2:
+                    #     _append_to_list_ping(input2, list_of_commands)
+                    #     _finite_or_infinite_ping(list_of_commands)
+                    #     list_of_commands.append(ip_addr)
+                    #     run_command_save(list_of_commands, scan)
+                    # elif '4' in input2:
+                    #     _append_to_list_ping(input2, list_of_commands, flood=True)
+                    #     list_of_commands.append(ip_addr)
+                    #     run_command_save(list_of_commands, scan)
+
                 else:
                     print("\nInvalid IP entered, Please Try again")
             else:
@@ -258,7 +269,7 @@ Select an Option:
     [1] Scan full network (find specific host)
     [2] Ping custom IP
     [3] Trace routing
-    [4] Advanced scan (single IP) (may require sudo)
+    [4] Advanced scan (may require sudo)
     [5] MAC vendor lookup (online)
     [6] Show network info""" +
               ("" if is_sudo_linux() else "\n    [S] Switch to SUDO") +

@@ -53,6 +53,27 @@ Select an Option:
         time.sleep(0.3)
 
 
+def _append_to_list_ping(input2, list_of_commands):
+    """To append options to the list of commands for ping"""
+    if '2' in input2:
+        list_of_commands.append("-l")
+        list_of_commands.append(input("\nEnter size of packet to send (0-65500)\n" + shell) or '56')
+    elif '3' in input2:
+        list_of_commands.append("-w")
+        list_of_commands.append(input("\nHow much time(sec.) to wait? \n" + shell) or '1')
+
+
+def _finite_or_infinite_ping(list_of_commands):
+    """To run ping command with infinite or finite options"""
+    ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
+    if ping_type == '1':
+        no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
+        list_of_commands.append("-n")
+        list_of_commands.append(no_of_packets)
+    elif ping_type == '2':
+        list_of_commands.append("-t")
+
+
 def level_2():
     """Menu Based : Ping option's function"""
     scan = "ping-scan"
@@ -73,33 +94,22 @@ Select required options (separate by space):
                 input("Enter to go back to menu...")
             elif input2 == '0':
                 return 0
-            elif input2 in ['1', '2', '3']:
+            elif all(x in ['1', '2', '3'] for x in input2):
                 ip_addr = input("\nEnter IP to ping (eg 192.168.1.1)\n" + shell) or "127.0.0.1"
                 if validate_ip_addr(ip_addr):
-                    ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
-                    if ping_type == '1':
-                        no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
-                        ping_count = f"-n {no_of_packets}"
-                    else:
-                        ping_count = "-t"
-
+                    list_of_commands = ['ping']
                     if input2 == '1':
-                        run_command_save(["ping", ping_count, ip_addr], scan)
+                        list_of_commands.append(ip_addr)
+                        run_command_save(list_of_commands, scan)
 
-                    elif input2 == '2':
-                        run_command_save(
-                            ["ping", ping_count, "-l", input("\nEnter size of packet to send (0-65500)"), ip_addr],
-                            scan)
+                    _append_to_list_ping(input2, list_of_commands)
+                    _finite_or_infinite_ping(list_of_commands)
 
-                    elif input2 == '3':
-                        run_command_save(
-                            ["ping", ping_count, "-w",
-                             str(int(input("\nHow much time (sec.) to wait?\n" + shell)) * 1000),
-                             ip_addr], scan)
-
+                    list_of_commands.append(ip_addr)
+                    run_command_save(list_of_commands, scan)
                 else:
                     print("\nInvalid IP entered, Please Try again")
-            elif input2 == '4':
+            elif '4' in input2:
                 print("\nSorry, Flood ping not possible in your operating system")
             else:
                 print("\nUnsupported Option selected, Please Try again")
