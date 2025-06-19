@@ -2,8 +2,8 @@ import time
 
 from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
 from utils.common_utils import documentation, run_command_save, shell
-from utils.menu_utils import validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, \
-    validate_mac, run_nmap_scan_firewall, validate_port
+from utils.menu_utils import validate_ip_addr, validate_ip_range, insert_spinner, get_mac_vendor, \
+    validate_mac, run_nmap_scan_firewall, validate_port, validate_ip
 
 
 def level_1():
@@ -31,8 +31,8 @@ Select an Option:
                 run_command_save(["sudo", "arp-scan", "-l"], scan)
 
         elif input2 in ['2', '3']:
-            ip_addr = input("\nEnter range of IPs (eg. 192.168.1.1-255)\n"+ shell) or "127.0.0.1"
-            if validate_ip_range(ip_addr):
+            ip_addr = input("\nEnter range of IPs (eg. 192.168.1.1-255)\n" + shell) or "127.0.0.1"
+            if validate_ip(ip_addr):
                 if input2 == '2':
                     run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",
                                       ip_addr], scan)
@@ -80,8 +80,8 @@ Select required options (separate by space):
             elif input2 == '0':
                 return 0
             elif all(x in ['1', '2', '3', '4'] for x in input2):
-                ip_addr = input("\nEnter IP to ping\n"+ shell) or "127.0.0.1"
-                if validate_ip(ip_addr):
+                ip_addr = input("\nEnter IP to ping\n" + shell) or "127.0.0.1"
+                if validate_ip_addr(ip_addr):
                     if input2 == '4':
                         if is_sudo_linux() == 1:
                             run_command_save(["sudo", "ping", "-f", ip_addr], scan)
@@ -89,9 +89,9 @@ Select required options (separate by space):
                         else:
                             print("\nSudo not detected, Try another option or Switch to SUDO")
                         continue
-                    ping_type = input("\nPing finitely or infinitely? (1/2)\n"+ shell) or '1'
+                    ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
                     if ping_type == '1':
-                        no_of_packets = input("\nEnter number of packets to send\n"+ shell) or '5'
+                        no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
                         ping_count = f"-c {no_of_packets}"
                     else:
                         ping_count = ""
@@ -104,14 +104,14 @@ Select required options (separate by space):
 
                     elif input2 == '2':
                         command = ["ping", ip_addr, "-s",
-                                   input("\nEnter size of packet to send (0-65500)\n"+ shell) or '56']
+                                   input("\nEnter size of packet to send (0-65500)\n" + shell) or '56']
                         if ping_count:
                             command.insert(1, ping_count)
                         run_command_save(command, scan)
 
                     elif input2 == '3':
                         command = ["ping", ip_addr, "-W",
-                                   input("\nHow much time(sec.) to wait? \n"+ shell) or '1']
+                                   input("\nHow much time(sec.) to wait? \n" + shell) or '1']
                         if ping_count:
                             command.insert(1, ping_count)
                         run_command_save(command, scan)
@@ -167,13 +167,8 @@ Select an Option:
         time.sleep(0.3)
 
 
-def level_4(number_of_ip=0):
+def level_4():
     """Menu based : All Nmap option's function"""
-    if number_of_ip == 0:
-        validate = validate_ip
-    else:
-        validate = validate_ip_range
-
     scan = "nmap-scan"
     while True:
         print(r"""
@@ -205,8 +200,8 @@ Select required options (separate by space):
             input("Enter to go back to menu...")
         # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
         elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] for x in input2):
-            ip = input("\nEnter IP to scan\n"+ shell) or "127.0.0.1"
-            if validate(ip):
+            ip = input("\nEnter IP to scan\n" + shell) or "127.0.0.1"
+            if validate_ip(ip):
                 if input2 == '1':
                     run_command_save(["nmap", ip], scan)
 
@@ -265,9 +260,8 @@ Select an Option:
     [2] Ping custom IP
     [3] Trace routing
     [4] Advanced scan (single IP) (may require sudo)
-    [5] Advanced scan (IP range) (may require sudo)
-    [6] MAC vendor lookup (online)
-    [7] Show network info""" +
+    [5] MAC vendor lookup (online)
+    [6] Show network info""" +
               ("" if is_sudo_linux() else "\n    [S] Switch to SUDO") +
               r"""
     [H] Help        [0] Quit
@@ -287,18 +281,16 @@ Select an Option:
         elif input1 == '3':
             level_3()
         elif input1 == '4':
-            level_4(number_of_ip=0)
+            level_4()
         elif input1 == '5':
-            level_4(number_of_ip=1)
-        elif input1 == '6':
             mac_addr = input(
-                "\nEnter MAC Address to look up (eg. 00:00:00:00:00:00)\n"+ shell) or "00:00:00:00:00:00"
+                "\nEnter MAC Address to look up (eg. 00:00:00:00:00:00)\n" + shell) or "00:00:00:00:00:00"
             if validate_mac(mac_addr):
                 print(f"\nMac Vendor is {get_mac_vendor(mac_addr)}")
             else:
                 print("\nInvalid MAC Address entered, Please Try again")
-        elif input1 == '7':
-            run_command_save(["ifconfig"])
+        elif input1 == '6':
+            run_command_save(["ip", "a"])
         elif input1 == 's':
             if not is_sudo_linux():
                 print("\nSwitching to SUDO...")

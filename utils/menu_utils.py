@@ -10,30 +10,78 @@ import requests
 from utils.common_utils import run_command_save, shell
 
 
-def validate_ip(ip):
+def validate_ip_addr(ip_addr):
     """To validate the IP address.
     Return True if valid, else False
-    :param ip: IP address to validate
-    :returns: True if valid, else False"""
+    :param ip_addr: IP address to validate
+    :returns bool: True if valid, else False
+    """
     try:
-        ipaddress.ip_address(ip)
+        ipaddress.ip_address(ip_addr)
         return True
     except ValueError:
         return False
 
 
 def validate_ip_range(ip_range):
-    """To validate IP address range. Return True if valid, else False
-    :param ip_range: IP address range to validate
-    :returns: True if valid, else False"""
+    """
+    Validates if a given string represents a valid IP range.
+    :param ip_range: The string representation of the IP range
+    :return: True if valid, False otherwise
+    """
     try:
-        if "-" in ip_range:
-            # noinspection PyTupleAssignmentBalance
-            base_ip, start, end = ip_range.rsplit(".", 1)[0], *ip_range.split("-")
-            return validate_ip(start) and validate_ip(base_ip + "." + end) and (int(start.split(".")[-1]) <= int(end))
-        else:
-            return validate_ip(ip_range)
+        if "-" not in ip_range:
+            return False
+
+        # full range like 192.168.0.1-192.168.0.10
+        if "." in ip_range.split("-")[1]:
+            start_ip, end_ip = ip_range.split("-")
+            if validate_ip_addr(start_ip) and validate_ip_addr(end_ip):
+                return int(ipaddress.IPv4Address(start_ip)) <= int(ipaddress.IPv4Address(end_ip))
+            return False
+
+        # compressed format like 192.168.0.1-10
+        full_part, short_end = ip_range.split("-")
+        ip_parts = full_part.split(".")
+        if len(ip_parts) != 4:
+            return False
+
+        base = ".".join(ip_parts[:3])
+        start = int(ip_parts[3])
+        end = int(short_end)
+
+        start_ip = f"{base}.{start}"
+        end_ip = f"{base}.{end}"
+
+        if validate_ip_addr(start_ip) and validate_ip_addr(end_ip):
+            return start <= end
+        return False
+
     except ValueError:
+        return False
+
+
+def validate_ip_subnet(ip_subnet):
+    """Validates if a given string represents a valid IP subnet.
+    :param ip_subnet: The string representation of the IP subnet (e.g., "192.168.1.0/24").
+    :return bool: True if valid, False otherwise.
+    """
+    try:
+        ipaddress.ip_network(ip_subnet, strict=True)
+        return True
+    except ValueError:
+        return False
+
+
+def validate_ip(ip):
+    """
+    Validates if a given string is a valid IP address, IP range, or IP subnet.
+    :param ip: The ip address or range or subnet to validate
+    :return: True if valid, False otherwise
+    """
+    if validate_ip_addr(ip) or validate_ip_range(ip) or validate_ip_subnet(ip):
+        return True
+    else:
         return False
 
 
@@ -184,7 +232,7 @@ def run_nmap_scan_firewall(command):
         if "Note: Host seems down" in line:
             host_down_detected = True
     if host_down_detected:
-        choice = input("\nHost may be blocking ping probes. Press 0 to retry with firewall Bypass option? \n"+
+        choice = input("\nHost may be blocking ping probes. Press 0 to retry with firewall Bypass option? \n" +
                        shell).strip().lower()
         if choice == '0':
             new_command = command + ['-Pn']

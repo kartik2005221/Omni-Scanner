@@ -1,8 +1,8 @@
 import time
 
 from utils.common_utils import documentation, run_command_save, shell
-from utils.menu_utils import validate_ip, validate_ip_range, insert_spinner, get_mac_vendor, validate_mac, \
-    run_tcp_traceroute_windows, run_nmap_scan_firewall, validate_port
+from utils.menu_utils import validate_ip_addr, validate_ip_range, insert_spinner, get_mac_vendor, validate_mac, \
+    run_tcp_traceroute_windows, run_nmap_scan_firewall, validate_port, validate_ip
 
 
 def level_1():
@@ -26,8 +26,8 @@ Select an Option:
         elif input2 == '1':
             print("\nSorry, This option is not available in your operating system")
         elif input2 in ['2', '3']:
-            ip_addr = input("\nEnter range of IPs (eg. 192.168.1.1-255)\n"+ shell) or "127.0.0.1"
-            if validate_ip_range(ip_addr):
+            ip_addr = input("\nEnter range of IPs (eg. 192.168.1.1-255)\n" + shell) or "127.0.0.1"
+            if validate_ip(ip_addr):
                 if input2 == '2':
                     run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100",
                                       "--host-timeout", "2000ms", ip_addr], scan)
@@ -74,11 +74,11 @@ Select required options (separate by space):
             elif input2 == '0':
                 return 0
             elif input2 in ['1', '2', '3']:
-                ip_addr = input("\nEnter IP to ping (eg 192.168.1.1)\n"+ shell) or "127.0.0.1"
-                if validate_ip(ip_addr):
-                    ping_type = input("\nPing finitely or infinitely? (1/2)\n"+ shell) or '1'
+                ip_addr = input("\nEnter IP to ping (eg 192.168.1.1)\n" + shell) or "127.0.0.1"
+                if validate_ip_addr(ip_addr):
+                    ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
                     if ping_type == '1':
-                        no_of_packets = input("\nEnter number of packets to send\n"+ shell) or '5'
+                        no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
                         ping_count = f"-n {no_of_packets}"
                     else:
                         ping_count = "-t"
@@ -94,7 +94,7 @@ Select required options (separate by space):
                     elif input2 == '3':
                         run_command_save(
                             ["ping", ping_count, "-w",
-                             str(int(input("\nHow much time (sec.) to wait?\n"+ shell)) * 1000),
+                             str(int(input("\nHow much time (sec.) to wait?\n" + shell)) * 1000),
                              ip_addr], scan)
 
                 else:
@@ -142,13 +142,8 @@ Select an Option:
         time.sleep(0.3)
 
 
-def level_4(number_of_ip=0):
+def level_4():
     """Menu based : All Nmap option's function"""
-    if number_of_ip == 0:
-        validate = validate_ip
-    else:
-        validate = validate_ip_range
-
     scan = "nmap-scan"
     while True:
         print(r"""
@@ -182,8 +177,8 @@ Select required options (separate by space):
             input("Enter to go back to menu...")
         # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
         elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] for x in input2):
-            ip_addr = input("\nEnter IP to scan(eg - 192.168.1.1)\n"+ shell) or "127.0.0.1"
-            if validate(ip_addr):
+            ip_addr = input("\nEnter IP to scan(eg - 192.168.1.1)\n" + shell) or "127.0.0.1"
+            if validate_ip(ip_addr):
                 if '1' in input2:
                     run_command_save(["nmap", ip_addr], scan)
 
@@ -243,10 +238,9 @@ Select an Option:
     [1] Scan full network (find specific host)
     [2] Ping custom IP
     [3] Trace routing
-    [4] Advanced scan (single IP)
-    [5] Advanced scan (IP range)
-    [6] MAC vendor lookup (online)
-    [7] Show network info
+    [4] Advanced scan
+    [5] MAC vendor lookup (online)
+    [6] Show network info
     [H] Help        [0] Quit
         """.rstrip())
         input1 = input(shell).lower() or '0'
@@ -264,17 +258,15 @@ Select an Option:
         elif input1 == '3':
             level_3()
         elif input1 == '4':
-            level_4(number_of_ip=0)
+            level_4()
         elif input1 == '5':
-            level_4(number_of_ip=1)
-        elif input1 == '6':
             mac_addr = input(
-                "\nEnter MAC Address to look up (eg. 00:00:00:00:00:00)\n"+ shell) or "00:00:00:00:00:00"
+                "\nEnter MAC Address to look up (eg. 00:00:00:00:00:00)\n" + shell) or "00:00:00:00:00:00"
             if validate_mac(mac_addr):
                 print(f"\nMac Vendor is {get_mac_vendor(mac_addr)}")
             else:
                 print("\nInvalid MAC Address entered, Please Try again")
-        elif input1 == '7':
+        elif input1 == '6':
             run_command_save(["ipconfig"])
         else:
             print("\nUnsupported Option selected, Please Try again")

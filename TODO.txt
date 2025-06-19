@@ -15,9 +15,6 @@ todo: see recorded video at videos folder
     and error is python doesn't install package in a system
     it wants to install in virtual environment
     *add .venv in git and remove .idea from github, jese tese
-todo: wrong ip identification
-    if user wants to enter ip subnet(eg. 192.168.1.1/24)
-    merge option 4 and 5 in the main menu
 todo: irregular exits
 todo: remove extra space from option 4th and 5th main menu option
 todo: mention in readme and doc that first startup can take time...wait
