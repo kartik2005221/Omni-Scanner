@@ -183,7 +183,6 @@ Select required options (separate by space):
     [8] Aggressive scan (slow, detailed)
     [9] Firewall bypass scan
    [10] Disable ARP ping (router evasion)
-        
     [P] Show top 50 common ports
     [H] Help        [0] Back
             """.rstrip())

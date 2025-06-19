@@ -148,7 +148,6 @@ def level_4():
     while True:
         print(r"""
 Select required options (separate by space):
-
     [1] Simple Nmap scan (fast) — use alone, not with other options
     [2] Detect operating system
     [3] Detect running services and versions
@@ -159,7 +158,6 @@ Select required options (separate by space):
     [8] Aggressive scan (slow, detailed)
     [9] Firewall bypass scan
    [10] Disable ARP ping (router evasion)
-        
     [P] Show top 50 common ports
     [H] Help        [0] Back
             """.rstrip())
