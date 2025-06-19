@@ -59,8 +59,8 @@ def level_2():
     while True:
         try:
             print(r"""
-Select an Option:
-    [1] Simple ping
+Select required options (separate by space):
+    [1] Simple ping — use alone, not with other options
     [2] Extended ping
     [3] Slow-network ping
     [4] Flood ping (linux only)
@@ -181,7 +181,7 @@ Select required options (separate by space):
             print(documentation('p'))
             input("Enter to go back to menu...")
         # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
-        elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8'] for x in input2):
+        elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] for x in input2):
             ip_addr = input("\nEnter IP to scan(eg - 192.168.1.1)\n", shell) or "127.0.0.1"
             if validate(ip_addr):
                 if '1' in input2:

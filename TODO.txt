@@ -21,6 +21,10 @@ todo: wrong ip identification
 todo: irregular exits
 todo: remove extra space from option 4th and 5th main menu option
 todo: mention in readme and doc that first startup can take time...wait
+todo: repair ping and add more options of possible
+todo:  ip_addr = input("\nEnter IP to ping (eg 192.168.1.1)\n", shell) or "127.0.0.1"
+                    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      TypeError: input expected at most 1 argument, got 2
 
 # for future
 todo: argument mode development…postponed, until further notice

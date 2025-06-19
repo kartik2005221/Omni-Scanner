@@ -65,8 +65,8 @@ def level_2():
     while True:
         try:
             print(r"""
-Select an Option:
-    [1] Simple ping
+Select required options (separate by space):
+    [1] Simple ping — use alone, not with other options
     [2] Extended ping
     [3] Slow-network ping
     [4] Flood ping (sudo required)
@@ -79,7 +79,7 @@ Select an Option:
                 input("Enter to go back to menu...")
             elif input2 == '0':
                 return 0
-            elif input2 in ['1', '2', '3', '4']:
+            elif all(x in ['1', '2', '3', '4'] for x in input2):
                 ip_addr = input("\nEnter IP to ping\n", shell) or "127.0.0.1"
                 if validate_ip(ip_addr):
                     if input2 == '4':
@@ -175,11 +175,9 @@ def level_4(number_of_ip=0):
         validate = validate_ip_range
 
     scan = "nmap-scan"
-    """Menu based : All Nmap option's function"""
     while True:
         print(r"""
 Select required options (separate by space):
-
     [1] Simple Nmap scan (fast) — use alone, not with other options
     [2] Detect operating system
     [3] Detect running services and versions
@@ -206,7 +204,7 @@ Select required options (separate by space):
             print(documentation('p'))
             input("Enter to go back to menu...")
         # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
-        elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8'] for x in input2):
+        elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] for x in input2):
             ip = input("\nEnter IP to scan\n", shell) or "127.0.0.1"
             if validate(ip):
                 if input2 == '1':
@@ -266,8 +264,8 @@ Select an Option:
     [1] Scan full network (find specific host)
     [2] Ping custom IP
     [3] Trace routing
-    [4] Advanced scan (single IP)
-    [5] Advanced scan (IP range)
+    [4] Advanced scan (single IP) (may require sudo)
+    [5] Advanced scan (IP range) (may require sudo)
     [6] MAC vendor lookup (online)
     [7] Show network info""" +
               ("" if is_sudo_linux() else "\n    [S] Switch to SUDO") +
