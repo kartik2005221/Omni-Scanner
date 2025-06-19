@@ -8,7 +8,7 @@ from utils.module_installer_utils import install_requirements_once
 if __name__ == "__main__":
     try:
         # if not is_module_installed("requests"):
-        #     print("Installing requests module...")
+        #     print("Installing requests module")
         #     run_command(["pip", "install", "requests"])
         install_requirements_once()
         time.sleep(0.7)

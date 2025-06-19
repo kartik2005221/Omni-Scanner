@@ -1,7 +1,7 @@
 import time
 
 from utils.common_utils import documentation, run_command_save, shell
-from utils.menu_utils import validate_ip_addr, validate_ip_range, insert_spinner, get_mac_vendor, validate_mac, \
+from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, validate_mac, \
     run_tcp_traceroute_windows, run_nmap_scan_firewall, validate_port, validate_ip
 
 

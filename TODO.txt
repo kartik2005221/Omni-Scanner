@@ -1,4 +1,4 @@
-# extra functionality
+# extra capability
 todo: adding
     scapy>=2.5.0 # For ARP scanning and packet manipulation
     python-nmap>=0.7.1 # Nmap integration (requires nmap installed)
@@ -10,12 +10,12 @@ todo: termux support
 todo: automated omni-scanner
 
 # errors or bugs
-todo: see recorded video at videos folder
+todo: see recorded video at videos folder, 
     and error is python doesn't install package in a system
     it wants to install in virtual environment
     *add .venv in git and remove .idea from github, jese tese
 todo: irregular exits
-todo: mention in readme and doc that first startup can take time...wait
+todo: mention in readme and doc that first startup can take time, wait
 todo: repair ping and add more options of possible
 
 # for future

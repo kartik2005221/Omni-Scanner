@@ -2,7 +2,7 @@ import time
 
 from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
 from utils.common_utils import documentation, run_command_save, shell
-from utils.menu_utils import validate_ip_addr, validate_ip_range, insert_spinner, get_mac_vendor, \
+from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, \
     validate_mac, run_nmap_scan_firewall, validate_port, validate_ip
 
 
@@ -122,7 +122,7 @@ Select required options (separate by space):
                     list_of_commands.append(ip_addr)
                     run_command_save(list_of_commands, scan)
 
-                    # clear but longer same logic for above code
+                    # clear but longer same logic for-above-code
                     # if '4' not in input2:
                     #     _append_to_list_ping(input2, list_of_commands)
                     #     _finite_or_infinite_ping(list_of_commands)
