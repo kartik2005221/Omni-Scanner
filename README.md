@@ -8,7 +8,7 @@
 
 **Discover. Analyze. Secure.**
 
-A Python-powered network scanning suite for ethical hackers, sysadmins, and security enthusiasts.
+Omni-Scanner is a simple yet powerful network scanner that helps you find devices, analyze your network, and stay secure — built with Python for ethical hacking and learning purposes.
 
 ---
 
@@ -89,9 +89,8 @@ We welcome contributions! Here's how:
 
 ---
 
-## ☕ Support My Work
+## ☕ Fuel My Code
 
-**Fuel My Code ☢️**  
 If this tool saved you time or helped secure your network:
 
 - **UPI ID (India)**: [kartik2005221@upi](/Medias/QR_1744889718.png)
