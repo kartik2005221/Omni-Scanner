@@ -71,7 +71,9 @@ Omni-Scanner is a Python-based, easy-to-use network scanner that helps you detec
 ## ⚠️ Responsible Use
 
 This tool is for **educational and authorized use only**.
+
 ✅ Only scan networks you own or have clear permission to test.
+
 ⛔ Never use this tool for illegal activities — misuse is strictly prohibited.
 
 *Omni-Scanner is meant to promote security awareness, not exploitation.*
