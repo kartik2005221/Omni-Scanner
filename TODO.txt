@@ -35,3 +35,6 @@ todo: make full fledge documentation…postponed bcz its internal documentation 
 todo: socket
 todo: scrapy - basic network sniffer
 todo: snort (by cisco) - intrusion detection system
+
+# major improvements coming soon
+in improvements1.md and improvements2.md
