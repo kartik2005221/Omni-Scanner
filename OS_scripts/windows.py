@@ -83,7 +83,7 @@ def level_2():
             print(r"""
 Select required options (separate by space):
     [1] Simple ping — use alone, not with other options
-    [2] Extended ping
+    [2] Bigger packet size of ping
     [3] Slow-network ping
     [4] Flood ping (linux only)
     [H] Help        [0] Back

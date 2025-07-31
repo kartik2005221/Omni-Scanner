@@ -17,6 +17,7 @@ def validate_ip_addr(ip_addr):
     :returns bool: True if valid, else False
     """
     try:
+        # Check if the input is a valid IPv4 address eg 192.168.1.1
         ipaddress.ip_address(ip_addr)
         return True
     except ValueError:
@@ -67,6 +68,7 @@ def validate_ip_subnet(ip_subnet):
     :return bool: True if valid, False otherwise.
     """
     try:
+        # Check if the input is a valid IP subnet eg 192.168.1.0/24
         ipaddress.ip_network(ip_subnet, strict=True)
         return True
     except ValueError:

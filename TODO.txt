@@ -16,9 +16,8 @@ todo-1: see recorded video at videos folder,
     and error is python doesn't install package in a system
     it wants to install in virtual environment
     *add .venv in git and remove .idea from GitHub, jese tese
-todo-2: irregular exits
 todo: mention in readme and doc that first startup can take time, wait
-todo-3: repair ping and add more options of possible
+
 todo: add more options for nmap, like -sS, -sU, -sV, -O, etc.
 todo: add more options for arp-scan, like -I, -l, -g, etc.
 todo: add more options for ping, like -c, -i, -W, etc.
@@ -28,8 +27,6 @@ todo: add more options for whois, like -h, -p, -c, etc.
 todo: add more options for dns, like -t, -c, -l, etc.
 todo: add more options for port scanning, like -p, -s, -T, etc.
 todo: add more options for network scanning, like -s, -p, -T, etc.
-todo: add lenghty nmap scan to normal, or remove spinning cursor from it, bcz that dont take that much of time
-todo: remove cursor from 1.3.0, bcz it is not needed
 
 # for future
 todo: argument mode development…postponed, until further notice
@@ -40,3 +37,6 @@ todo: snort (by cisco) - intrusion detection system
 
 # major improvements coming soon
 in improvements1.md and improvements2.md, finally in improvements.md
+
+nmap is not installed by default in ubbuntu, so we need to install it
+todo: add nmap installation in script, if not installed
