@@ -1,5 +1,6 @@
 import time
 
+from OS_scripts.linux import level_4
 from utils.common_utils import documentation, run_command_save, shell
 from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, validate_mac, \
     run_tcp_traceroute_windows, run_nmap_scan_firewall, validate_port, validate_ip
@@ -25,7 +26,7 @@ Select an Option:
         elif input2 == '1':
             print("\nSorry, This option is not available in your windows operating system")
         elif input2 in ['2']:
-            ip_addr = input("\nEnter range of IPs (eg. 192.168.1.1-255)\n" + shell) or "127.0.0.1"
+            ip_addr = input("\nEnter range of IPs\n" + shell) or "127.0.0.1"
             if validate_ip(ip_addr):
                 if input2 == '2':
                     run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100",
@@ -95,7 +96,7 @@ Select required options (separate by space):
             elif input2 == '0':
                 return 0
             elif all(x in ['1', '2', '3'] for x in input2):
-                ip_addr = input("\nEnter IP to ping (eg 192.168.1.1)\n" + shell) or "127.0.0.1"
+                ip_addr = input("\nEnter IP to ping\n" + shell) or "127.0.0.1"
                 if validate_ip_addr(ip_addr):
                     list_of_commands = ['ping']
                     if input2 == '1':
@@ -152,88 +153,86 @@ Select an Option:
         time.sleep(0.3)
 
 
-def level_4():
-    """Menu based : All Nmap option's function"""
-    scan = "nmap-scan"
-    while True:
-        print(r"""
-Select required options (separate by space):
-    [1] Simple Nmap scan (fast) — use alone, not with other options
-    [2] Detect operating system
-    [3] Detect running services and versions
-    [4] SYN scan
-    [5] UDP scan
-    [6] Specific port scan
-    [7] Full port scan — all 65535 ports (use *either* 6 or 7, not both)
-    [8] Aggressive scan (slow, detailed)
-    [9] Firewall bypass scan
-   [10] Disable ARP ping (router evasion)
-    [P] Show top 50 common ports
-    [H] Help        [0] Back
-            """.rstrip())
-        input2 = input(shell).lower() or '0'
-        time.sleep(0.3)
-        input2 = input2.split()
-
-        if 'h' in input2:
-            print(documentation(4))
-            input("Enter to go back to menu...")
-        elif '0' in input2:
-            return 0
-        elif 'p' in input2:
-            print(documentation('p'))
-            input("Enter to go back to menu...")
-        # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
-        elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] for x in input2):
-            ip_addr = input("\nEnter IP to scan(eg - 192.168.1.1)\n" + shell) or "127.0.0.1"
-            if validate_ip(ip_addr):
-                if '1' in input2:
-                    run_command_save(["nmap", ip_addr], scan)
-
-                else:
-                    # new_input2 = input2.split("")
-                    # print(new_input2)
-                    list_of_commands = ['nmap']
-
-                    if '2' in input2:
-                        list_of_commands.append("-O")
-
-                    if '3' in input2:
-                        list_of_commands.append("-sV")
-
-                    if '4' in input2:
-                        list_of_commands.append("-sS")
-
-                    if '5' in input2:
-                        list_of_commands.append("-sU")
-
-                    if '7' in input2:
-                        list_of_commands.append("-p-")
-                    elif '6' in input2:
-                        list_of_ports = input("\nEnter port range (Eg. 1-65535) : ") or '1-65535'
-                        if validate_port(list_of_ports):
-                            list_of_commands.append("-p")
-                            list_of_commands.append(list_of_ports)
-
-                    if '8' in input2:
-                        list_of_commands.append("-A")
-
-                    if '9' in input2:
-                        list_of_commands.append("-Pn")
-
-                    if '10' in input2:
-                        list_of_commands.append("-disable-arp-ping")
-
-                    list_of_commands.append(ip_addr)
-                    # print(list_of_commands)
-                    # run_command_save(list_of_commands)
-                    run_nmap_scan_firewall(list_of_commands)
-
-            else:
-                print("\nInvalid IP entered, Please Try again")
-        else:
-            print("\nUnsupported Option selected, Please Try again")
-        time.sleep(0.3)
+# def level_4():
+#     """Menu based : All Nmap option's function"""
+#     scan = "nmap-scan"
+#     while True:
+#         print(r"""
+# Select required options (separate by space):
+#     [1] Simple Nmap scan (fast) — use alone, not with other options
+#     [2] Detect operating system
+#     [3] Detect running services and versions
+#     [4] SYN scan
+#     [5] UDP scan
+#     [6] Specific port scan
+#     [7] Full port scan — all 65535 ports (use *either* 6 or 7, not both)
+#     [8] Aggressive scan (slow, detailed)
+#     [9] Firewall bypass scan
+#    [10] Disable ARP ping (router evasion)
+#     [P] Show top 50 common ports
+#     [H] Help        [0] Back
+#             """.rstrip())
+#         input2 = input(shell).lower() or '0'
+#         input2 = input2.split()
+#         time.sleep(0.3)
+# 
+#         if 'h' in input2:
+#             print(documentation(4))
+#             input("Enter to go back to menu...")
+#         elif '0' in input2:
+#             return 0
+#         elif 'p' in input2:
+#             print(documentation('p'))
+#             input("Enter to go back to menu...")
+#         # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
+#         elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] for x in input2):
+#             ip_addr = input("\nEnter IP to scan\n" + shell) or "127.0.0.1"
+#             if validate_ip(ip_addr):
+#                 if '1' in input2:
+#                     run_command_save(["nmap", ip_addr], scan)
+# 
+#                 else:
+#                     list_of_commands = ['nmap']
+# 
+#                     if '2' in input2:
+#                         list_of_commands.append("-O")
+# 
+#                     if '3' in input2:
+#                         list_of_commands.append("-sV")
+# 
+#                     if '4' in input2:
+#                         list_of_commands.append("-sS")
+# 
+#                     if '5' in input2:
+#                         list_of_commands.append("-sU")
+# 
+#                     if '7' in input2:
+#                         list_of_commands.append("-p-")
+#                     elif '6' in input2:
+#                         list_of_ports = input("\nEnter port range (Eg. 1-65535) : ") or '1-65535'
+#                         if validate_port(list_of_ports):
+#                             list_of_commands.append("-p")
+#                             list_of_commands.append(list_of_ports)
+# 
+#                     if '8' in input2:
+#                         list_of_commands.append("-A")
+# 
+#                     if '9' in input2:
+#                         list_of_commands.append("-Pn")
+# 
+#                     if '10' in input2:
+#                         list_of_commands.append("-disable-arp-ping")
+# 
+#                     list_of_commands.append(ip_addr)
+#                     # print(list_of_commands)
+#                     # run_command_save(list_of_commands)
+#                     run_nmap_scan_firewall(list_of_commands)
+# 
+#             else:
+#                 print("\nInvalid IP entered, Please Try again")
+#         else:
+#             print("\nUnsupported Option selected, Please Try again")
+#         time.sleep(0.3)
 
 
 def menu_windows():

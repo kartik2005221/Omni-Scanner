@@ -1,7 +1,6 @@
 # extra capability
 todo: adding
     scapy>=2.5.0 # For ARP scanning and packet manipulation
-    python-nmap>=0.7.1 # Nmap integration (requires nmap installed)
     prettytable>=3.6.0 # Clean terminal output formatting
     colorama>=0.4.6 # Cross-platform colored terminal text
     tqdm>=4.64.1 # Progress bars for long scans
@@ -17,6 +16,7 @@ todo-1: see recorded video at videos folder,
     it wants to install in virtual environment
     *add .venv in git and remove .idea from GitHub, jese tese
 todo: mention in readme and doc that first startup can take time, wait
+todo: implement n top ports scan in nmap,,,upto 100 ports
 
 # for future
 todo: argument mode development…postponed, until further notice using typer cli tool

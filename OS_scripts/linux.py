@@ -30,7 +30,7 @@ Select an Option:
                 run_command_save(["sudo", "arp-scan", "-l"], scan)
 
         elif input2 in ['2']:
-            ip_addr = input("\nEnter range of IPs (eg. 192.168.1.1-255)\n" + shell) or "127.0.0.1"
+            ip_addr = input("\nEnter range of IPs\n" + shell) or "127.0.0.1"
             if validate_ip(ip_addr):
                 if input2 == '2':
                     run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",
@@ -185,22 +185,31 @@ def level_4():
         print(r"""
 Select required options (separate by space):
     [1] Simple Nmap scan (fast) — use alone, not with other options
-    [2] Detect operating system
-    [3] Detect running services and versions
-    [4] SYN scan
-    [5] UDP scan
-    [6] Specific port scan
-    [7] Full port scan — all 65535 ports (use *either* 6 or 7, not both)
-    [8] Aggressive scan (slow, detailed)
-    [9] Firewall bypass scan
-   [10] Disable ARP ping (router evasion)
-    [P] Show top 50 common ports
+    [2] Detect operating system (-o)
+    [3] Detect running services and versions (-sV)
+    [4] SYN scan (-sS) (stealth scan, requires sudo)
+    [5] UDP scan (-sU) (requires sudo)
+    [7] Aggressive scan (-A) (slow, detailed)
+    [8] Firewall bypass scan (-Pn) (no ping)
+    [9] Disable ARP ping (-disable-arp-scan) (router evasion)
+   [10] Show all Nmap options (useful for advanced users)
+   
+Adjustments:
+   [p1] Specific ports scan (-p <ports>)
+   [p2] Top ports scan (-top-ports <number>)
+   [p3] Full ports scan — all ports (-p-)
+   
+   [a1] Skip DNS lookup (-n)
+   [a2] Show only open ports (-open)
+   [a3] Adjust Scan Speed and Stealthiness (T0-T5)
+    
+    [P] Show top 'n' common ports
     [H] Help        [0] Back
             """.rstrip())
         input2 = input(shell).lower() or '0'
         input2 = input2.split()
         time.sleep(0.3)
-        if input2 == 'h':
+        if 'h' in input2:
             print(documentation(4))
             input("Enter to go back to menu...")
         elif '0' in input2:
@@ -208,15 +217,14 @@ Select required options (separate by space):
         elif 'p' in input2:
             print(documentation('p'))
             input("Enter to go back to menu...")
-        # elif input2 in ['1', '2', '3', '4', '5', '6', '7', '8']:
-        elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] for x in input2):
+        elif all(x in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'p1', 'p2', 'p3', 'a1', 'a2', 'a3'] for x in
+                 input2):
             ip = input("\nEnter IP to scan\n" + shell) or "127.0.0.1"
             if validate_ip(ip):
-                if input2 == '1':
+                if '1' in input2:
                     run_command_save(["nmap", ip], scan)
 
                 else:
-                    # print(new_input23)
                     list_of_commands = ['nmap']
 
                     if '2' in input2:
@@ -231,22 +239,47 @@ Select required options (separate by space):
                     if '5' in input2:
                         list_of_commands.append("-sU")
 
-                    if '7' in input2:
+                    if 'p3' in input2:
                         list_of_commands.append("-p-")
-                    elif '6' in input2:
+                    elif 'p1' in input2:
                         list_of_ports = input("\nEnter port range (Eg. 1-65535) : ") or '1-65535'
                         if validate_port(list_of_ports):
                             list_of_commands.append("-p")
                             list_of_commands.append(list_of_ports)
+                    elif 'p2' in input2:
+                        number_of_ports = input("\nEnter number of top ports to scan (default 100) : ") or '100'
+                        list_of_commands.append("--top-ports")
+                        list_of_commands.append(number_of_ports)
 
-                    if '8' in input2:
+                    if '7' in input2:
                         list_of_commands.append("-A")
 
-                    if '9' in input2:
+                    if '8' in input2:
                         list_of_commands.append("-Pn")
 
-                    if '10' in input2:
+                    if '9' in input2:
                         list_of_commands.append("-disable-arp-ping")
+
+                    if '10' in input2:
+                        list_of_commands.append("-h")
+                        run_command_save(list_of_commands, scan)
+                        continue
+
+                    if 'a1' in input2:
+                        list_of_commands.append("-n")
+
+                    if 'a2' in input2:
+                        list_of_commands.append("--open")
+
+                    if 'a3' in input2:
+                        speed = input("\nEnter scan speed (T0-T5, default T3) : ") or 'T3'
+                        if speed in ['T0', 'T1', 'T2', 'T3', 'T4', 'T5']:
+                            list_of_commands.append(f"-{speed}")
+                        elif speed in ['0', '1', '2', '3', '4', '5']:
+                            list_of_commands.append(f"-T{speed}")
+                        else:
+                            print("\nInvalid speed selected, using default T3")
+                            list_of_commands.append("-T3")
 
                     list_of_commands.append(ip)
                     # print(list_of_commands)
