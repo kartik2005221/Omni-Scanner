@@ -43,7 +43,8 @@ Select an Option:
                     # except KeyboardInterrupt:
                     #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
                     #     if the user does not have enough time]")
-                    insert_spinner(["nmap", ip_addr])
+                    run_command_save(["nmap", ip_addr])
+                    # insert_spinner(["nmap", ip_addr]) # not required for now,,,
             else:
                 print("\nInvalid IP Address, please try again")
         # elif input2 == '4':

@@ -8,6 +8,7 @@ todo: adding
 todo: add a section in readme for preparing user's os to run this script
 todo-4: termux support
 todo: automated omni-scanner
+
 todo: linux2.py
 
 # errors or bugs
@@ -28,6 +29,7 @@ todo: add more options for dns, like -t, -c, -l, etc.
 todo: add more options for port scanning, like -p, -s, -T, etc.
 todo: add more options for network scanning, like -s, -p, -T, etc.
 todo: add lenghty nmap scan to normal, or remove spinning cursor from it, bcz that dont take that much of time
+todo: remove cursor from 1.3.0, bcz it is not needed
 
 # for future
 todo: argument mode development…postponed, until further notice
@@ -37,4 +39,4 @@ todo: scrapy - basic network sniffer
 todo: snort (by cisco) - intrusion detection system
 
 # major improvements coming soon
-in improvements1.md and improvements2.md
+in improvements1.md and improvements2.md, finally in improvements.md
