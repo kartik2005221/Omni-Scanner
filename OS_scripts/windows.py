@@ -11,9 +11,8 @@ def level_1():
     while True:
         print(r"""
 Select an Option:
-    [1] Fast scan: All IPs on network (less detailed, *linux only)
-    [2] Fast scan: Specific IP(s) (less detailed)
-    [3] Deep scan: Specific IP(s) (more detailed, slower)
+    [1] Arp scan: All IPs on network (less detailed, requires sudo)
+    [2] Nmap-Arp scan: Specific IP(s) (less detailed)
     [H] Help        [0] Back
             """.rstrip())
         input2 = input(shell).lower() or '0'
@@ -24,22 +23,22 @@ Select an Option:
         elif input2 == '0':
             return 0
         elif input2 == '1':
-            print("\nSorry, This option is not available in your operating system")
-        elif input2 in ['2', '3']:
+            print("\nSorry, This option is not available in your windows operating system")
+        elif input2 in ['2']:
             ip_addr = input("\nEnter range of IPs (eg. 192.168.1.1-255)\n" + shell) or "127.0.0.1"
             if validate_ip(ip_addr):
                 if input2 == '2':
                     run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100",
                                       "--host-timeout", "2000ms", ip_addr], scan)
 
-                elif input2 == '3':
-                    # try:
-                    #     subprocess.run(["nmap", ip_addr])
-                    # except KeyboardInterrupt:
-                    #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
-                    #     if the user does not have enough time]")
-                    run_command_save(["nmap", ip_addr])
-                    # insert_spinner(["nmap", ip_addr]) # not required for now,,,
+                # elif input2 == '3':
+                #     # try:
+                #     #     subprocess.run(["nmap", ip_addr])
+                #     # except KeyboardInterrupt:
+                #     #     print("\n(Ctrl-C) Exiting...\n\t[Try Fast Scan with option 1,
+                #     #     if the user does not have enough time]")
+                #     run_command_save(["nmap", ip_addr])
+                #     # insert_spinner(["nmap", ip_addr]) # not required for now,,,
             else:
                 print("\nInvalid IP range entered, Please Try again")
         # elif input2 == '4':
