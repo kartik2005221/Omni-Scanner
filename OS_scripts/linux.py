@@ -111,7 +111,7 @@ Select required options (separate by space):
                     list_of_commands = ['ping']
                     if input2 == '1':
                         list_of_commands.append(ip_addr)
-                        run_command_save(list_of_commands, scan)
+                        # run_command_save(list_of_commands, scan)
 
                     flood = '4' in input2
                     _append_to_list_ping(input2, list_of_commands, flood=flood)

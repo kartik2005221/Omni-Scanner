@@ -8,6 +8,8 @@ todo: add a section in readme for preparing user's os to run this script
 todo-4: termux support
 todo: automated omni-scanner
 
+todo: dns lookup
+
 todo: linux2.py
 
 # errors or bugs
@@ -17,6 +19,7 @@ todo-1: see recorded video at videos folder,
     *add .venv in git and remove .idea from GitHub, jese tese
 todo: mention in readme and doc that first startup can take time, wait
 todo: implement n top ports scan in nmap,,,upto 100 ports
+todo: update nmap documentation
 
 # for future
 todo: argument mode development…postponed, until further notice using typer cli tool
@@ -28,5 +31,5 @@ todo: snort (by cisco) - intrusion detection system
 # major improvements coming soon
 in improvements1.md and improvements2.md, finally in improvements.md
 
-nmap, arp-scan is not installed by default in ubbuntu, so we need to install it
+nmap, arp-scan is not installed by default in ubuntu, so we need to install it
 todo: add nmap ,arp-scan installation in script, if not installed
