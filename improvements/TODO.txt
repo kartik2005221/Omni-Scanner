@@ -31,5 +31,5 @@ todo: snort (by cisco) - intrusion detection system
 # major improvements coming soon
 in improvements1.md and improvements2.md, finally in improvements.md
 
-nmap, arp-scan is not installed by default in ubuntu, so we need to install it
+nmap, arp-scan, traceroute is not installed by default in ubuntu, so we need to install it
 todo: add nmap ,arp-scan installation in script, if not installed
