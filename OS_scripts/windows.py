@@ -7,7 +7,16 @@ from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, v
 
 
 def level_1():
-    """Menu Based : All IP Scanner"""
+    """
+    Display the ARP scan menu and handle user choices (Windows version).
+    
+    Provides options for:
+    - ARP scan (not available on Windows)
+    - Nmap ARP scan for specific IP ranges
+    
+    Returns:
+        int: 0 when user chooses to go back
+    """
     scan = "arp-scan"
     while True:
         print(r"""
@@ -55,7 +64,13 @@ Select an Option:
 
 
 def _append_to_list_ping(input2, list_of_commands):
-    """To append options to the list of commands for ping"""
+    """
+    Append ping options to command list based on user selections (Windows version).
+    
+    :param input2: User input string containing option selections
+    :param list_of_commands: List to append command arguments to
+    :return: None
+    """
     if '2' in input2:
         list_of_commands.append("-l")
         list_of_commands.append(input("\nEnter size of packet to send (0-65500)\n" + shell) or '56')
@@ -65,7 +80,12 @@ def _append_to_list_ping(input2, list_of_commands):
 
 
 def _finite_or_infinite_ping(list_of_commands):
-    """To run ping command with infinite or finite options"""
+    """
+    Prompt user to select finite or infinite ping and update command list (Windows version).
+    
+    :param list_of_commands: List to append count/infinite argument to
+    :return: None
+    """
     ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
     if ping_type == '1':
         no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
@@ -76,7 +96,18 @@ def _finite_or_infinite_ping(list_of_commands):
 
 
 def level_2():
-    """Menu Based : Ping option's function"""
+    """
+    Display the ping options menu and handle user choices (Windows version).
+    
+    Provides options for:
+    - Simple ping
+    - Custom packet size
+    - Timeout configuration
+    - Flood ping (Linux only - not available)
+    
+    Returns:
+        int: 0 when user chooses to go back
+    """
     scan = "ping-scan"
     while True:
         try:
@@ -122,7 +153,16 @@ Select required options (separate by space):
 
 
 def level_3():
-    """Menu Based : Traceroute option's function"""
+    """
+    Display the traceroute menu and handle user choices (Windows version).
+    
+    Provides options for:
+    - Standard traceroute (ICMP)
+    - TCP traceroute on port 80 for firewall evasion (via nmap)
+    
+    Returns:
+        int: 0 when user chooses to go back
+    """
     scan = "traceroute-scan"
     while True:
         print(r"""
@@ -236,7 +276,20 @@ Select an Option:
 
 
 def menu_windows():
-    """Function for Initial Menu to show in front of the user"""
+    """
+    Display the main menu for Windows systems and handle user navigation.
+    
+    Main menu providing access to:
+    - Network scanning (Nmap)
+    - Ping utilities
+    - Traceroute
+    - Advanced Nmap scans
+    - MAC vendor lookup
+    - Network interface information
+    
+    Returns:
+        int: 0 when user chooses to quit
+    """
     # check_and_run_admin_windows()
     print("(Windows Version)")
     while True:

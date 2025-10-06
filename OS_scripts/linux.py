@@ -7,7 +7,16 @@ from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, \
 
 
 def level_1():
-    """Menu Based : All IP Scanner"""
+    """
+    Display the ARP scan menu and handle user choices.
+    
+    Provides options for:
+    - Full network ARP scan (requires sudo)
+    - Nmap ARP scan for specific IP ranges
+    
+    Returns:
+        int: 0 when user chooses to go back
+    """
     scan = "arp-scan"
     while True:
         print(r"""
@@ -60,6 +69,14 @@ Select an Option:
 
 
 def _append_to_list_ping(input2, list_of_commands, flood=False):
+    """
+    Append ping options to command list based on user selections.
+    
+    :param input2: User input string containing option selections
+    :param list_of_commands: List to append command arguments to
+    :param flood: Whether flood ping is enabled (requires sudo)
+    :return: None
+    """
     if '2' in input2:
         list_of_commands.append('-s')
         list_of_commands.append(input("\nEnter size of packet to send (0-65500)\n" + shell) or '56')
@@ -75,7 +92,12 @@ def _append_to_list_ping(input2, list_of_commands, flood=False):
 
 
 def _finite_or_infinite_ping(list_of_commands):
-    """To run ping command with infinite or finite options"""
+    """
+    Prompt user to select finite or infinite ping and update command list.
+    
+    :param list_of_commands: List to append count argument to
+    :return: None
+    """
     ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
     if ping_type == '1':
         no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
@@ -86,7 +108,18 @@ def _finite_or_infinite_ping(list_of_commands):
 
 
 def level_2():
-    """Menu Based : Ping option's function"""
+    """
+    Display the ping options menu and handle user choices.
+    
+    Provides options for:
+    - Simple ping
+    - Custom packet size
+    - Timeout configuration
+    - Flood ping (requires sudo)
+    
+    Returns:
+        int: 0 when user chooses to go back
+    """
     scan = "ping-scan"
     while True:
         try:
@@ -145,7 +178,16 @@ Select required options (separate by space):
 
 
 def level_3():
-    """Menu Based : Traceroute option's function"""
+    """
+    Display the traceroute menu and handle user choices.
+    
+    Provides options for:
+    - Standard traceroute (ICMP/UDP)
+    - TCP traceroute on port 80 for firewall evasion (requires sudo)
+    
+    Returns:
+        int: 0 when user chooses to go back
+    """
     scan = "traceroute-scan"
     while True:
         print(r"""
@@ -179,7 +221,21 @@ Select an Option:
 
 
 def level_4():
-    """Menu based : All Nmap option's function"""
+    """
+    Display the Nmap advanced scan menu and handle user choices.
+    
+    Provides options for:
+    - OS detection
+    - Service/version detection
+    - SYN stealth scan (requires sudo)
+    - UDP scan (requires sudo)
+    - Aggressive scan
+    - Firewall bypass options
+    - Custom port specifications
+    
+    Returns:
+        int: 0 when user chooses to go back
+    """
     scan = "nmap-scan"
     while True:
         print(r"""
@@ -293,7 +349,21 @@ Adjustments:
 
 
 def menu_linux():
-    """Function for Initial Menu to show in front of the user"""
+    """
+    Display the main menu for Linux systems and handle user navigation.
+    
+    Main menu providing access to:
+    - Network scanning (ARP, Nmap)
+    - Ping utilities
+    - Traceroute
+    - Advanced Nmap scans
+    - MAC vendor lookup
+    - Network interface information
+    - Sudo privilege elevation
+    
+    Returns:
+        int: 0 when user chooses to quit
+    """
     check_and_run_sudo_linux()
     print(f"(Linux {'Full' if is_sudo_linux() else 'Limited'} Functionality Version)")
     while True:

@@ -68,6 +68,63 @@ Omni-Scanner is a Python-based, easy-to-use network scanner that helps you detec
 
 ---
 
+## 🧪 Testing
+
+Omni-Scanner now includes a test suite to ensure code quality and reliability.
+
+### Running Tests
+
+```bash
+# Run all tests
+python -m unittest discover tests/ -v
+
+# Run specific test file
+python -m unittest tests.test_scan_builders -v
+python -m unittest tests.test_input_validators -v
+```
+
+### Test Coverage
+
+The test suite covers:
+* **Command Builders** — Validates correct command construction for ping, traceroute, ARP, and Nmap scans
+* **Input Validators** — Tests port parsing, packet size validation, timeout validation, and IP normalization
+* **Edge Cases** — Ensures proper handling of invalid inputs and boundary conditions
+
+All core utility functions are tested to maintain code quality during refactoring and feature additions.
+
+---
+
+## 🛠️ Development
+
+### Project Structure
+
+```
+Omni-Scanner/
+├── OS_scripts/          # Platform-specific menu implementations
+│   ├── linux.py         # Linux menu and commands
+│   └── windows.py       # Windows menu and commands
+├── utils/               # Utility modules
+│   ├── scan_builders.py        # Pure command construction functions
+│   ├── input_validators.py    # Enhanced input validation
+│   ├── menu_utils.py          # Menu and validation helpers
+│   ├── common_utils.py        # Common utilities
+│   └── administrative_utils.py # Sudo/admin management
+├── tests/               # Unit test suite
+│   ├── test_scan_builders.py
+│   └── test_input_validators.py
+└── main.py             # Application entry point
+```
+
+### Code Quality
+
+The codebase follows these principles:
+* **Separation of Concerns** — Command building separated from UI and execution
+* **Input Validation** — Uses Python's `ipaddress` module for robust IP validation
+* **Enhanced Docstrings** — Comprehensive documentation for all public functions
+* **Testability** — Pure functions enable easy unit testing without I/O dependencies
+
+---
+
 ## ⚠️ Responsible Use
 
 This tool is for **educational and authorized use only**.
