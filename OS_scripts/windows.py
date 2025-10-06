@@ -4,6 +4,7 @@ from OS_scripts.linux import level_4
 from utils.common_utils import documentation, run_command_save, shell
 from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, validate_mac, \
     run_tcp_traceroute_windows, run_nmap_scan_firewall, validate_port, validate_ip
+from utils.scan_builders import build_nmap_arp_scan_cmd
 
 
 def level_1():
@@ -38,8 +39,8 @@ Select an Option:
             ip_addr = input("\nEnter range of IPs\n" + shell) or "127.0.0.1"
             if validate_ip(ip_addr):
                 if input2 == '2':
-                    run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100",
-                                      "--host-timeout", "2000ms", ip_addr], scan)
+                    cmd = build_nmap_arp_scan_cmd(ip_addr)
+                    run_command_save(cmd, scan)
 
                 # elif input2 == '3':
                 #     # try:

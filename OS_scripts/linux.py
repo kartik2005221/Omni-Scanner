@@ -4,6 +4,7 @@ from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, 
 from utils.common_utils import documentation, run_command_save, shell
 from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, \
     validate_mac, run_nmap_scan_firewall, validate_port, validate_ip
+from utils.scan_builders import build_arp_scan_cmd_linux, build_nmap_arp_scan_cmd, build_traceroute_cmd_linux
 
 
 def level_1():
@@ -36,14 +37,15 @@ Select an Option:
             if not is_sudo_linux():
                 print("\nSudo not detected, \nTry another option or Switch to SUDO (Option 5 in previous menu)")
             else:
-                run_command_save(["sudo", "arp-scan", "-l"], scan)
+                cmd = build_arp_scan_cmd_linux(use_sudo=True)
+                run_command_save(cmd, scan)
 
         elif input2 in ['2']:
             ip_addr = input("\nEnter range of IPs\n" + shell) or "127.0.0.1"
             if validate_ip(ip_addr):
                 if input2 == '2':
-                    run_command_save(["nmap", "-sn", "-T5", "--min-parallelism", "100", "--host-timeout", "2000ms",
-                                      ip_addr], scan)
+                    cmd = build_nmap_arp_scan_cmd(ip_addr)
+                    run_command_save(cmd, scan)
 
                 # elif input2 == '3':
                 #     # try:
@@ -207,10 +209,12 @@ Select an Option:
             ip_addr = input("\nEnter IP for traceroute : ") or "127.0.0.1"
             # if validate_ip(ip_addr):
             if input2 == '1':
-                run_command_save(["traceroute", ip_addr], scan)
+                cmd = build_traceroute_cmd_linux(ip_addr)
+                run_command_save(cmd, scan)
             elif input2 == '2':
                 if is_sudo_linux() == 1:
-                    run_command_save(["sudo", "traceroute", "-T", "-O", "info", "-p", "80", ip_addr], scan)
+                    cmd = build_traceroute_cmd_linux(ip_addr, tcp_mode=True, use_sudo=True)
+                    run_command_save(cmd, scan)
                 else:
                     print("\nSudo not detected, Try another option or Switch to SUDO")
             # else:
