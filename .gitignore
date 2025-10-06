@@ -183,3 +183,4 @@ cython_debug/
 /.modules_installed_marker
 /scans/
 .idea
+.venv

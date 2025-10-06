@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omni-scanner"
+version = "2.0.0"
+description = "A comprehensive network scanning tool with support for ARP, ping, traceroute, and nmap scans"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Kartik", email = "kartik@example.com"}
+]
+keywords = ["network", "scanning", "security", "nmap", "arp", "ping"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: System :: Networking",
+    "Topic :: Security",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.32.3",
+    "manuf>=1.1.5",
+    "colorama>=0.4.6",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/kartik2005221/Omni-Scanner"
+Repository = "https://github.com/kartik2005221/Omni-Scanner"
+Issues = "https://github.com/kartik2005221/Omni-Scanner/issues"
+
+[project.scripts]
+omni-scanner = "main:main"
+omni-scanner-cli = "omni_scanner.ui.cli:app"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  __pycache__
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "--cov=omni_scanner --cov-report=html --cov-report=term-missing"

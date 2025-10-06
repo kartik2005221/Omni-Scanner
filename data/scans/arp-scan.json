@@ -1,0 +1,160 @@
+[
+    {
+        "timestamp": "2025-04-26 14:10:09",
+        "scan_type": "arp-scan",
+        "operating_system": "linux",
+        "command": [
+            "nmap",
+            "-sn",
+            "-T5",
+            "--min-parallelism",
+            "100",
+            "--host-timeout",
+            "2000ms",
+            "192.168.1.1-10"
+        ],
+        "result": "Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-04-26 14:10 IST\nNmap scan report for 192.168.1.1\nHost is up (0.018s latency).\nNmap scan report for 192.168.1.7\nHost is up (0.0033s latency).\nNmap done: 10 IP addresses (2 hosts up) scanned in 1.19 seconds\n"
+    },
+    {
+        "timestamp": "2025-04-26 14:16:04",
+        "scan_type": "arp-scan",
+        "operating_system": "linux",
+        "command": "sudo arp-scan -l",
+        "result": "Interface: eth0, type: EN10MB, MAC: 00:15:5d:5b:63:5a, IPv4: 172.26.67.173\nStarting arp-scan 1.10.0 with 4096 hosts (https://github.com/royhills/arp-scan)\n172.26.64.1\t00:15:5d:c2:4c:4b\tMicrosoft Corporation\n\n1 packets received by filter, 0 packets dropped by kernel\nEnding arp-scan 1.10.0: 4096 hosts scanned in 17.332 seconds (236.33 hosts/sec). 1 responded\n"
+    },
+    {
+        "timestamp": "2025-04-26 14:16:27",
+        "scan_type": "arp-scan",
+        "operating_system": "linux",
+        "command": "nmap -sn -T5 --min-parallelism 100 --host-timeout 2000ms 192.168.1.1-10",
+        "result": "Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-04-26 14:16 IST\nNmap scan report for 192.168.1.1\nHost is up (0.0070s latency).\nNmap scan report for 192.168.1.7\nHost is up (0.00086s latency).\nNmap done: 10 IP addresses (2 hosts up) scanned in 1.18 seconds\n"
+    },
+    {
+        "timestamp": "2025-04-26 15:28:25",
+        "scan_type": "arp-scan",
+        "operating_system": "linux",
+        "command": "sudo arp-scan -l",
+        "result": [
+            "Interface: eth0, type: EN10MB, MAC: 00:15:5d:0b:16:e0, IPv4: 172.26.67.173",
+            "Starting arp-scan 1.10.0 with 4096 hosts (https://github.com/royhills/arp-scan)",
+            "172.26.64.1\t00:15:5d:92:35:4f\tMicrosoft Corporation",
+            "172.26.64.1\t00:15:5d:92:35:4f\tMicrosoft Corporation (DUP: 2)",
+            "",
+            "2 packets received by filter, 0 packets dropped by kernel",
+            "Ending arp-scan 1.10.0: 4096 hosts scanned in 17.396 seconds (235.46 hosts/sec). 1 responded"
+        ]
+    },
+    {
+        "timestamp": "2025-05-19 18:35:44",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "sudo arp-scan -l",
+        "result": [
+            "Interface: eth0, type: EN10MB, MAC: 00:15:5d:08:83:e6, IPv4: 172.26.67.173",
+            "Starting arp-scan 1.10.0 with 4096 hosts (https://github.com/royhills/arp-scan)",
+            "172.26.64.1\t00:15:5d:91:a2:82\tMicrosoft Corporation",
+            "",
+            "1 packets received by filter, 0 packets dropped by kernel",
+            "Ending arp-scan 1.10.0: 4096 hosts scanned in 17.519 seconds (233.80 hosts/sec). 1 responded"
+        ]
+    },
+    {
+        "timestamp": "2025-05-19 18:37:23",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "sudo arp-scan -l",
+        "result": []
+    },
+    {
+        "timestamp": "2025-05-19 18:37:32",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "nmap -sn -T5 --min-parallelism 100 --host-timeout 2000ms 192.168.1.1",
+        "result": [
+            "Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-05-19 18:37 IST",
+            "Nmap scan report for 192.168.1.1",
+            "Host is up (0.0031s latency).",
+            "Nmap done: 1 IP address (1 host up) scanned in 0.09 seconds"
+        ]
+    },
+    {
+        "timestamp": "2025-05-19 19:03:32",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "sudo arp-scan -l",
+        "result": []
+    },
+    {
+        "timestamp": "2025-05-19 19:09:51",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "sudo arp-scan -l",
+        "result": [
+            "Interface: eth0, type: EN10MB, MAC: 00:15:5d:08:83:e6, IPv4: 172.26.67.173",
+            "Starting arp-scan 1.10.0 with 4096 hosts (https://github.com/royhills/arp-scan)",
+            "172.26.64.1\t00:15:5d:91:a2:82\tMicrosoft Corporation",
+            "172.26.64.1\t00:15:5d:91:a2:82\tMicrosoft Corporation (DUP: 2)",
+            "",
+            "2 packets received by filter, 0 packets dropped by kernel",
+            "Ending arp-scan 1.10.0: 4096 hosts scanned in 17.365 seconds (235.88 hosts/sec). 1 responded"
+        ]
+    },
+    {
+        "timestamp": "2025-05-19 19:12:43",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "sudo arp-scan -l",
+        "result": [
+            "Interface: eth0, type: EN10MB, MAC: 00:15:5d:08:83:e6, IPv4: 172.26.67.173",
+            "Starting arp-scan 1.10.0 with 4096 hosts (https://github.com/royhills/arp-scan)",
+            "172.26.64.1\t00:15:5d:91:a2:82\tMicrosoft Corporation",
+            "",
+            "1 packets received by filter, 0 packets dropped by kernel",
+            "Ending arp-scan 1.10.0: 4096 hosts scanned in 17.381 seconds (235.66 hosts/sec). 1 responded"
+        ]
+    },
+    {
+        "timestamp": "2025-05-19 19:12:53",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "nmap -sn -T5 --min-parallelism 100 --host-timeout 2000ms 192.168.1.1",
+        "result": [
+            "Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-05-19 19:12 IST",
+            "Nmap scan report for 192.168.1.1",
+            "Host is up (0.0038s latency).",
+            "Nmap done: 1 IP address (1 host up) scanned in 0.08 seconds"
+        ]
+    },
+    {
+        "timestamp": "2025-07-31 13:23:05",
+        "scan_type": "arp-scan",
+        "operating_system": "Linux",
+        "command": "nmap -sn -T5 --min-parallelism 100 --host-timeout 2000ms 192.168.1.0/24",
+        "result": [
+            "Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-07-31 13:21 UTC",
+            "Nmap scan report for 192.168.1.1 (192.168.1.1)",
+            "Host is up (0.037s latency).",
+            "Nmap scan report for 192.168.1.147 (192.168.1.147)",
+            "Host is up (0.33s latency).",
+            "Nmap scan report for 192.168.1.173 (192.168.1.173)",
+            "Host is up (0.0028s latency).",
+            "Nmap scan report for 192.168.1.184 (192.168.1.184)",
+            "Host is up (0.56s latency).",
+            "Nmap scan report for 192.168.1.185 (192.168.1.185)",
+            "Host is up (0.53s latency).",
+            "Nmap done: 256 IP addresses (5 hosts up) scanned in 6.45 seconds"
+        ]
+    },
+    {
+        "timestamp": "2025-08-13 16:14:50",
+        "scan_type": "arp-scan",
+        "operating_system": "Windows",
+        "command": "nmap -sn -T5 --min-parallelism 100 --host-timeout 2000ms 127.0.0.1",
+        "result": [
+            "Starting Nmap 7.97 ( https://nmap.org ) at 2025-08-13 16:14 +0530",
+            "Nmap scan report for localhost (127.0.0.1)",
+            "Host is up.",
+            "Nmap done: 1 IP address (1 host up) scanned in 0.32 seconds"
+        ]
+    }
+]

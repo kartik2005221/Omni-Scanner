@@ -1,0 +1,28 @@
+[
+    {
+        "timestamp": "2025-04-26 14:10:36",
+        "scan_type": "ping-scan",
+        "operating_system": "linux",
+        "command": [
+            "ping",
+            "-c 5",
+            "192.168.1.1"
+        ],
+        "result": "PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.\n64 bytes from 192.168.1.1: icmp_seq=1 ttl=63 time=2.98 ms\n64 bytes from 192.168.1.1: icmp_seq=2 ttl=63 time=40.8 ms\n64 bytes from 192.168.1.1: icmp_seq=3 ttl=63 time=41.0 ms\n64 bytes from 192.168.1.1: icmp_seq=4 ttl=63 time=1.63 ms\n64 bytes from 192.168.1.1: icmp_seq=5 ttl=63 time=1.63 ms\n\n--- 192.168.1.1 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 4004ms\nrtt min/avg/max/mdev = 1.626/17.616/41.044/19.037 ms\n"
+    },
+    {
+        "timestamp": "2025-06-19 09:49:05",
+        "scan_type": "ping-scan",
+        "operating_system": "Linux",
+        "command": "ping 172.26.67.173",
+        "result": [
+            "PING 172.26.67.173 (172.26.67.173) 56(84) bytes of data.",
+            "64 bytes from 172.26.67.173: icmp_seq=1 ttl=64 time=0.233 ms",
+            "64 bytes from 172.26.67.173: icmp_seq=2 ttl=64 time=0.023 ms",
+            "64 bytes from 172.26.67.173: icmp_seq=3 ttl=64 time=0.025 ms",
+            "64 bytes from 172.26.67.173: icmp_seq=4 ttl=64 time=0.023 ms",
+            "64 bytes from 172.26.67.173: icmp_seq=5 ttl=64 time=0.023 ms",
+            "64 bytes from 172.26.67.173: icmp_seq=6 ttl=64 time=0.025 ms"
+        ]
+    }
+]

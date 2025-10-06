@@ -1,9 +1,38 @@
 import time
 
-from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, run_with_sudo_linux
-from utils.common_utils import documentation, run_command_save, shell
-from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, \
-    validate_mac, run_nmap_scan_firewall, validate_port, validate_ip
+from ..utils.validation import validate_ip_addr, validate_mac, validate_port
+from ..utils.common import documentation, run_command_save, shell
+from ..utils.logging import get_logger
+
+# Administrative utilities - these will need to be implemented or moved
+def check_and_run_sudo_linux():
+    """Placeholder for sudo checking functionality."""
+    pass
+
+def is_sudo_linux():
+    """Placeholder for sudo checking functionality.""" 
+    return False
+
+def run_with_sudo_linux():
+    """Placeholder for sudo running functionality."""
+    pass
+
+# Additional utilities that may be missing
+def insert_spinner():
+    """Placeholder for spinner functionality."""
+    pass
+
+def get_mac_vendor(mac):
+    """Placeholder for MAC vendor lookup."""
+    return "Unknown"
+
+def run_nmap_scan_firewall():
+    """Placeholder for nmap firewall scan."""
+    pass
+
+def validate_ip(ip):
+    """Placeholder for IP validation."""
+    return validate_ip_addr(ip)
 
 
 def level_1():

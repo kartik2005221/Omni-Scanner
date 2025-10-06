@@ -1,0 +1,41 @@
+[
+    {
+        "timestamp": "2025-04-26 15:32:32",
+        "scan_type": "nmap-scan",
+        "operating_system": "windows",
+        "command": "nmap 192.168.0.1",
+        "result": [
+            "Starting Nmap 7.95 ( https://nmap.org ) at 2025-04-26 15:32 India Standard Time",
+            "Nmap scan report for 192.168.0.1",
+            "Host is up (0.0070s latency).",
+            "Not shown: 996 closed tcp ports (reset)",
+            "PORT      STATE SERVICE",
+            "80/tcp    open  http",
+            "5500/tcp  open  hotline",
+            "9000/tcp  open  cslistener",
+            "10004/tcp open  emcrmirccd",
+            "",
+            "Nmap done: 1 IP address (1 host up) scanned in 1.50 seconds"
+        ]
+    },
+    {
+        "timestamp": "2025-07-31 22:15:58",
+        "scan_type": "nmap-scan",
+        "operating_system": "Windows",
+        "command": "nmap 192.168.1.1",
+        "result": [
+            "Starting Nmap 7.97 ( https://nmap.org ) at 2025-07-31 22:12 +0530",
+            "Nmap scan report for 192.168.1.1",
+            "Host is up (0.011s latency).",
+            "Not shown: 996 closed tcp ports (reset)",
+            "PORT      STATE SERVICE",
+            "80/tcp    open  http",
+            "5500/tcp  open  hotline",
+            "9000/tcp  open  cslistener",
+            "10004/tcp open  emcrmirccd",
+            "MAC Address: 04:95:E6:B4:12:E0 (Tenda Technology,Ltd.Dongguan branch)",
+            "",
+            "Nmap done: 1 IP address (1 host up) scanned in 17.78 seconds"
+        ]
+    }
+]

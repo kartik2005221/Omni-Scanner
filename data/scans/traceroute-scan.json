@@ -1,0 +1,74 @@
+[
+    {
+        "timestamp": "2025-04-26 14:11:22",
+        "scan_type": "traceroute-scan",
+        "operating_system": "linux",
+        "command": [
+            "traceroute",
+            "192.168.0.1"
+        ],
+        "result": "traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets\n 1  K-ASUS.mshome.net (172.26.64.1)  0.706 ms  0.390 ms  6.213 ms\n 2  192.168.1.1 (192.168.1.1)  57.394 ms  57.367 ms  57.359 ms\n 3  * * *\n 4  * * *\n 5  * * *\n 6  * * *\n 7  * * *\n 8  * * *\n 9  * * *\n10  * * *\n11  * * *\n12  * * *\n13  * * *\n14  * * *\n15  * * *\n16  * * *\n17  * * *\n18  * * *\n19  * * *\n20  * * *\n21  * * *\n22  * * *\n23  * * *\n24  * * *\n25  * * *\n26  * * *\n27  * * *\n28  * * *\n29  * * *\n30  * * *\n"
+    },
+    {
+        "timestamp": "2025-04-26 15:48:46",
+        "scan_type": "traceroute-scan",
+        "operating_system": "Linux",
+        "command": "traceroute 192.168.0.1",
+        "result": [
+            "traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets",
+            "1  K-ASUS.mshome.net (172.26.64.1)  0.704 ms  0.638 ms  0.970 ms"
+        ]
+    },
+    {
+        "timestamp": "2025-04-26 15:51:55",
+        "scan_type": "traceroute-scan",
+        "operating_system": "Linux",
+        "command": "traceroute 192.168.0.1 && sudo apt update",
+        "result": [
+            "192.168.0.1 && sudo apt update: Name or service not known",
+            "Cannot handle \"host\" cmdline arg `192.168.0.1 && sudo apt update' on position 1 (argc 1)"
+        ]
+    },
+    {
+        "timestamp": "2025-04-26 15:52:14",
+        "scan_type": "traceroute-scan",
+        "operating_system": "Linux",
+        "command": "sudo traceroute -T -O info -p 80 192.168.1.1 && sudo apt update",
+        "result": [
+            "192.168.1.1 && sudo apt update: Name or service not known",
+            "Cannot handle \"host\" cmdline arg `192.168.1.1 && sudo apt update' on position 1 (argc 6)"
+        ]
+    },
+    {
+        "timestamp": "2025-05-19 18:57:23",
+        "scan_type": "traceroute-scan",
+        "operating_system": "Linux",
+        "command": "traceroute 192.168.0.1",
+        "result": [
+            "traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets",
+            "1  K-ASUS.mshome.net (172.26.64.1)  0.752 ms  0.656 ms  0.648 ms",
+            "2  192.168.1.1 (192.168.1.1)  5.160 ms  5.151 ms  5.146 ms",
+            "3  * * *",
+            "4  * * *",
+            "5  * * *",
+            "6  * * *",
+            "7  * * *",
+            "8  * * *",
+            "9  * * *",
+            "10  * * *",
+            "11  * * *",
+            "12  * * *",
+            "13  * * *",
+            "14  * * *",
+            "15  * * *",
+            "16  * * *",
+            "17  * * *",
+            "18  * * *",
+            "19  * * *",
+            "20  * * *",
+            "21  * * *",
+            "22  * * *",
+            "23  * * *"
+        ]
+    }
+]

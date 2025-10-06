@@ -7,7 +7,7 @@ import time
 
 import requests
 
-from utils.common_utils import run_command_save, shell
+from .common import run_command_save, shell
 
 
 def validate_ip_addr(ip_addr):
@@ -300,6 +300,141 @@ def validate_port(port):
             print(f"Invalid port: {p} is out of range (1-65535)")
             return False
     return True
+
+
+def validate_port_range(port_range_str: str) -> bool:
+    """
+    Validate port range string (e.g., "80-443", "22,80,443", "1-1000").
+    
+    Args:
+        port_range_str: String to validate as port range
+        
+    Returns:
+        bool: True if valid port range, False otherwise
+    """
+    if not port_range_str:
+        return False
+        
+    # Handle comma-separated ports
+    if ',' in port_range_str:
+        ports = port_range_str.split(',')
+        return all(validate_port(port.strip()) for port in ports)
+    
+    # Handle port ranges
+    if '-' in port_range_str:
+        parts = port_range_str.split('-')
+        if len(parts) == 2:
+            try:
+                start_port = int(parts[0].strip())
+                end_port = int(parts[1].strip())
+                return (1 <= start_port <= 65535 and 
+                       1 <= end_port <= 65535 and 
+                       start_port <= end_port)
+            except ValueError:
+                return False
+    
+    # Single port
+    return validate_port(port_range_str)
+
+
+def validate_packet_size(size_str: str) -> bool:
+    """
+    Validate packet size for ping operations.
+    
+    Args:
+        size_str: String to validate as packet size
+        
+    Returns:
+        bool: True if valid packet size (0-65500), False otherwise
+    """
+    try:
+        size = int(size_str)
+        return 0 <= size <= 65500
+    except ValueError:
+        return False
+
+
+def validate_packet_count(count_str: str) -> bool:
+    """
+    Validate packet count for ping operations.
+    
+    Args:
+        count_str: String to validate as packet count
+        
+    Returns:
+        bool: True if valid packet count (positive integer), False otherwise
+    """
+    try:
+        count = int(count_str)
+        return count > 0
+    except ValueError:
+        return False
+
+
+def validate_timeout(timeout_str: str) -> bool:
+    """
+    Validate timeout value (positive number).
+    
+    Args:
+        timeout_str: String to validate as timeout
+        
+    Returns:
+        bool: True if valid timeout, False otherwise
+    """
+    try:
+        timeout = float(timeout_str)
+        return timeout > 0
+    except ValueError:
+        return False
+
+
+def sanitize_filename(filename: str) -> str:
+    """
+    Sanitize filename by removing or replacing unsafe characters.
+    
+    Args:
+        filename: Original filename
+        
+    Returns:
+        str: Sanitized filename safe for filesystem
+    """
+    # Remove or replace unsafe characters
+    unsafe_chars = r'[<>:"/\\|?*]'
+    sanitized = re.sub(unsafe_chars, '_', filename)
+    
+    # Remove leading/trailing whitespace and dots
+    sanitized = sanitized.strip('. ')
+    
+    # Ensure filename is not empty
+    if not sanitized:
+        sanitized = "scan_output"
+    
+    return sanitized
+
+
+def parse_scan_options(options_str: str) -> list:
+    """
+    Parse space-separated scan options and validate them.
+    
+    Args:
+        options_str: String containing space-separated options
+        
+    Returns:
+        list: List of valid option tokens
+    """
+    if not options_str:
+        return []
+    
+    # Split and clean options
+    options = [opt.strip() for opt in options_str.split()]
+    
+    # Filter out empty strings and validate format
+    valid_options = []
+    for opt in options:
+        if opt and re.match(r'^[a-zA-Z0-9\-_]+$', opt):
+            valid_options.append(opt)
+    
+    return valid_options
 
 
 # import importlib.util
