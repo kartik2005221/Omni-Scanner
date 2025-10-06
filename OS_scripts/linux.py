@@ -4,7 +4,8 @@ from utils.administrative_utils import check_and_run_sudo_linux, is_sudo_linux, 
 from utils.common_utils import documentation, run_command_save, shell
 from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, \
     validate_mac, run_nmap_scan_firewall, validate_port, validate_ip
-from utils.scan_builders import build_arp_scan_cmd_linux, build_nmap_arp_scan_cmd, build_traceroute_cmd_linux
+from utils.scan_builders import build_arp_scan_cmd_linux, build_nmap_arp_scan_cmd, build_traceroute_cmd_linux, \
+    build_ping_cmd_linux
 
 
 def level_1():
@@ -70,45 +71,6 @@ Select an Option:
         time.sleep(0.3)
 
 
-def _append_to_list_ping(input2, list_of_commands, flood=False):
-    """
-    Append ping options to command list based on user selections.
-    
-    :param input2: User input string containing option selections
-    :param list_of_commands: List to append command arguments to
-    :param flood: Whether flood ping is enabled (requires sudo)
-    :return: None
-    """
-    if '2' in input2:
-        list_of_commands.append('-s')
-        list_of_commands.append(input("\nEnter size of packet to send (0-65500)\n" + shell) or '56')
-    if '3' in input2:
-        list_of_commands.append('-W')
-        list_of_commands.append(input("\nHow much time(sec.) to wait? \n" + shell) or '1')
-    if flood:
-        if is_sudo_linux() == 1:
-            list_of_commands.insert(0, "sudo")
-            list_of_commands.append("-f")
-        else:
-            print("\nSudo not detected, Try another option or Switch to SUDO")
-
-
-def _finite_or_infinite_ping(list_of_commands):
-    """
-    Prompt user to select finite or infinite ping and update command list.
-    
-    :param list_of_commands: List to append count argument to
-    :return: None
-    """
-    ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
-    if ping_type == '1':
-        no_of_packets = input("\nEnter number of packets to send\n" + shell) or '5'
-        list_of_commands.append("-c")
-        list_of_commands.append(no_of_packets)
-    elif ping_type == '2':
-        pass
-
-
 def level_2():
     """
     Display the ping options menu and handle user choices.
@@ -143,19 +105,37 @@ Select required options (separate by space):
             elif all(x in ['1', '2', '3', '4'] for x in input2):
                 ip_addr = input("\nEnter IP to ping\n" + shell) or "127.0.0.1"
                 if validate_ip_addr(ip_addr):
-                    list_of_commands = ['ping']
-                    if input2 == '1':
-                        list_of_commands.append(ip_addr)
-                        # run_command_save(list_of_commands, scan)
-
+                    # Gather ping options
+                    packet_size = None
+                    timeout = None
+                    count = None
                     flood = '4' in input2
-                    _append_to_list_ping(input2, list_of_commands, flood=flood)
-
+                    
+                    if '2' in input2:
+                        packet_size = int(input("\nEnter size of packet to send (0-65500)\n" + shell) or '56')
+                    if '3' in input2:
+                        timeout = int(input("\nHow much time(sec.) to wait? \n" + shell) or '1')
+                    
+                    # Ask for count if not flood ping
                     if not flood:
-                        _finite_or_infinite_ping(list_of_commands)
-
-                    list_of_commands.append(ip_addr)
-                    run_command_save(list_of_commands, scan)
+                        ping_type = input("\nPing finitely or infinitely? (1/2)\n" + shell) or '1'
+                        if ping_type == '1':
+                            count = int(input("\nEnter number of packets to send\n" + shell) or '5')
+                    
+                    # Check sudo for flood ping
+                    if flood and not is_sudo_linux():
+                        print("\nSudo not detected, Try another option or Switch to SUDO")
+                        continue
+                    
+                    # Build and run command
+                    cmd = build_ping_cmd_linux(
+                        target=ip_addr,
+                        count=count,
+                        packet_size=packet_size,
+                        timeout=timeout,
+                        flood=flood
+                    )
+                    run_command_save(cmd, scan)
 
                     # clear but longer same logic for-above-code
                     # if '4' not in input2:
