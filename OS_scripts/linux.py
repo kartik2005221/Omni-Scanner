@@ -5,7 +5,7 @@ from utils.common_utils import documentation, run_command_save, shell
 from utils.menu_utils import validate_ip_addr, insert_spinner, get_mac_vendor, \
     validate_mac, run_nmap_scan_firewall, validate_port, validate_ip
 from utils.scan_builders import build_arp_scan_cmd_linux, build_nmap_arp_scan_cmd, build_traceroute_cmd_linux, \
-    build_ping_cmd_linux
+    build_ping_cmd_linux, build_nmap_cmd
 
 
 def level_1():
@@ -261,70 +261,73 @@ Adjustments:
                  input2):
             ip = input("\nEnter IP to scan\n" + shell) or "127.0.0.1"
             if validate_ip(ip):
+                # Handle simple scan separately
                 if '1' in input2:
                     run_command_save(["nmap", ip], scan)
-
+                # Handle help display
+                elif '10' in input2:
+                    run_command_save(["nmap", "-h"], scan)
+                    continue
                 else:
-                    list_of_commands = ['nmap']
-
-                    if '2' in input2:
-                        list_of_commands.append("-O")
-
-                    if '3' in input2:
-                        list_of_commands.append("-sV")
-
-                    if '4' in input2:
-                        list_of_commands.append("-sS")
-
-                    if '5' in input2:
-                        list_of_commands.append("-sU")
-
+                    # Gather all scan options
+                    detect_os = '2' in input2
+                    detect_services = '3' in input2
+                    syn_scan = '4' in input2
+                    udp_scan = '5' in input2
+                    aggressive = '7' in input2
+                    no_ping = '8' in input2
+                    disable_arp = '9' in input2
+                    
+                    # Handle port specifications
+                    ports = None
+                    top_ports = None
+                    all_ports = False
+                    
                     if 'p3' in input2:
-                        list_of_commands.append("-p-")
+                        all_ports = True
                     elif 'p1' in input2:
                         list_of_ports = input("\nEnter port range (Eg. 1-65535) : ") or '1-65535'
                         if validate_port(list_of_ports):
-                            list_of_commands.append("-p")
-                            list_of_commands.append(list_of_ports)
+                            ports = list_of_ports
                     elif 'p2' in input2:
                         number_of_ports = input("\nEnter number of top ports to scan (default 100) : ") or '100'
-                        list_of_commands.append("--top-ports")
-                        list_of_commands.append(number_of_ports)
-
-                    if '7' in input2:
-                        list_of_commands.append("-A")
-
-                    if '8' in input2:
-                        list_of_commands.append("-Pn")
-
-                    if '9' in input2:
-                        list_of_commands.append("-disable-arp-ping")
-
-                    if '10' in input2:
-                        list_of_commands.append("-h")
-                        run_command_save(list_of_commands, scan)
-                        continue
-
+                        top_ports = int(number_of_ports)
+                    
+                    # Build base command
+                    cmd = build_nmap_cmd(
+                        target=ip,
+                        detect_os=detect_os,
+                        detect_services=detect_services,
+                        syn_scan=syn_scan,
+                        udp_scan=udp_scan,
+                        aggressive=aggressive,
+                        no_ping=no_ping,
+                        disable_arp=disable_arp,
+                        ports=ports,
+                        top_ports=top_ports,
+                        all_ports=all_ports,
+                        use_sudo=is_sudo_linux()
+                    )
+                    
+                    # Handle additional adjustments that aren't in build_nmap_cmd
                     if 'a1' in input2:
-                        list_of_commands.append("-n")
-
+                        cmd.insert(-1, "-n")  # Insert before target IP
+                    
                     if 'a2' in input2:
-                        list_of_commands.append("--open")
-
+                        cmd.insert(-1, "--open")
+                    
                     if 'a3' in input2:
                         speed = input("\nEnter scan speed (T0-T5, default T3) : ") or 'T3'
                         if speed in ['T0', 'T1', 'T2', 'T3', 'T4', 'T5']:
-                            list_of_commands.append(f"-{speed}")
+                            cmd.insert(-1, f"-{speed}")
                         elif speed in ['0', '1', '2', '3', '4', '5']:
-                            list_of_commands.append(f"-T{speed}")
+                            cmd.insert(-1, f"-T{speed}")
                         else:
                             print("\nInvalid speed selected, using default T3")
-                            list_of_commands.append("-T3")
-
-                    list_of_commands.append(ip)
-                    # print(list_of_commands)
-                    # run_command(list_of_commands)
-                    run_nmap_scan_firewall(list_of_commands)
+                            cmd.insert(-1, "-T3")
+                    
+                    # Run the command
+                    run_nmap_scan_firewall(cmd)
             else:
                 print("\nInvalid IP entered, Please Try again")
         else:
